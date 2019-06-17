@@ -19,7 +19,8 @@ namespace MrRamdomForGomoku
         }
 
         public override GomokuInputObject Input(GomokuField field) {
-            field
+            //field
+            return new GomokuInputObject();
         }
 
     }

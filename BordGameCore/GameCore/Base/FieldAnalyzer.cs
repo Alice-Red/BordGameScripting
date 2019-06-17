@@ -51,6 +51,7 @@ namespace BordGameCore.GameCore.Base
             return result;
         }
 
+
         /// <summary>
         /// 指定座標から全8方向に見える物を返します
         /// </summary>
@@ -87,11 +88,11 @@ namespace BordGameCore.GameCore.Base
         /// <returns></returns>
         public static RawColumn RelativePosition(this GridField field, RawColumn rc, RelativeName rp, int c) {
             RawColumn t = rc + (Relative.Position[rp] * c);
-            if (field.InField(t)) {
+            if (field.InField(t))
                 return t;
-            } else {
+            else
                 return field.RelativePosition(rc, rp, c - 1);
-            }
+
         }
 
         /// <summary>
@@ -100,9 +101,7 @@ namespace BordGameCore.GameCore.Base
         /// <param name="field"></param>
         /// <param name="rc"></param>
         /// <returns></returns>
-        public static bool InField(this GridField field, RawColumn rc) {
-            return field.InField(rc.Raw, rc.Column);
-        }
+        public static bool InField(this GridField field, RawColumn rc) => field.InField(rc.Raw, rc.Column);
 
         /// <summary>
         /// 指定した位置が枠内に収まっているか判定
@@ -111,9 +110,7 @@ namespace BordGameCore.GameCore.Base
         /// <param name="r"></param>
         /// <param name="c"></param>
         /// <returns></returns>
-        public static bool InField(this GridField field, int r, int c) {
-            return !(r < 0 || c < 0 || r >= field.Width || c >= field.Width);
-        }
+        public static bool InField(this GridField field, int r, int c) => !(r < 0 || c < 0 || r >= field.Width || c >= field.Width);
 
 
     }

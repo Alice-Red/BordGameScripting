@@ -45,11 +45,8 @@ namespace Gomoku
                 RelativeName.LowerLeft,
             };
 
-            foreach (var item in rp) {
+            foreach (var item in rp)
                 yield return ScanLine(field, rc, item).ToArray();
-            }
-
-
 
         }
 
@@ -58,7 +55,7 @@ namespace Gomoku
             var exists = field.Exists();
             List<RawColumn[]>[] results = Enumerable.Range(0, 4).Select(s => new List<RawColumn[]>()).ToArray();
 
-
+            return results[0];
 
 
         }
@@ -66,7 +63,7 @@ namespace Gomoku
 
 
         public static IEnumerable<RawColumn> BeConnected(this GomokuField field, int num) {
-
+            yield return RawColumn.New(0, 0);
 
         }
 

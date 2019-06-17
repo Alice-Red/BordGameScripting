@@ -41,9 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\Library\RUtil.cs">
-      <Link>RUtil.cs</Link>
-    </Compile>
     <Compile Include="API\BordGameAttribute.cs" />
     <Compile Include="API\LibraryLoader.cs" />
     <Compile Include="API\LibraryObject.cs" />
@@ -71,6 +68,7 @@
     <Compile Include="GameCore\Util\RelativeName.cs" />
     <Compile Include="GameCore\Util\RelativePosition.cs" />
     <Compile Include="GameCore\Util\SafeArray.cs" />
+    <Compile Include="RUtil.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

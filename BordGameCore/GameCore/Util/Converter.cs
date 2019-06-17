@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 using BordGameCore.GameCore.Base;
 using RUtil;
 
+
 namespace BordGameCore.GameCore.Util
 {
     public static class Converter
     {
 
+        /// <summary>
+        /// 反対の色を返します
+        /// </summary>
+        /// <param name="pc2p"></param>
+        /// <returns></returns>
         public static PlayerColor2P Reverse(this PlayerColor2P pc2p) {
             return (((int) pc2p) * -1).ToPlayerColor2P();
         }
@@ -18,7 +24,7 @@ namespace BordGameCore.GameCore.Util
         /// <summary>
         /// PlayerColor2Pとintで相互変換します
         /// </summary>
-        /// <param name="color"></param>
+        /// <param name="color">色</param>
         /// <returns></returns>
         public static int ToInt(this PlayerColor2P color) {
             return (int) color;

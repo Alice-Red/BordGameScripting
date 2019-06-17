@@ -15,6 +15,10 @@ namespace BordGameCore.GameCore.Util
         Warning = 0x04,
         Error = 0x08,
 
-        Reserved = 0x40
+        Default = 0b1100,
+        All = 0b1111,
+
+        Reserved = 0x40,
+
     }
 }
