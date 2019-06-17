@@ -452,7 +452,6 @@ namespace RUtil
             return default(T);
         }
 
-
         /// <summary>
         /// 最後のインデックス値を返します。
         /// </summary>

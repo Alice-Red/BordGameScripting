@@ -51,11 +51,14 @@ namespace Gomoku
         }
 
 
-        public static IEnumerable<RawColumn[]> Connected(this GomokuField field, int num) {
+        public static IEnumerable<RawColumn[]> Connected(this GomokuField field, int num = 0) {
             var exists = field.Exists();
             List<RawColumn[]>[] results = Enumerable.Range(0, 4).Select(s => new List<RawColumn[]>()).ToArray();
 
-            return results[0];
+
+
+
+
 
 
         }
@@ -63,9 +66,19 @@ namespace Gomoku
 
 
         public static IEnumerable<RawColumn> BeConnected(this GomokuField field, int num) {
-            yield return RawColumn.New(0, 0);
+
+
 
         }
+
+
+        public static IEnumerable<RawColumn> BeConnected(this GomokuField field, int a, int b, bool free = false) {
+
+
+
+        }
+
+        public static IEnumerable<RawColumn> BeConnected5(this GomokuField field) => BeConnected(field, 5, 5, false);
 
     }
 }

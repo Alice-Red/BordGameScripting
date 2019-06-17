@@ -19,8 +19,7 @@ namespace MrRamdomForGomoku
         }
 
         public override GomokuInputObject Input(GomokuField field) {
-            //field
-            return new GomokuInputObject();
+            field.BeConnected(2);
         }
 
     }
