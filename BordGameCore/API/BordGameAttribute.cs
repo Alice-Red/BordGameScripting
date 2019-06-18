@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BordGameCore.API
+namespace GameLib.API
 {
 
     [AttributeUsage(AttributeTargets.Class)]
     public class BordGameAttribute : Attribute
     {
-        public string ModID { get; set; }
+        public string GameID { get; set; }
 
         public BordGameAttribute(string modid) {
-            ModID = modid;
+            GameID = modid;
         }
     }
 }

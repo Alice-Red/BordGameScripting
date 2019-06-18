@@ -7,11 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BordGameScripting", "BordGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BordGameScriptingCUI", "BordGameScriptingCUI\BordGameScriptingCUI.csproj", "{AA741F96-8E24-4422-806F-AE0B4CB4DF7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BordGameCore", "BordGameCore\BordGameCore.csproj", "{435B9491-0D88-45F0-ACE1-AF59209CF252}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCore", "BordGameCore\GameCore.csproj", "{435B9491-0D88-45F0-ACE1-AF59209CF252}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gomoku", "Gomoku\Gomoku.csproj", "{E52CF746-8C27-4BA5-B677-1C9178020FF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrRamdomForGomoku", "MrRamdomForGomoku\MrRamdomForGomoku.csproj", "{522A76C0-FD24-4513-A392-E8416271F948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLib", "BordGameCore\GameLib.csproj", "{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{522A76C0-FD24-4513-A392-E8416271F948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{522A76C0-FD24-4513-A392-E8416271F948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{522A76C0-FD24-4513-A392-E8416271F948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

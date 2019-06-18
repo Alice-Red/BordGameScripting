@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BordGameCore.GameCore.Base;
+using GameLib.Core.Base;
 
-namespace BordGameCore.API
+namespace GameLib.API
 {
     public abstract class Initializer
     {

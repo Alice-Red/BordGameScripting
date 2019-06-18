@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using RUtil;
 
-namespace BordGameCore.GameCore.Util
+namespace GameLib.Core.Util
 {
     public struct Message
     {

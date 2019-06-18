@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BordGameCore.GameCore.Util;
+using GameLib.Core.Util;
 using RUtil;
 
-namespace BordGameCore.GameCore.Base
+namespace GameLib.Core.Base
 {
     public static class FieldAnalyzer
     {

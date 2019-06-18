@@ -45,9 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BordGameCore\BordGameCore.csproj">
+    <ProjectReference Include="..\BordGameCore\GameCore.csproj">
       <Project>{435B9491-0D88-45F0-ACE1-AF59209CF252}</Project>
-      <Name>BordGameCore</Name>
+      <Name>GameCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gomoku\Gomoku.csproj">
       <Project>{e52cf746-8c27-4ba5-b677-1c9178020ff3}</Project>

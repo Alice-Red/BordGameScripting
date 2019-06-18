@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BordGameCore.API;
+using GameLib.API;
 
-namespace BordGameCore.GameCore
+namespace GameLib.Core
 {
     public abstract class BordGame
     {
         protected int Loser = 0;
+        protected int turn = 1;
         protected bool Running = false;
         public IField Field;
 

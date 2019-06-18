@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BordGameCore.API;
-using BordGameCore.GameCore.Util;
+using GameLib.API;
+using GameLib.Core.Util;
 
-namespace BordGameCore.GameCore.Base
+namespace GameLib.Core.Base
 {
 
     public abstract class GridField : IField

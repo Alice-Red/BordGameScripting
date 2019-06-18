@@ -4,27 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BordGameCore.GameCore.Util
+namespace GameLib.Core
 {
-    public struct RawColumn
+    class RawColumn
     {
         public int Raw { get; set; }
-
         public int Column { get; set; }
 
-        public int X { get => Column; set => Column = value; }
-
-        public int Y { get => Raw; set => Raw = value; }
-
-        public int Width { get => Column; set => Column = value; }
-
-        public int Height { get => Raw; set => Raw = value; }
-
-        public int Horizontal { get => Column; set => Column = value; }
-
-        public int Vertical { get => Raw; set => Raw = value; }
-
-        public (int, int) Tuple => (this.Raw, this.Column);
+        public RawColumn() {
+            this.Raw = 0;
+            this.Column = 0;
+        }
 
         // 数値直入力
         public RawColumn(int Raw, int Column) {
@@ -44,6 +34,26 @@ namespace BordGameCore.GameCore.Util
             this.Column = value.Raw;
         }
 
+        public int GetX() {
+            return Column;
+        }
+
+        public int GetY() {
+            return Raw;
+        }
+
+        public int GetW() {
+            return Column;
+        }
+
+        public int GetH() {
+            return Raw;
+        }
+
+        public (int, int) Tuple() {
+            return (this.Raw, this.Column);
+        }
+
         public override string ToString() {
             return string.Format($"({this.Raw}, {this.Column})");
         }
@@ -61,28 +71,12 @@ namespace BordGameCore.GameCore.Util
             return hashCode;
         }
 
-        public static RawColumn New(int Raw, int Column) {
-            return new RawColumn(Raw, Column);
-        }
-
-        public static RawColumn New((int, int) value) {
-            return new RawColumn(value);
-        }
-
-        public static RawColumn New(RawColumn value) {
-            return new RawColumn(value);
-        }
-
         public static RawColumn operator +(RawColumn left, RawColumn right) {
             return new RawColumn(left.Raw + right.Raw, left.Column + right.Column);
         }
 
         public static RawColumn operator -(RawColumn left, RawColumn right) {
             return new RawColumn(left.Raw - right.Raw, left.Column - right.Column);
-        }
-
-        public static RawColumn operator *(RawColumn left, int right) {
-            return new RawColumn(left.Raw * right, left.Column * right);
         }
 
         public static bool operator ==(RawColumn left, RawColumn right) {

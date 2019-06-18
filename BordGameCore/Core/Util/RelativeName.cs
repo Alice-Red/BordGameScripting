@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BordGameCore.GameCore.Util
+namespace GameLib.Core.Util
 {
     public enum RelativeName
     {

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{435B9491-0D88-45F0-ACE1-AF59209CF252}</ProjectGuid>
+    <ProjectGuid>{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BordGameCore</RootNamespace>
@@ -46,7 +46,6 @@
     <Compile Include="API\LibraryObject.cs" />
     <Compile Include="API\LibraryType.cs" />
     <Compile Include="API\Util.cs" />
-    <Compile Include="GameCore\Util\Calculation.cs" />
     <Compile Include="API\IDrawer.cs" />
     <Compile Include="API\IField.cs" />
     <Compile Include="API\IInputter.cs" />
@@ -54,20 +53,24 @@
     <Compile Include="API\IMenu.cs" />
     <Compile Include="API\IO.cs" />
     <Compile Include="API\Initializer.cs" />
-    <Compile Include="GameCore\Base\FieldAnalyzer.cs" />
-    <Compile Include="GameCore\Base\PlayerColor4P.cs" />
-    <Compile Include="GameCore\Util\Converter.cs" />
-    <Compile Include="GameCore\Util\MessageType.cs" />
-    <Compile Include="GameCore\Util\ConsoleOut.cs" />
-    <Compile Include="GameCore\BordGame.cs" />
-    <Compile Include="GameCore\Base\GridField.cs" />
-    <Compile Include="GameCore\Base\PlayerColor2P.cs" />
-    <Compile Include="GameCore\Util\RawColumn.cs" />
-    <Compile Include="GameCore\Util\Message.cs" />
+    <Compile Include="Core\Base\FieldAnalyzer.cs" />
+    <Compile Include="Core\Base\GridField.cs" />
+    <Compile Include="Core\Base\PlayerColor2P.cs" />
+    <Compile Include="Core\Base\PlayerColor4P.cs" />
+    <Compile Include="Core\BordGame.cs" />
+    <Compile Include="Core\GridField.cs" />
+    <Compile Include="Core\PlayerColor2P.cs" />
+    <Compile Include="Core\RawColumn.cs" />
+    <Compile Include="Core\Util\Calculation.cs" />
+    <Compile Include="Core\Util\ConsoleOut.cs" />
+    <Compile Include="Core\Util\Converter.cs" />
+    <Compile Include="Core\Util\Message.cs" />
+    <Compile Include="Core\Util\MessageType.cs" />
+    <Compile Include="Core\Util\RawColumn.cs" />
+    <Compile Include="Core\Util\RelativeName.cs" />
+    <Compile Include="Core\Util\RelativePosition.cs" />
+    <Compile Include="Core\Util\SafeArray.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameCore\Util\RelativeName.cs" />
-    <Compile Include="GameCore\Util\RelativePosition.cs" />
-    <Compile Include="GameCore\Util\SafeArray.cs" />
     <Compile Include="RUtil.cs" />
   </ItemGroup>
   <ItemGroup />

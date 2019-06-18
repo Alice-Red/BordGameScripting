@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BordGameCore.GameCore.Base
+namespace GameLib.Core.Base
 {
     public enum PlayerColor2P
     {

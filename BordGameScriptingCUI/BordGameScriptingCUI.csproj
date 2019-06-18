@@ -55,9 +55,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BordGameCore\BordGameCore.csproj">
+    <ProjectReference Include="..\BordGameCore\GameCore.csproj">
       <Project>{435b9491-0d88-45f0-ace1-af59209cf252}</Project>
-      <Name>BordGameCore</Name>
+      <Name>GameCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
