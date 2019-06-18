@@ -51,9 +51,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BordGameCore\GameCore.csproj">
-      <Project>{435b9491-0d88-45f0-ace1-af59209cf252}</Project>
-      <Name>GameCore</Name>
+    <ProjectReference Include="..\BordGameCore\GameLib.csproj">
+      <Project>{90073e79-d901-44be-9c5c-6f1d6dc6fe61}</Project>
+      <Name>GameLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BordGameCore.GameCore.Base;
-using BordGameCore.GameCore.Util;
+using GameLib.Core.Base;
+using GameLib.Core.Util;
 using RUtil;
 
 namespace Gomoku
