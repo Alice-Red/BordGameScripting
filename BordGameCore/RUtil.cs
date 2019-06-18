@@ -337,6 +337,30 @@ namespace RUtil
         }
 
         /// <summary>
+        /// 配列にアイテムを追加します
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static T[] Add<T>(this T[] source, T item) {
+            source = source.Concat(new T[] { item }).ToArray();
+            return source;
+        }
+
+        /// <summary>
+        /// 配列にアイテムを追加します。追加したアイテムを戻り値としています．
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static T AddGet<T>(this T[] source, T item) {
+            source = source.Concat(new T[] { item }).ToArray();
+            return item;
+        }
+
+        /// <summary>
         /// シーケンスに指定アイテムを追加します。同じキーがあった場合置き換えます。
         /// </summary>
         /// <typeparam name="TKey"></typeparam>
