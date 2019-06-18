@@ -19,7 +19,10 @@ namespace MrRamdomForGomoku
         }
 
         public override GomokuInputObject Input(GomokuField field) {
-            field.BeConnected(2);
+            var t = field.BeConnected(2);
+
+            GomokuInputObject box = new GomokuInputObject(t.Ramdom());
+
         }
 
     }
