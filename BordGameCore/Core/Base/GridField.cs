@@ -19,12 +19,10 @@ namespace GameLib.Core.Base
         /// </summary>
         internal int Width {
             get { return width; }
-            set { if (value > 0) { width = (ushort) value; height = (ushort) value; } }
         }
 
         internal int Height {
             get { return height; }
-            set { if (value > 0) { height = (ushort) value; } }
         }
 
         /// <summary>
@@ -33,16 +31,34 @@ namespace GameLib.Core.Base
         protected SafeArray<int> field;
         public int[,] Field {
             get {
-                if (field.Length == 0) {
+                if (field.Length == 0)
                     field = new SafeArray<int>(Width);
-                }
                 return field.Array;
             }
         }
 
         public GridField(int width) {
-            Width = width;
+            this.width = (ushort) width;
+            this.height = (ushort) width;
         }
+
+        public GridField(int width, int height) {
+            this.width = (ushort) width;
+            this.height = (ushort) height;
+        }
+
+        public int this[int raw, int column] {
+            get { return field[raw, column]; }
+        }
+
+        public int this[RawColumn rc] {
+            get { return field[rc.Raw, rc.Column]; }
+        }
+
+        public int this[(int, int) value] {
+            get { return field[value.Item1, value.Item2]; }
+        }
+
 
         /// <summary>
         /// 指定座標に置いてあるもの
@@ -50,8 +66,8 @@ namespace GameLib.Core.Base
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public int Get(int x, int y) {
-            return field[y, x];
+        public int Get(int raw, int column) {
+            return field[raw, column];
         }
 
         /// <summary>
@@ -61,6 +77,15 @@ namespace GameLib.Core.Base
         /// <returns></returns>
         public int Get(RawColumn rc) {
             return field[rc.Raw, rc.Column];
+        }
+
+        /// <summary>
+        /// 指定座標に置いてあるもの
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <returns></returns>
+        public int Get((int, int) value) {
+            return field[value.Item1, value.Item2];
         }
 
         /// <summary>
@@ -109,7 +134,7 @@ namespace GameLib.Core.Base
         /// ゲームの終了を検知します．
         /// </summary>
         /// <returns>0:試合中，1:1P，-1:2P，2:引き分け，-2:その他終了</returns>
-        internal abstract int CheckWinner();
+        public abstract int CheckWinner();
 
     }
 }

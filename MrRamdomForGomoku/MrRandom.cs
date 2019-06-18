@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
-using GameLib.Core;
+using GameLib.Core.Util;
 using Gomoku;
 
 
@@ -20,9 +20,8 @@ namespace MrRamdomForGomoku
 
         public override GomokuInputObject Input(GomokuField field) {
             var t = field.BeConnected(2);
-
             GomokuInputObject box = new GomokuInputObject(t.Ramdom());
-
+            return box;
         }
 
     }

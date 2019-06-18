@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
-using GameLib.Core;
+using GameLib.Core.Util;
 
 namespace Gomoku
 {
     public struct GomokuInputObject : IInputObjectContainer
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int Raw { get; set; }
+        public int Column { get; set; }
 
         public GomokuInputObject(int x, int y) {
-            X = x;
-            Y = y;
+
+            Raw = y;
+            Column = x;
         }
 
         public GomokuInputObject(RawColumn rc) {
-            X = rc.GetX();
-            Y = rc.GetY();
+            Raw = rc.Raw;
+            Column = rc.Column;
         }
     }
 }
