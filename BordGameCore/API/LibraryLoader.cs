@@ -8,6 +8,8 @@ namespace GameLib.API
 {
     public class LibraryLoader
     {
+        public LibraryLoader(string path) {
 
+        }
     }
 }

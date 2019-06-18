@@ -7,7 +7,7 @@ using GameLib.API;
 
 namespace GameLib.Core
 {
-    public abstract class BordGame
+    public abstract class BordGame : Game
     {
         protected int Loser = 0;
         protected int turn = 1;

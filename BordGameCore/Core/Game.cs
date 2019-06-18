@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameLib.Core.Base;
 
-
-namespace GameLib.API
+namespace GameLib.Core
 {
-    public interface IDrawer
+    public interface Game
     {
-        void Draw(GridField field);
+        void Run();
+
     }
 }

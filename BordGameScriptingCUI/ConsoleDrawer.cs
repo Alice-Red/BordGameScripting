@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
-using GameLib.Core;
-using GameLib.Core.Util;
 using GameLib.Core.Base;
 
 namespace BordGameScriptingCUI
 {
-    class GameMain
+    public class ConsoleDrawer : IDrawer
     {
-        ConsoleDrawer drawer = new ConsoleDrawer();
-        GameLib.API.LibraryLoader loader = new LibraryLoader(@"");
+        public void Draw(GridField field) {
 
+        }
     }
 }
