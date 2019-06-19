@@ -7,14 +7,11 @@ using GameLib.Core;
 
 namespace Gomoku
 {
-    [BordGameCore.API.BordGame(ID)]
+    [GameLib.API.BordGame(ID)]
     class Gomoku : BordGame
     {
         public const string ID = "Gomoku";
 
-        protected override void Draw() {
-            throw new NotImplementedException();
-        }
 
         protected override void Init() {
             throw new NotImplementedException();

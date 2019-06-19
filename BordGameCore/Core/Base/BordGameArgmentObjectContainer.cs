@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLib.API;
 
-namespace GameLib.API
+namespace BordGameCore.Core.Base
 {
-    public enum LibraryType
+    public struct BordGameArgmentObjectContainer
     {
-        Game,
-        Inputter,
-
-        Other
     }
 }

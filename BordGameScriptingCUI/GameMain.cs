@@ -7,13 +7,21 @@ using GameLib.API;
 using GameLib.Core;
 using GameLib.Core.Util;
 using GameLib.Core.Base;
+using RUtil;
 
 namespace BordGameScriptingCUI
 {
     class GameMain
     {
-        ConsoleDrawer drawer = new ConsoleDrawer();
-        GameLib.API.LibraryLoader loader = new LibraryLoader(@"");
+        public GameMain() {
+            ConsoleDrawer drawer = new ConsoleDrawer();
+            LibraryLoader loader = new LibraryLoader(@"");
+            var tgame = loader.Games.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s is Game).ToArray();
+
+
+
+        }
+
 
     }
 }

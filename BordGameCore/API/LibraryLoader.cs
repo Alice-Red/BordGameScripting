@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +20,26 @@ namespace GameLib.API
             } else if (Directory.Exists(fullPath)) {
                 Libs.Concat(LoadFolder(fullPath));
             } else {
-
+                throw new System.IO.DirectoryNotFoundException();
             }
 
         }
 
+        public Assembly[] Games => Libs.Where(s=>s.LibType == LibraryType.Game).Select(s=>s.Get)
+
         public static LibraryObject LoadFile(string file) {
+            if (!File.Exists(file))
+                throw new System.IO.FileNotFoundException();
+
+
 
         }
 
         public static LibraryObject[] LoadFolder(string folder) {
+            if (!Directory.Exists(folder))
+                throw new System.IO.DirectoryNotFoundException();
+
+
 
         }
 

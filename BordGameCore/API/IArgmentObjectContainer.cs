@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLib.API
+namespace BordGameCore.API
 {
-    public enum LibraryType
+    public interface IArgmentObjectContainer
     {
-        Game,
-        Inputter,
-
-        Other
     }
 }

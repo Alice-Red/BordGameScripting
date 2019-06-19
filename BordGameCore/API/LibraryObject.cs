@@ -13,6 +13,8 @@ namespace GameLib.API
     {
         public string ID { get; }
 
+        public LibraryType LibType { get; }
+
         private Assembly assembly;
 
         public MethodInfo Input {

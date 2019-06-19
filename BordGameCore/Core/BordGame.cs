@@ -37,7 +37,9 @@ namespace GameLib.Core
 
         protected abstract void Process();
 
-        protected abstract void Draw();
+        public void Draw() {
+
+        }
 
         protected abstract void Result();
 

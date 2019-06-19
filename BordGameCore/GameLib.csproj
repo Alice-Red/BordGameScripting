@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\..\Library\RUtil.cs">
+      <Link>RUtil.cs</Link>
+    </Compile>
     <Compile Include="API\BordGameAttribute.cs" />
     <Compile Include="API\LibraryLoader.cs" />
     <Compile Include="API\LibraryObject.cs" />
@@ -53,6 +56,8 @@
     <Compile Include="API\IMenu.cs" />
     <Compile Include="API\IO.cs" />
     <Compile Include="API\Initializer.cs" />
+    <Compile Include="API\IArgmentObjectContainer.cs" />
+    <Compile Include="Core\Base\BordGameArgmentObjectContainer.cs" />
     <Compile Include="Core\Base\FieldAnalyzer.cs" />
     <Compile Include="Core\Base\GridField.cs" />
     <Compile Include="Core\Base\PlayerColor2P.cs" />
@@ -69,7 +74,6 @@
     <Compile Include="Core\Util\SafeArray.cs" />
     <Compile Include="Core\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RUtil.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
