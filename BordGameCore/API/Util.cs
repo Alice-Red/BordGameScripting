@@ -29,5 +29,12 @@ namespace GameLib.API
             int n = source.Count();
             return source.ElementAt(DICE(n) - 1);
         }
+
+        public static bool Include<T>(this T[] source, T[] target) {
+            for (int i = 0; i < target.Length; i++)
+                if (!source.Contains(target[i]))
+                    return false;
+            return true;
+        }
     }
 }

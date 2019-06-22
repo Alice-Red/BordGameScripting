@@ -25,47 +25,24 @@ namespace GameLib.API
 
         }
 
-        public Assembly[] Games => Libs.Where(s=>s.LibType == LibraryType.Game).Select(s=>s)
+        public Assembly[] Games => Libs.Where(s => s.LibType == LibraryType.Game).Select(s => s.Asm).ToArray();
 
         public static LibraryObject LoadFile(string file) {
             if (!File.Exists(file))
                 throw new System.IO.FileNotFoundException();
 
-            var t = new LibraryObject(file);
-
-
-
-            //assembly = Assembly.LoadFrom(path);
-            //var types = assembly.GetExportedTypes();
-
-            //staticMethods = new Dictionary<string, MethodInfo>[types.Length];
-
-            //for (int i = 0; i < types.Length; i++) {
-
-            //    //Console.WriteLine(types[i].Name + ":" + types[i].IsAbstract);
-
-            //    staticMethods[i] = new Dictionary<string, MethodInfo>();
-            //    foreach (var method in types[i].GetMethods()) {
-            //        // static関数回収
-            //        if (method.IsStatic) {
-            //            string tmpKey = types[i].ToString() + "." + method.Name;
-            //            if (!staticMethods[i].ContainsKey(tmpKey)) {
-            //                staticMethods[i].Add(tmpKey, method);
-            //            }
-            //        }
-            //    }
-            //}
-
-
-
+            return new LibraryObject(file);
         }
 
         public static LibraryObject[] LoadFolder(string folder) {
             if (!Directory.Exists(folder))
                 throw new System.IO.DirectoryNotFoundException();
-
-
-
+            var libs = System.IO.Directory.GetFiles(folder, "*.dll", System.IO.SearchOption.TopDirectoryOnly);
+            List<LibraryObject> tmp = new List<LibraryObject>();
+            foreach (var item in libs) {
+                tmp.Add(LoadFile(item));
+            }
+            return tmp.ToArray();
         }
 
     }

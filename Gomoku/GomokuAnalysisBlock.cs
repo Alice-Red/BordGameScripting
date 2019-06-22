@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameLib.Core.Base;
 using GameLib.Core.Util;
+using GameLib.API;
 
 namespace Gomoku
 {
@@ -20,14 +21,14 @@ namespace Gomoku
             if (this.Direction != block.Direction)
                 return false;
 
-            if (this.Items.Last() != block.Items.Last()) {
+            if (this.Items.Last() != block.Items.Last())
+                return false;
 
-            }
+            if (!this.Items.Include(block.Items))
+                return false;
 
-
-
+            return true;
         }
-
 
 
 

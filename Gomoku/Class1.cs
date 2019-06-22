@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameLib.Core;
 
+
 namespace Gomoku
 {
     [GameLib.API.BordGame(ID)]
