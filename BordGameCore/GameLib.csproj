@@ -7,8 +7,8 @@
     <ProjectGuid>{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BordGameCore</RootNamespace>
-    <AssemblyName>BordGameCore</AssemblyName>
+    <RootNamespace>GameLib</RootNamespace>
+    <AssemblyName>GameLib</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -45,6 +45,7 @@
       <Link>RUtil.cs</Link>
     </Compile>
     <Compile Include="API\BordGameAttribute.cs" />
+    <Compile Include="API\InputterAttribute.cs" />
     <Compile Include="API\LibraryLoader.cs" />
     <Compile Include="API\LibraryObject.cs" />
     <Compile Include="API\LibraryType.cs" />

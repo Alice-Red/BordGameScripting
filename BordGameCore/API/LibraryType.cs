@@ -8,6 +8,7 @@ namespace GameLib.API
 {
     public enum LibraryType
     {
+        None,
         Game,
         Inputter,
 

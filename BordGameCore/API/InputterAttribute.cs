@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace GameLib.API
 {
-
     [AttributeUsage(AttributeTargets.Class)]
-    public class BordGameAttribute : Attribute
+    class InputterAttribute : Attribute
     {
         public string GameID { get; set; }
 
-        public BordGameAttribute(string gameid) {
+        public InputterAttribute(string gameid) {
             GameID = gameid;
         }
+
     }
 }

@@ -7,7 +7,7 @@ using GameLib.API;
 
 namespace Gomoku
 {
-    class GomokuInit:Initializer
+    class GomokuInit : Initializer
     {
 
     }

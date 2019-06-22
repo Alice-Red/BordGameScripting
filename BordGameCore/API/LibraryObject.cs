@@ -17,11 +17,36 @@ namespace GameLib.API
 
         private Assembly assembly;
 
-        public MethodInfo Input {
-            get {
-                assembly.
+        public LibraryObject(string path) {
+
+            assembly = Assembly.LoadFrom(path);
+            var types = assembly.GetExportedTypes();
+            LibType = LibraryType.None;
+            foreach (var item in types) {
+                if (item.IsAssignableFrom(typeof(BordGameAttribute))) {
+                    LibType = LibraryType.Game;
+                    ID = ((BordGameAttribute) Attribute.GetCustomAttribute(item, typeof(BordGameAttribute))).GameID;
+                    break;
+                }
+
+                if (item.IsAssignableFrom(typeof(InputterAttribute))) {
+                    LibType = LibraryType.Game;
+                    ID = ((BordGameAttribute) Attribute.GetCustomAttribute(item, typeof(BordGameAttribute))).GameID;
+                    break;
+                }
+
+
             }
 
+
+
         }
+
+        //public MethodInfo Input {
+        //    get {
+        //        assembly.
+        //    }
+
+        //}
     }
 }
