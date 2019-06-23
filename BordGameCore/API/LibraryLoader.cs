@@ -37,7 +37,7 @@ namespace GameLib.API
         public static LibraryObject[] LoadFolder(string folder) {
             if (!Directory.Exists(folder))
                 throw new System.IO.DirectoryNotFoundException();
-            var libs = System.IO.Directory.GetFiles(folder, "*.dll", System.IO.SearchOption.TopDirectoryOnly);
+            var libs = System.IO.Directory.GetFiles(folder, "*.dll", System.IO.SearchOption.AllDirectories);
             List<LibraryObject> tmp = new List<LibraryObject>();
             foreach (var item in libs) {
                 tmp.Add(LoadFile(item));

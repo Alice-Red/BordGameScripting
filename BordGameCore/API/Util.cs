@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RUtil;
 
 namespace GameLib.API
 {
@@ -30,10 +31,14 @@ namespace GameLib.API
             return source.ElementAt(DICE(n) - 1);
         }
 
-        public static bool Include<T>(this T[] source, T[] target) {
-            for (int i = 0; i < target.Length; i++)
-                if (!source.Contains(target[i]))
+        public static bool Include<T>(this T[] source, T[] target, bool strict = false) {
+            var sequence = source.ToList();
+            for (int i = 0; i < target.Length; i++) {
+                if (!sequence.Contains(target[i]))
                     return false;
+                sequence.Remove(target[i]);
+            }
+
             return true;
         }
     }

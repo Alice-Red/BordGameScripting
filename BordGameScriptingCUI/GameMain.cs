@@ -19,11 +19,13 @@ namespace BordGameScriptingCUI
 
 
         public GameMain() {
-            ConsoleDrawer drawer = new ConsoleDrawer();
-            LibraryLoader loader = new LibraryLoader(@"");
+            LibraryLoader loader = new LibraryLoader(ProgramBGSCUI.LibraryPath);
             var tgame = loader.Games.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s is Game).ToArray();
             Menu(tgame);
 
+            Task.Factory.StartNew(() => {
+                game.Run();
+            });
 
         }
 

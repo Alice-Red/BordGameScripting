@@ -1,4 +1,4 @@
-﻿#define NO_MAIN
+﻿#define NO_MAIN_
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,9 @@ namespace BordGameScriptingCUI
 {
     class ProgramBGSCUI
     {
+
+        public static string LibraryPath = @"Lib\";
+
         static void Main(string[] args) {
 
 #if NO_MAIN
