@@ -16,6 +16,7 @@ namespace GameLib.API
         public LibraryType LibType { get; }
 
         private Assembly assembly;
+
         public Assembly Asm {
             get {
                 return assembly;
