@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="GamokuInputter.cs" />
-    <Compile Include="GomokuAnalysis.cs" />
     <Compile Include="GomokuAnalysisBlock.cs" />
+    <Compile Include="GomokuDraw.cs" />
     <Compile Include="GomokuField.cs" />
     <Compile Include="GomokuInit.cs" />
     <Compile Include="GomokuInputObject.cs" />

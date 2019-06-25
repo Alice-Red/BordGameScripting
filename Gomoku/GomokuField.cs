@@ -94,8 +94,9 @@ namespace Gomoku
             List<RawColumn[]>[] results = Enumerable.Range(0, 4).Select(s => new List<RawColumn[]>()).ToArray();
 
             foreach (var item in exists) {
+                var tmp = ScanLises(item).ToArray();
                 for(int i = 0; i < results.Length; i++) {
-                    results[i].Add()
+                    results[i].Add(tmp[i]);
                 }
 
 
