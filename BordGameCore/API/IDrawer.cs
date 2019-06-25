@@ -10,6 +10,9 @@ namespace GameLib.API
 {
     public interface IDrawer
     {
-        void Draw(GridField field);
+        void DrawPanel(GridField field);
+
+        void DrawConsole(GridField field);
+
     }
 }
