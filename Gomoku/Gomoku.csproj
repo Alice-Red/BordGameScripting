@@ -58,6 +58,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(OutDir)$(TargetFileName) $(OutDir)..\..\..\BordGameScriptingCUI\bin\Debug\Lib\</PostBuildEvent>
+    <PostBuildEvent>copy $(SolutionDir)\BordGameScriptingCUI\bin\Debug\ $(OutDir)\$(TargetName).dll</PostBuildEvent>
   </PropertyGroup>
 </Project>

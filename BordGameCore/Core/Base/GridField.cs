@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GameLib.API;
+using GameLib.Core.Util;
+using RUtil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameLib.API;
-using GameLib.Core.Util;
 
 namespace GameLib.Core.Base
 {
@@ -39,7 +40,7 @@ namespace GameLib.Core.Base
 
         public GridField(int width) {
             this.width = (ushort) width;
-            this.height = (ushort) width;
+            height = (ushort) width;
         }
 
         public GridField(int width, int height) {
@@ -86,6 +87,14 @@ namespace GameLib.Core.Base
         /// <returns></returns>
         public int Get((int, int) value) {
             return field[value.Item1, value.Item2];
+        }
+
+        public bool InField(RawColumn rc) {
+            return rc.Raw.InBetween(0, Height) && rc.Column.InBetween(0, width);
+        }
+
+        public bool InField(int raw, int column) {
+            return raw.InBetween(0, Height) && column.InBetween(0, width);
         }
 
         /// <summary>

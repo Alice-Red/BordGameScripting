@@ -23,11 +23,9 @@ namespace Gomoku
         }
 
         public override int CheckWinner() {
-
-
             var t = this.Connected(5);
             if (t.Count() > 0)
-                return this.Get(t.ElementAt(0)[0]);
+                return t.ElementAt(0).Player.ToInt();
             else
                 return 0;
         }
@@ -69,7 +67,7 @@ namespace Gomoku
         /// <param name="field"></param>
         /// <param name="rc"></param>
         /// <returns></returns>
-        public IEnumerable<RawColumn[]> ScanLises(RawColumn rc) {
+        public IEnumerable<GomokuAnalysisBlock[]> ScanLises(RawColumn rc) {
             int color = Get(rc);
             var rp = new RelativeName[] {
                 RelativeName.Right,
@@ -79,7 +77,7 @@ namespace Gomoku
             };
 
             foreach (var item in rp)
-                yield return ScanLine(rc, item).ToArray();
+                yield return new GomokuAnalysisBlock(ScanLine(rc, item).ToArray(), item);
 
         }
 
@@ -89,19 +87,14 @@ namespace Gomoku
         /// <param name="field"></param>
         /// <param name="num"></param>
         /// <returns></returns>
-        public IEnumerable<RawColumn[]> Connected(int num = 0) {
+        public IEnumerable<GomokuAnalysisBlock> Connected(int num = 0) {
             var exists = this.Exists();
-            List<RawColumn[]>[] results = Enumerable.Range(0, 4).Select(s => new List<RawColumn[]>()).ToArray();
+            List<GomokuAnalysisBlock[]> results = new List<GomokuAnalysisBlock[]>();
 
             foreach (var item in exists) {
-                var tmp = ScanLises(item).ToArray();
-                for(int i = 0; i < results.Length; i++) {
-                    results[i].Add(tmp[i]);
-                }
-
-
+                ScanLises(item).ForEach(s => results.Add(s));
             }
-
+            return results;
 
         }
 
