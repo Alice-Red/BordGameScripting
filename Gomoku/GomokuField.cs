@@ -77,7 +77,7 @@ namespace Gomoku
             };
 
             foreach (var item in rp)
-                yield return new GomokuAnalysisBlock(ScanLine(rc, item).ToArray(), item);
+                yield return new GomokuAnalysisBlock(ScanLine(rc, item).ToArray(), item, );
 
         }
 
@@ -106,7 +106,13 @@ namespace Gomoku
         /// <param name="num"></param>
         /// <returns></returns>
         public IEnumerable<RawColumn> BeConnected(int num) {
-
+            var gab = Connected(num - 1);
+            foreach (var item in gab) {
+                foreach (var t in item.ValidPosition) {
+                    if (InField(t) && Get(t) == 0)
+                        yield return t;
+                }
+            }
 
 
         }
@@ -120,11 +126,14 @@ namespace Gomoku
         /// <param name="free">両端が開いてなければならない</param>
         /// <returns></returns>
         public IEnumerable<RawColumn> BeConnected(int a, int b, bool free = false) {
-
-
-
+            var gab = Connected(num - 1);
+            foreach (var item in gab) {
+                foreach (var t in item.ValidPosition) {
+                    if (InField(t) && Get(t) == 0)
+                        yield return t;
+                }
+            }
         }
-
 
         /// <summary>
         /// 置いたら5連になる位置を返します
