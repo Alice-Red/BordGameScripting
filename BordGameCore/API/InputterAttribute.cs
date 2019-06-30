@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GameLib.API
 {
     [AttributeUsage(AttributeTargets.Class)]
-    class InputterAttribute : Attribute
+    public class InputterAttribute : Attribute
     {
         public string GameID { get; set; }
 

@@ -67,7 +67,7 @@ namespace Gomoku
         /// <param name="field"></param>
         /// <param name="rc"></param>
         /// <returns></returns>
-        public IEnumerable<GomokuAnalysisBlock[]> ScanLises(RawColumn rc) {
+        public IEnumerable<GomokuAnalysisBlock> ScanLises(RawColumn rc) {
             int color = Get(rc);
             var rp = new RelativeName[] {
                 RelativeName.Right,
@@ -77,7 +77,7 @@ namespace Gomoku
             };
 
             foreach (var item in rp)
-                yield return new GomokuAnalysisBlock(ScanLine(rc, item).ToArray(), item, );
+                yield return new GomokuAnalysisBlock(ScanLine(rc, item).ToArray(), item, Get(rc).ToPlayerColor2P());
 
         }
 
@@ -89,7 +89,7 @@ namespace Gomoku
         /// <returns></returns>
         public IEnumerable<GomokuAnalysisBlock> Connected(int num = 0) {
             var exists = this.Exists();
-            List<GomokuAnalysisBlock[]> results = new List<GomokuAnalysisBlock[]>();
+            List<GomokuAnalysisBlock> results = new List<GomokuAnalysisBlock>();
 
             foreach (var item in exists) {
                 ScanLises(item).ForEach(s => results.Add(s));
@@ -126,7 +126,7 @@ namespace Gomoku
         /// <param name="free">両端が開いてなければならない</param>
         /// <returns></returns>
         public IEnumerable<RawColumn> BeConnected(int a, int b, bool free = false) {
-            var gab = Connected(num - 1);
+            var gab = Enumerable.Range(Math.Min(a, b), Math.Abs(a - b)).Select(s => Connected(s)).SelectMany(s => s);
             foreach (var item in gab) {
                 foreach (var t in item.ValidPosition) {
                     if (InField(t) && Get(t) == 0)

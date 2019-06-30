@@ -8,7 +8,7 @@ using GameLib.Core.Base;
 
 namespace Gomoku
 {
-    class GomokuInit : Initializer
+    public class GomokuInit : Initializer
     {
         protected override IInputter Get1P() {
             throw new NotImplementedException();

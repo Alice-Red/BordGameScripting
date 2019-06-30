@@ -10,9 +10,9 @@ using RUtil;
 
 namespace Gomoku
 {
-    class GomokuDraw : IDrawer
+    public class GomokuDraw : ADrawer
     {
-        public void DrawConsole(GridField field) {
+        public override void DrawConsole(GridField field) {
             var num = new string[] {
                 "一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二", "十三", "十四", "十五", "十六",
             };
@@ -25,7 +25,7 @@ namespace Gomoku
 
         }
 
-        public void DrawPanel(GridField field) {
+        public override void DrawPanel(GridField field) {
             throw new NotImplementedException();
         }
     }

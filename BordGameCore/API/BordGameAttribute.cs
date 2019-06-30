@@ -11,9 +11,12 @@ namespace GameLib.API
     public class BordGameAttribute : Attribute
     {
         public string GameID { get; set; }
+        public ADrawer Drawer { get; set; }
 
-        public BordGameAttribute(string gameid) {
+
+        public BordGameAttribute(string gameid, ADrawer drawer) {
             GameID = gameid;
+            Drawer = drawer;
         }
     }
 }

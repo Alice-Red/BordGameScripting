@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLib.API;
 using GameLib.Core;
 
 
 namespace Gomoku
 {
-    [GameLib.API.BordGame(ID)]
-    class Gomoku : BordGame
+    [BordGame(ID, new GomokuDraw())]
+    public class Gomoku : BordGame
     {
         public const string ID = "Gomoku";
 

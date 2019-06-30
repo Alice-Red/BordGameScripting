@@ -8,11 +8,11 @@ using GameLib.Core.Base;
 
 namespace GameLib.API
 {
-    public interface IDrawer
+    public abstract class ADrawer
     {
-        void DrawPanel(GridField field);
+        abstract public void DrawPanel(GridField field);
 
-        void DrawConsole(GridField field);
+        abstract public void DrawConsole(GridField field);
 
     }
 }
