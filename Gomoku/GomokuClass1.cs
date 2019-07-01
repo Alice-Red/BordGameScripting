@@ -21,24 +21,23 @@ namespace Gomoku
             //throw new NotImplementedException();
         }
 
-        protected override void Input() {
-            //throw new NotImplementedException();
-        }
-
         protected override void Menu() {
+            
             //throw new NotImplementedException();
         }
 
         protected override void Next() {
+
             //throw new NotImplementedException();
         }
 
         protected override void Process() {
+            
             //throw new NotImplementedException();
         }
 
         protected override void Result() {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

@@ -14,6 +14,9 @@ namespace GameLib.Core
         protected bool Running = false;
         public GameField Field;
         protected IInputObjectContainer current;
+        protected GameInputter PL1;
+        protected GameInputter PL2;
+        protected IDrawer Drawer;
 
 
         public override void Run() {
@@ -35,11 +38,21 @@ namespace GameLib.Core
 
         protected abstract void Menu();
 
-        protected abstract void Input();
+        protected void Input() {
+            switch (turn) {
+                case 1:
+                    current = PL1.Input(Field);
+                    break;
+                case -1:
+                    current = PL2.Input(Field);
+                    break;
+            }
+        }
 
         protected abstract void Process();
 
         public void Draw() {
+            Drawer.DrawConsole((Base.GridField) Field);
 
         }
 

@@ -7,11 +7,11 @@ using GameLib.Core.Base;
 
 namespace GameLib.API
 {
-    public interface GameInputter
+    public abstract class GameInputter
     {
-        string Name();
+        public abstract string Name();
 
-        IInputObjectContainer Input(GridField field);
+        public abstract IInputObjectContainer Input(GameField field);
 
     }
 }

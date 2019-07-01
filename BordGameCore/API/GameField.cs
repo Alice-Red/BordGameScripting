@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.API
 {
-    public interface IField
+    public abstract class GameField
     {
 
     }

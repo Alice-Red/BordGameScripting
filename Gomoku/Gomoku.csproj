@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="GomokuClass1.cs" />
     <Compile Include="GamokuInputter.cs" />
     <Compile Include="GomokuAnalysisBlock.cs" />
     <Compile Include="GomokuDraw.cs" />
