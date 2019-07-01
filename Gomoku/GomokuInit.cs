@@ -10,11 +10,11 @@ namespace Gomoku
 {
     public class GomokuInit : Initializer
     {
-        protected override IInputter Get1P() {
+        protected override GameInputter Get1P() {
             throw new NotImplementedException();
         }
 
-        protected override IInputter Get2P() {
+        protected override GameInputter Get2P() {
             throw new NotImplementedException();
         }
 

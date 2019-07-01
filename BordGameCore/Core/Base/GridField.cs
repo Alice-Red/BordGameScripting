@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GameLib.Core.Base
 {
 
-    public abstract class GridField : IField
+    public abstract class GridField : GameField
     {
         private ushort width = 0;
         private ushort height = 0;

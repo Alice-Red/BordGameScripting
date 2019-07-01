@@ -8,14 +8,13 @@ using GameLib.Core.Base;
 
 namespace Gomoku
 {
-    public abstract class GamokuInputter : IInputter
+    public abstract class GamokuInputter : GameInputter
     {
-        public IInputObjectContainer Input(GridField field) {
+        public override IInputObjectContainer Input(GridField field) {
             return Input(field);
         }
 
         public abstract GomokuInputObject Input(GomokuField field);
 
-        public abstract string Name();
     }
 }

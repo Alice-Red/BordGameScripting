@@ -11,9 +11,9 @@ namespace GameLib.API
     {
         protected abstract IMenu GetIMenu();
 
-        protected abstract IInputter Get1P();
+        protected abstract GameInputter Get1P();
 
-        protected abstract IInputter Get2P();
+        protected abstract GameInputter Get2P();
 
         protected abstract IInputObjectContainer GetInputContainer();
 

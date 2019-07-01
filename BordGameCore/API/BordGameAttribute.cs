@@ -11,12 +11,16 @@ namespace GameLib.API
     public class BordGameAttribute : Attribute
     {
         public string GameID { get; set; }
-        public ADrawer Drawer { get; set; }
+        //public IDrawer Drawer { get; set; }
 
 
-        public BordGameAttribute(string gameid, ADrawer drawer) {
+        public BordGameAttribute(string gameid) {
             GameID = gameid;
-            Drawer = drawer;
         }
+
+        public void Nendo() {
+
+        }
+
     }
 }

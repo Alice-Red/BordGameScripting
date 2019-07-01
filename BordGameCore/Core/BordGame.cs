@@ -7,17 +7,16 @@ using GameLib.API;
 
 namespace GameLib.Core
 {
-    public abstract class BordGame : BordGameAttribute, IGame
+    public abstract class BordGame : Game
     {
         protected int Loser = 0;
         protected int turn = 1;
         protected bool Running = false;
-        public IField Field;
+        public GameField Field;
+        protected IInputObjectContainer current;
 
-        public BordGame(string gameid, ADrawer drawer) : base(gameid, drawer) {
-        }
 
-        public void Run() {
+        public override void Run() {
             if (Running) {
                 return;
             }

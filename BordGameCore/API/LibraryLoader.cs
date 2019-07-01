@@ -15,13 +15,15 @@ namespace GameLib.API
 
         public LibraryLoader(string path) {
             var fullPath = Path.GetFullPath(path);
+            var libs = new List<LibraryObject>();
             if (File.Exists(fullPath)) {
-                Libs.Add(LoadFile(fullPath));
+                libs.Add(LoadFile(fullPath));
             } else if (Directory.Exists(fullPath)) {
-                Libs.Concat(LoadFolder(fullPath));
+                libs = libs.Concat(LoadFolder(fullPath)).ToList();
             } else {
                 throw new System.IO.DirectoryNotFoundException();
             }
+            Libs = libs.ToArray();
 
         }
 

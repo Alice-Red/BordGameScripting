@@ -7,7 +7,7 @@ using GameLib.Core.Base;
 
 namespace GameLib.API
 {
-    public interface IInputter
+    public interface GameInputter
     {
         string Name();
 

@@ -49,8 +49,8 @@
     <Compile Include="API\LibraryType.cs" />
     <Compile Include="API\Util.cs" />
     <Compile Include="API\IDrawer.cs" />
-    <Compile Include="API\IField.cs" />
-    <Compile Include="API\IInputter.cs" />
+    <Compile Include="API\GameField.cs" />
+    <Compile Include="API\GameInputter.cs" />
     <Compile Include="API\IInputObjectContainer.cs" />
     <Compile Include="API\IMenu.cs" />
     <Compile Include="API\IO.cs" />

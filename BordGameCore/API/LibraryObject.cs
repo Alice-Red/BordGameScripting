@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLib.Core;
 
 namespace GameLib.API
 {
@@ -30,13 +31,7 @@ namespace GameLib.API
             var types = assembly.GetExportedTypes();
             LibType = LibraryType.None;
             foreach (var item in types) {
-                if (item.IsAssignableFrom(typeof(BordGameAttribute))) {
-                    LibType = LibraryType.Game;
-                    ID = ((BordGameAttribute) Attribute.GetCustomAttribute(item, typeof(BordGameAttribute))).GameID;
-                    break;
-                }
-
-                if (item.IsAssignableFrom(typeof(InputterAttribute))) {
+                if (item.IsSubclassOf(typeof(Game))) {
                     LibType = LibraryType.Game;
                     ID = ((BordGameAttribute) Attribute.GetCustomAttribute(item, typeof(BordGameAttribute))).GameID;
                     break;
@@ -49,11 +44,5 @@ namespace GameLib.API
 
         }
 
-        //public MethodInfo Input {
-        //    get {
-        //        assembly.
-        //    }
-
-        //}
     }
 }

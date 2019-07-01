@@ -609,6 +609,8 @@ namespace RUtil
         /// <returns></returns>
         public static T[,] To2D<T>(this T[][] source) {
             int FirstDim = source.Length;
+            //if (FirstDim <= 0)
+            //    return null;
             int SecondDim = source.Select(s => s.Length).Max();
             var result = new T[FirstDim, SecondDim];
             for (long i = 0; i < FirstDim; i++)

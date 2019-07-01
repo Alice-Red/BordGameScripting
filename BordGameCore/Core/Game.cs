@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GameLib.Core
 {
-    public interface IGame
+    public abstract class Game
     {
-        void Run();
+        public abstract void Run();
 
     }
 }

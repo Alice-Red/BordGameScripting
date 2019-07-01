@@ -20,7 +20,7 @@ namespace BordGameScriptingCUI
 
         public GameMain() {
             LibraryLoader loader = new LibraryLoader(ProgramBGSCUI.LibraryPath);
-            var tgame = loader.Games.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s is IGame).ToArray();
+            var tgame = loader.Games.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s.IsSubclassOf(typeof(Game))).ToArray();
             Menu(tgame);
 
             Task.Factory.StartNew(() => {
