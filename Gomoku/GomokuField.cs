@@ -34,7 +34,6 @@ namespace Gomoku
         /// <summary>
         /// 1方向を見ます
         /// </summary>
-        /// <param name="field"></param>
         /// <param name="rc"></param>
         /// <param name="rp"></param>
         /// <returns></returns>
@@ -64,7 +63,6 @@ namespace Gomoku
         /// <summary>
         /// 4方向を見ます
         /// </summary>
-        /// <param name="field"></param>
         /// <param name="rc"></param>
         /// <returns></returns>
         public IEnumerable<GomokuAnalysisBlock> ScanLises(RawColumn rc) {
@@ -84,7 +82,6 @@ namespace Gomoku
         /// <summary>
         /// 指定されたもしくはすべての数の連結している位置を返します
         /// </summary>
-        /// <param name="field"></param>
         /// <param name="num"></param>
         /// <returns></returns>
         public IEnumerable<GomokuAnalysisBlock> Connected(int num = 0) {
@@ -102,7 +99,6 @@ namespace Gomoku
         /// <summary>
         /// 置いたら N連 になる位置を返します
         /// </summary>
-        /// <param name="field"></param>
         /// <param name="num"></param>
         /// <returns></returns>
         public IEnumerable<RawColumn> BeConnected(int num) {
@@ -120,7 +116,6 @@ namespace Gomoku
         /// <summary>
         /// 置いたら A連からB連 になる位置を返します
         /// </summary>
-        /// <param name="field"></param>
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <param name="free">両端が開いてなければならない</param>
@@ -138,7 +133,6 @@ namespace Gomoku
         /// <summary>
         /// 置いたら5連になる位置を返します
         /// </summary>
-        /// <param name="field"></param>
         /// <returns></returns>
         public IEnumerable<RawColumn> BeConnected5() => BeConnected(5, 5, false);
 

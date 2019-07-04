@@ -10,7 +10,7 @@ using GameLib.Core;
 namespace GameLib.API
 {
 
-    public struct LibraryObject
+    public class LibraryObject
     {
         public string ID { get; }
 
@@ -35,13 +35,14 @@ namespace GameLib.API
                     LibType = LibraryType.Game;
                     ID = ((BordGameAttribute) Attribute.GetCustomAttribute(item, typeof(BordGameAttribute))).GameID;
                     break;
+                }else if (item.IsSubclassOf(typeof(IDrawer))) {
+
+                }else if (item.IsSubclassOf(typeof(GameInputter))) {
+
                 }
 
 
             }
-
-
-
         }
 
     }
