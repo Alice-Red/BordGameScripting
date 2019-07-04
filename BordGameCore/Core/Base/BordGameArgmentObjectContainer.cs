@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
 
-namespace BordGameCore.Core.Base
+namespace GameLib.Core.Base
 {
     public struct BordGameArgmentObjectContainer
     {
