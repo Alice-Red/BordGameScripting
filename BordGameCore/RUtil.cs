@@ -123,6 +123,23 @@ namespace RUtil
             return false;
         }
 
+        public static T CreateInstance<T>(this Type target) {
+            return (T) Activator.CreateInstance(target);
+        }
+
+
+        public static bool CreateInstance<T>(this Type target, Type parent, out T obj) {
+            if (target.IsSubclassOf(parent.GetType())) {
+                obj = (T) Activator.CreateInstance(target);
+                return true;
+            } else {
+                obj = default(T);
+                return false;
+            }
+
+        }
+
+
         #endregion
 
         /**-------------------------
@@ -609,8 +626,8 @@ namespace RUtil
         /// <returns></returns>
         public static T[,] To2D<T>(this T[][] source) {
             int FirstDim = source.Length;
-            //if (FirstDim <= 0)
-            //    return null;
+            if (FirstDim <= 0)
+                return new T[0, 0];
             int SecondDim = source.Select(s => s.Length).Max();
             var result = new T[FirstDim, SecondDim];
             for (long i = 0; i < FirstDim; i++)

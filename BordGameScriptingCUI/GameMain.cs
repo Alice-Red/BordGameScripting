@@ -38,6 +38,10 @@ namespace BordGameScriptingCUI
             var n = Console.ReadLine().ParseInt();
             game = igames[n] as BordGame;
 
+
+
+
+
         }
 
     }

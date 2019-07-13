@@ -29,6 +29,10 @@ namespace GameLib.API
 
         public Assembly[] Games => Libs.Where(s => s.LibType == LibraryType.Game).Select(s => s.Asm).ToArray();
 
+        public Assembly[] Inputters => Libs.Where(s => s.LibType == LibraryType.Inputter).Select(s => s.Asm).ToArray();
+
+        public Assembly[] Inpuuters(string id) => Libs.Where(s => s.LibType == LibraryType.Inputter).Where(s => s.ID == id).Select(s => s.Asm).ToArray();
+
         public static LibraryObject LoadFile(string file) {
             if (!File.Exists(file))
                 throw new System.IO.FileNotFoundException();

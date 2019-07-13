@@ -98,6 +98,13 @@ namespace GameLib.Core.Base
         }
 
         /// <summary>
+        /// 問答無用で上書きします
+        /// </summary>
+        public void OverWrite(RawColumn point, int value) {
+            field[point.Raw, point.Column] = value;
+        }
+
+        /// <summary>
         /// 指定要素をカウントします
         /// </summary>
         /// <param name="color"></param>

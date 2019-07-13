@@ -10,8 +10,9 @@ namespace Gomoku
 {
     public abstract class GamokuInputter : GameInputter
     {
-        public override IInputObjectContainer Input(GridField field) {
-            return Input(field);
+
+        public override IInputObjectContainer Input(GameField field) {
+            return Input((GomokuField) field);
         }
 
         public abstract GomokuInputObject Input(GomokuField field);

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
+using GameLib.Core.Base;
+using GameLib.Core.Util;
+using RUtil;
 
 namespace GameLib.Core
 {
@@ -12,18 +15,38 @@ namespace GameLib.Core
         protected int Loser = 0;
         protected int turn = 1;
         protected bool Running = false;
-        public GameField Field;
+        private bool Inited = true;
+        public GridField Field;
         protected IInputObjectContainer current;
         protected GameInputter PL1;
         protected GameInputter PL2;
         protected IDrawer Drawer;
 
+        public BordGame() {
+            Inited = false;
+        } 
+
+        public BordGame(Type pl1, Type pl2) {
+            if (!pl1.CreateInstance(typeof(GameInputter), out PL1) || pl2.CreateInstance(typeof(GameInputter), out PL2)) {
+                ConsoleOut.Error("初期化に失敗しました");
+                Inited = false;
+            }
+        }
+
+        public void SetPlayer(Type pl1, Type pl2) {
+            if (!pl1.CreateInstance(typeof(GameInputter), out PL1) || pl2.CreateInstance(typeof(GameInputter), out PL2)) {
+                ConsoleOut.Error("初期化に失敗しました");
+                Inited = false;
+            }
+        }
+
 
         public override void Run() {
-            if (Running) {
+            if (Running)
                 return;
-            }
             Init();
+            if (Inited == false)
+                return;
             Menu();
             Draw();
             do {
@@ -47,6 +70,7 @@ namespace GameLib.Core
                     current = PL2.Input(Field);
                     break;
             }
+            
         }
 
         protected abstract void Process();

@@ -33,11 +33,13 @@ namespace GameLib.API
             foreach (var item in types) {
                 if (item.IsSubclassOf(typeof(Game))) {
                     LibType = LibraryType.Game;
-                    ID = ((BordGameAttribute) Attribute.GetCustomAttribute(item, typeof(BordGameAttribute))).GameID;
+                    ID = ((GameAddonAttribute) Attribute.GetCustomAttribute(item, typeof(GameAddonAttribute))).GameID;
                     break;
                 }else if (item.IsSubclassOf(typeof(IDrawer))) {
 
                 }else if (item.IsSubclassOf(typeof(GameInputter))) {
+                    LibType = LibraryType.Inputter;
+                    ID = ((GameAddonAttribute) Attribute.GetCustomAttribute(item, typeof(GameAddonAttribute))).GameID;
 
                 }
 

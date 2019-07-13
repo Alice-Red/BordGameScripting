@@ -8,13 +8,13 @@ namespace GameLib.API
 {
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class BordGameAttribute : Attribute
+    public class GameAddonAttribute : Attribute
     {
         public string GameID { get; set; }
         //public IDrawer Drawer { get; set; }
 
 
-        public BordGameAttribute(string gameid) {
+        public GameAddonAttribute(string gameid) {
             GameID = gameid;
         }
 
