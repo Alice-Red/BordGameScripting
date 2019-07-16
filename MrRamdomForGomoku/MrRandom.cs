@@ -9,6 +9,7 @@ using Gomoku;
 
 namespace MrRamdomForGomoku
 {
+    [GameAddon(Gomoku.Gomoku.ID)]
     class MrRandom : GamokuInputter
     {
         const string NAME = "Mr.Random";

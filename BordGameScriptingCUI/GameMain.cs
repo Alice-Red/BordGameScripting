@@ -15,13 +15,16 @@ namespace BordGameScriptingCUI
     {
 
         GameLib.Core.BordGame game;
+        GameInputter pl1;
+        GameInputter pl2;
 
 
 
         public GameMain() {
             LibraryLoader loader = new LibraryLoader(ProgramBGSCUI.LibraryPath);
-            var tgame = loader.Games.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s.IsSubclassOf(typeof(Game))).ToArray();
-            Menu(tgame);
+            var tgame = loader.Games.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s.IsSubclassOf(typeof(BordGame))).ToArray();
+            var tinput = loader.Inputters.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s.IsSubclassOf(typeof(GameInputter))).ToArray();
+            Menu(tgame, tinput);
 
             Task.Factory.StartNew(() => {
                 game.Run();
@@ -29,7 +32,7 @@ namespace BordGameScriptingCUI
 
         }
 
-        public void Menu(Type[] tgames) {
+        public void Menu(Type[] tgames, Type[] tinputters) {
             var igames = tgames.Select(s => Activator.CreateInstance(s)).ToArray();
             for (int i = 0; i < igames.Length; i++) {
                 Console.WriteLine($"{i}: {(igames[i] as BordGame).ToString()}");
@@ -38,7 +41,7 @@ namespace BordGameScriptingCUI
             var n = Console.ReadLine().ParseInt();
             game = igames[n] as BordGame;
 
-
+            var iinputters = tinputters.Select(s => (GameInputter)Activator.CreateInstance(s)).Where(s=>s.).ToArray();
 
 
 
