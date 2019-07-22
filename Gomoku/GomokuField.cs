@@ -56,7 +56,6 @@ namespace Gomoku
                         color = Get(current);
                 }
             }
-
         }
 
 
