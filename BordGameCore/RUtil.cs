@@ -1068,6 +1068,15 @@ namespace RUtil
                 return (T) Enum.ToObject(typeof(T), value);
             return default(T);
         }
+
+        /// <summary>
+        /// 属性の値を取得します
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T GetAttributeValue<T>(this Type target) where T : Attribute {
+            return (T) Attribute.GetCustomAttribute(target, typeof(T));
+        }
         #endregion
 
         /**-------------------------

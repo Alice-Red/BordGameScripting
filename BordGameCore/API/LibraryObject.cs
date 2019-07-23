@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.Core;
+using RUtil;
 
 namespace GameLib.API
 {
@@ -33,13 +34,14 @@ namespace GameLib.API
             foreach (var item in types) {
                 if (item.IsSubclassOf(typeof(Game))) {
                     LibType = LibraryType.Game;
-                    ID = ((GameAddonAttribute) Attribute.GetCustomAttribute(item, typeof(GameAddonAttribute))).GameID;
+                    ID = item.GetAttributeValue<GameAddonAttribute>().GameID;
+                    //ID = ((GameAddonAttribute) Attribute.GetCustomAttribute(item, typeof(GameAddonAttribute))).GameID;
                     break;
                 }else if (item.IsSubclassOf(typeof(IDrawer))) {
 
                 }else if (item.IsSubclassOf(typeof(GameInputter))) {
                     LibType = LibraryType.Inputter;
-                    ID = ((GameAddonAttribute) Attribute.GetCustomAttribute(item, typeof(GameAddonAttribute))).GameID;
+                    ID = item.GetAttributeValue<GameAddonAttribute>().GameID;
 
                 }
 

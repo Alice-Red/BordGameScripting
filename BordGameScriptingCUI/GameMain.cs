@@ -40,9 +40,20 @@ namespace BordGameScriptingCUI
             Console.Write(">>");
             var n = Console.ReadLine().ParseInt();
             game = igames[n] as BordGame;
+            var id = game.GetType().GetAttributeValue<GameAddonAttribute>().GameID;
+            var iinputters = tinputters.Select(s => (GameInputter) Activator.CreateInstance(s)).Where(s => s.Name() == id).ToArray();
 
-            var iinputters = tinputters.Select(s => (GameInputter)Activator.CreateInstance(s)).Where(s=>s.).ToArray();
+            for (int i = 0; i < igames.Length; i++) {
+                Console.WriteLine($"{i}: {(igames[i] as BordGame).ToString()}");
+            }
+            Console.Write(">>");
+            var n2 = Console.ReadLine().ParseInt();
 
+            for (int i = 0; i < igames.Length; i++) {
+                Console.WriteLine($"{i}: {(igames[i] as BordGame).ToString()}");
+            }
+            Console.Write(">>");
+            var n3 = Console.ReadLine().ParseInt();
 
 
         }

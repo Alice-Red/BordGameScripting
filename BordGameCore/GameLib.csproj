@@ -42,12 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\BordGameAttribute.cs" />
+    <Compile Include="API\GameAddonAttribute.cs" />
     <Compile Include="API\InputterAttribute.cs" />
     <Compile Include="API\LibraryLoader.cs" />
     <Compile Include="API\LibraryObject.cs" />
     <Compile Include="API\LibraryType.cs" />
-    <Compile Include="API\TcpConnecter.cs" />
+    <Compile Include="API\TcpServer.cs" />
     <Compile Include="API\Util.cs" />
     <Compile Include="API\IDrawer.cs" />
     <Compile Include="API\GameField.cs" />
