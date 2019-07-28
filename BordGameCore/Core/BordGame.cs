@@ -24,7 +24,7 @@ namespace GameLib.Core
 
         public BordGame() {
             Inited = false;
-        } 
+        }
 
         public BordGame(Type pl1, Type pl2) {
             if (!pl1.CreateInstance(typeof(GameInputter), out PL1) || pl2.CreateInstance(typeof(GameInputter), out PL2)) {

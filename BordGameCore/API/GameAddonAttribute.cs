@@ -18,9 +18,6 @@ namespace GameLib.API
             GameID = gameid;
         }
 
-        public void Nendo() {
-
-        }
 
     }
 }
