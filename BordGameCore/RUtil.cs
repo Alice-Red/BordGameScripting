@@ -1077,6 +1077,16 @@ namespace RUtil
         public static T GetAttributeValue<T>(this Type target) where T : Attribute {
             return (T) Attribute.GetCustomAttribute(target, typeof(T));
         }
+
+        /// <summary>
+        /// 指定された Type の継承元であるすべての型を取得します
+        /// </summary>
+        public static IEnumerable<Type> GetBaseTypes(this Type self) {
+            for (var baseType = self.BaseType; null != baseType; baseType = baseType.BaseType) {
+                yield return baseType;
+            }
+        }
+
         #endregion
 
         /**-------------------------

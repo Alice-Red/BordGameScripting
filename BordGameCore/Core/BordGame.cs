@@ -18,12 +18,12 @@ namespace GameLib.Core
         private bool Inited = true;
         public GridField Field;
         protected IInputObjectContainer current;
-        protected GameInputter PL1;
-        protected GameInputter PL2;
+        public GameInputter PL1;
+        public GameInputter PL2;
         protected IDrawer Drawer;
 
         public BordGame() {
-            Inited = false;
+            //Inited = false;
         }
 
         public BordGame(Type pl1, Type pl2) {
@@ -76,6 +76,7 @@ namespace GameLib.Core
         protected abstract void Process();
 
         public void Draw() {
+            Console.WriteLine(turn);
             Drawer.DrawConsole((Base.GridField) Field);
 
         }

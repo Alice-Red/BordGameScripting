@@ -15,12 +15,16 @@ namespace Gomoku
     {
         public const string ID = "Gomoku";
 
+        public Gomoku() {
+
+        }
+
         public Gomoku(Type pl1, Type pl2) : base(pl1, pl2) {
         }
 
         protected override void Init() {
             this.Drawer = new GomokuDraw();
-            
+            Field = new GomokuField(); 
 
             //throw new NotImplementedException();
         }

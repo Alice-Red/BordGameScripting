@@ -39,7 +39,7 @@ namespace GameLib.API
                     break;
                 }else if (item.IsSubclassOf(typeof(IDrawer))) {
 
-                }else if (item.IsSubclassOf(typeof(GameInputter))) {
+                }else if (item.GetBaseTypes().Contains(typeof(GameInputter))) {
                     LibType = LibraryType.Inputter;
                     ID = item.GetAttributeValue<GameAddonAttribute>().GameID;
 

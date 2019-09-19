@@ -12,7 +12,7 @@ namespace Gomoku
     public class GomokuField : GridField
     {
 
-        public GomokuField() : base(15) {
+        public GomokuField() : base(16) {
 
 
         }

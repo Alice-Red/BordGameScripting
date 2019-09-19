@@ -47,7 +47,6 @@
     <Compile Include="API\LibraryLoader.cs" />
     <Compile Include="API\LibraryObject.cs" />
     <Compile Include="API\LibraryType.cs" />
-    <Compile Include="API\TcpServer.cs" />
     <Compile Include="API\Util.cs" />
     <Compile Include="API\IDrawer.cs" />
     <Compile Include="API\GameField.cs" />
@@ -75,7 +74,6 @@
     <Compile Include="Core\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RUtil.cs" />
-    <Compile Include="API\TcpMessageReceivedArgs.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
