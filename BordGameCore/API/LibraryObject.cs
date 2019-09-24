@@ -37,6 +37,11 @@ namespace GameLib.API
                     ID = item.GetAttributeValue<GameAddonAttribute>().GameID;
                     //ID = ((GameAddonAttribute) Attribute.GetCustomAttribute(item, typeof(GameAddonAttribute))).GameID;
                     break;
+
+
+
+
+
                 }else if (item.IsSubclassOf(typeof(IDrawer))) {
 
                 }else if (item.GetBaseTypes().Contains(typeof(GameInputter))) {
