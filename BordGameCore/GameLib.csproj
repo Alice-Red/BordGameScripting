@@ -59,6 +59,7 @@
     <Compile Include="Core\Base\BordGameArgmentObjectContainer.cs" />
     <Compile Include="Core\Base\FieldAnalyzer.cs" />
     <Compile Include="Core\Base\GridField.cs" />
+    <Compile Include="Core\Base\PlayerColor1P.cs" />
     <Compile Include="Core\Base\PlayerColor2P.cs" />
     <Compile Include="Core\Base\PlayerColor4P.cs" />
     <Compile Include="Core\BordGame.cs" />
