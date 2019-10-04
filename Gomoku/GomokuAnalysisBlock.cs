@@ -23,10 +23,13 @@ namespace Gomoku
             Connect = rc.Length >= 1 && rc.All(s => s == rc[0]) ? rc.Length : 0;
             Direction = relative;
             Player = player;
-            ValidPosition = new RawColumn[]{
+            if (rc.Count() != 0)
+                ValidPosition = new RawColumn[]{
                 new RawColumn(rc.First() - Relative.Position[relative]),
                 new RawColumn(rc.First() + Relative.Position[relative]),
             };
+            else
+                ValidPosition = new RawColumn[0];
 
         }
 
@@ -43,6 +46,12 @@ namespace Gomoku
             return true;
         }
 
+        public override string ToString() {
+            if (Items.Length != 0)
+                return $"{Player.ToString()} has {Connect} stone in {Items.First()} at {Direction.ToString()}";
+            else
+                return $"{Player.ToString()} doesn't have a stone.";
+        }
 
 
     }

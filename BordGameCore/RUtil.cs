@@ -744,7 +744,7 @@ namespace RUtil
         /// <param name="max"></param>
         /// <returns></returns>
         public static bool InBetween<T>(this T value, T min, T max) where T : IComparable<T> {
-            if (min.CompareTo(max) <= -1)
+            if (min.CompareTo(max) > 0)
                 Swap(ref min, ref max);
             return value.CompareTo(min) >= 0 && value.CompareTo(max) <= 0;
         }

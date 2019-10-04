@@ -42,7 +42,7 @@ namespace Gomoku
             if (start.Any(PlayerColor2P.Black, PlayerColor2P.White)) {
                 int color = start.ToInt();
                 RawColumn current = rc;
-                while (Get(current).ToPlayerColor2P() != color.ToPlayerColor2P().Reverse()) {
+                while (InField(current) && Get(current) == color) {
                     yield return current;
                     current += Relative.Position[rp];
                 }
@@ -65,7 +65,7 @@ namespace Gomoku
         /// <param name="rc"></param>
         /// <returns></returns>
         public IEnumerable<GomokuAnalysisBlock> ScanLises(RawColumn rc) {
-            int color = Get(rc);
+            //int color = Get(rc);
             var rp = new RelativeName[] {
                 RelativeName.Right,
                 RelativeName.LowerRight,
@@ -88,10 +88,10 @@ namespace Gomoku
             List<GomokuAnalysisBlock> results = new List<GomokuAnalysisBlock>();
 
             foreach (var item in exists) {
-                ScanLises(item).ForEach(s => results.Add(s));
-            }
-            return results;
+                ScanLises(item).ForEach(s => System.Diagnostics.Debug.WriteLine($"{results.AddGet(s).ToString()}"));
 
+            }
+            return results.Where(s => s.Connect == num);
         }
 
 
@@ -127,6 +127,17 @@ namespace Gomoku
                         yield return t;
                 }
             }
+        }
+
+        /// <summary>
+        /// 置くことができるすべての位置
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<RawColumn> CanPutList() {
+            for (int r = 0; r < Height; r++)
+                for (int c = 0; c < Width; c++)
+                    if (Get(r, c) == 0)
+                        yield return RawColumn.New(r, c);
         }
 
         /// <summary>

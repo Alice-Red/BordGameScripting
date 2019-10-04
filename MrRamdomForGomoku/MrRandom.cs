@@ -19,8 +19,10 @@ namespace MrRamdomForGomoku
         }
 
         public override GomokuInputObject Input(GomokuField field) {
-            var t = field.BeConnected(2);
+            var t = field.CanPutList();
+            //Console.WriteLine($"\tt : {t.Count()}");
             GomokuInputObject box = new GomokuInputObject(t.Ramdom());
+            //if(t.Count()!=0)
             return box;
         }
 

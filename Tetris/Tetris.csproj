@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}</ProjectGuid>
+    <ProjectGuid>{624682DD-86C3-4840-B926-C326DCC855FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameLib</RootNamespace>
-    <AssemblyName>GameLib</AssemblyName>
+    <RootNamespace>Tetris</RootNamespace>
+    <AssemblyName>Tetris</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,40 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\GameAddonAttribute.cs" />
-    <Compile Include="API\InputterAttribute.cs" />
-    <Compile Include="API\LibraryLoader.cs" />
-    <Compile Include="API\LibraryObject.cs" />
-    <Compile Include="API\LibraryType.cs" />
-    <Compile Include="API\Util.cs" />
-    <Compile Include="API\IDrawer.cs" />
-    <Compile Include="API\GameField.cs" />
-    <Compile Include="API\GameInputter.cs" />
-    <Compile Include="API\IInputObjectContainer.cs" />
-    <Compile Include="API\IMenu.cs" />
-    <Compile Include="API\IO.cs" />
-    <Compile Include="API\Initializer.cs" />
-    <Compile Include="API\IArgmentObjectContainer.cs" />
-    <Compile Include="Core\Base\BordGameArgmentObjectContainer.cs" />
-    <Compile Include="Core\Base\GridField.cs" />
-    <Compile Include="Core\Base\PlayerColor1P.cs" />
-    <Compile Include="Core\Base\PlayerColor2P.cs" />
-    <Compile Include="Core\Base\PlayerColor4P.cs" />
-    <Compile Include="Core\BordGame.cs" />
-    <Compile Include="Core\SingleGame.cs" />
-    <Compile Include="Core\Util\Calculation.cs" />
-    <Compile Include="Core\Util\ConsoleOut.cs" />
-    <Compile Include="Core\Util\Converter.cs" />
-    <Compile Include="Core\Util\Message.cs" />
-    <Compile Include="Core\Util\MessageType.cs" />
-    <Compile Include="Core\Util\RawColumn.cs" />
-    <Compile Include="Core\Util\RelativeName.cs" />
-    <Compile Include="Core\Util\RelativePosition.cs" />
-    <Compile Include="Core\Util\SafeArray.cs" />
-    <Compile Include="Core\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RUtil.cs" />
+    <Compile Include="TetrisMain.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

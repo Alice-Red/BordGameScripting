@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrRamdomForGomoku", "MrRamd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLib", "BordGameCore\GameLib.csproj", "{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris", "Tetris\Tetris.csproj", "{624682DD-86C3-4840-B926-C326DCC855FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624682DD-86C3-4840-B926-C326DCC855FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624682DD-86C3-4840-B926-C326DCC855FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624682DD-86C3-4840-B926-C326DCC855FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624682DD-86C3-4840-B926-C326DCC855FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

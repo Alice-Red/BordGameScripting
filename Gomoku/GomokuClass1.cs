@@ -24,13 +24,13 @@ namespace Gomoku
 
         protected override void Init() {
             this.Drawer = new GomokuDraw();
-            Field = new GomokuField(); 
+            Field = new GomokuField();
 
             //throw new NotImplementedException();
         }
 
         protected override void Menu() {
-            
+
             //throw new NotImplementedException();
         }
 
@@ -40,11 +40,18 @@ namespace Gomoku
         }
 
         protected override void Process() {
-            if (((GomokuField) Field).Canput((RawColumn) current, turn)) {
-                ((GomokuField) Field).OverWrite((RawColumn) current, turn);
+            var tmpObject = (GomokuInputObject) current;
+
+            if (((GomokuField) Field).Canput(new RawColumn(tmpObject.Raw, tmpObject.Column), turn)) {
+                ((GomokuField) Field).OverWrite(new RawColumn(tmpObject.Raw, tmpObject.Column), turn);
                 turn *= -1;
             }
-            
+
+            var reslut = ((GomokuField) Field).Connected(5);
+            if (reslut.Count() >= 1) {
+                Loser = reslut.First().Player.Reverse().ToInt();
+            }
+
             //throw new NotImplementedException();
         }
 
