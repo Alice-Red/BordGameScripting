@@ -228,7 +228,6 @@ namespace GameLib.Core.Base
                 return t;
             else
                 return RelativePosition(rc, rp, c - 1);
-
         }
 
         /// <summary>

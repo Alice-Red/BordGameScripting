@@ -26,7 +26,6 @@ namespace Gomoku
             this.Drawer = new GomokuDraw();
             Field = new GomokuField();
 
-            //throw new NotImplementedException();
         }
 
         protected override void Menu() {

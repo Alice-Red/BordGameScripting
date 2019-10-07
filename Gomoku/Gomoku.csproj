@@ -46,7 +46,6 @@
     <Compile Include="GomokuAnalysisBlock.cs" />
     <Compile Include="GomokuDraw.cs" />
     <Compile Include="GomokuField.cs" />
-    <Compile Include="GomokuInit.cs" />
     <Compile Include="GomokuInputObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
