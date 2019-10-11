@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
 using GameLib.Core.Base;
 using GameLib.Core.Util;
-
 namespace Tetris
 {
 
@@ -20,8 +20,16 @@ namespace Tetris
 
         }
 
-        public IEnumerable<IEnumerable<int>> GetRect(RawColumn point1, RawColumn point2) {
-            
+        public IEnumerable<int[]> GetRect(RawColumn point1, RawColumn point2) {
+            var point = TetrisUtils.NomalizeRect(point1, point2);
+
+
+
+
+
+
+
+
         }
 
 
