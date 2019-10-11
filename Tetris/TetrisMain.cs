@@ -11,6 +11,10 @@ namespace Tetris
 {
     public class TetrisMain : SingleGame
     {
+
+        TetrisField TField = new TetrisField();
+
+
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
             OnDraw += TetrisMain_OnDraw_GDI;

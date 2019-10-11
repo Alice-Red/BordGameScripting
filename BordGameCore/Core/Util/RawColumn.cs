@@ -7,7 +7,7 @@ using GameLib.API;
 
 namespace GameLib.Core.Util
 {
-    public struct RawColumn : IInputObjectContainer
+    public struct RawColumn : IInputObjectContainer, IComparable<RawColumn>
     {
         public int Raw { get; set; }
 
@@ -74,6 +74,22 @@ namespace GameLib.Core.Util
             return new RawColumn(value);
         }
 
+        public int CompareTo(RawColumn other) {
+            if (other.Raw < Raw) {
+                return -1;
+            } else if (other.Raw > Raw) {
+                return 1;
+            } else {
+                if (other.Column < Column) {
+                    return -1;
+                } else if (other.Column > Column) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+
         public static RawColumn operator +(RawColumn left, RawColumn right) {
             return new RawColumn(left.Raw + right.Raw, left.Column + right.Column);
         }
@@ -92,6 +108,20 @@ namespace GameLib.Core.Util
 
         public static bool operator !=(RawColumn left, RawColumn right) {
             return (left.Raw != right.Raw || left.Column != right.Column);
+        }
+
+        public static bool operator <(RawColumn left, RawColumn right) {
+            return (left.Raw < right.Raw || (left.Raw == right.Raw && left.Column < right.Column));
+        }
+        public static bool operator <=(RawColumn left, RawColumn right) {
+            return (left.Raw < right.Raw || (left.Raw == right.Raw && left.Column <= right.Column));
+        }
+        public static bool operator >(RawColumn left, RawColumn right) {
+            return (left.Raw > right.Raw || (left.Raw == right.Raw && left.Column > right.Column));
+
+        }
+        public static bool operator >=(RawColumn left, RawColumn right) {
+            return (left.Raw < right.Raw || (left.Raw == right.Raw && left.Column >= right.Column));
         }
 
     }
