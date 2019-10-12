@@ -21,7 +21,7 @@ namespace MrRamdomForGomoku
         public override GomokuInputObject Input(GomokuField field) {
             var t = field.CanPutList();
             //Console.WriteLine($"\tt : {t.Count()}");
-            GomokuInputObject box = new GomokuInputObject(t.Ramdom());
+            GomokuInputObject box = new GomokuInputObject(t.Random());
             //if(t.Count()!=0)
             return box;
         }

@@ -9,6 +9,11 @@ namespace Tetris
     public class MinoGenerator
     {
         
+
+
+        public Mino Generate() {
+
+        }
         
 
     }
