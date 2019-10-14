@@ -21,7 +21,13 @@ namespace Tetris
 
         private Queue<int> _nexts;
         private Queue<int> nexts {
-            get { }
+            get {
+                while (_nexts.Count() < nextCount) {
+                    int index = GameLib.API.Util.DICE(Buffer.Length);
+                    _nexts.Enqueue(Buffer[index]);
+                }
+                return _nexts;
+            }
             set {
 
             }
@@ -31,7 +37,16 @@ namespace Tetris
         public Mino[] Nexts => nexts.Select(s => s.ToEnum<Mino>()).ToArray();
         public Mino Current;
 
+        private int nextCount = 0;
+        public int NextCount {
+            get { return nextCount; }
+            private set { nextCount = value; }
+        }
+
         public MinoGenerator(int nextcount) {
+            this.nextCount = nextCount;
+
+
         }
 
         public Mino Generate() {
