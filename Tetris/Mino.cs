@@ -61,6 +61,12 @@ namespace Tetris
             { 0, 0, 1, 1 },
             { 0, 0, 0, 0 },
         };
+
+        public static Dictionary<Mino, int[,]> Mino = new Dictionary<Mino, int[,]>() {
+
+        };
+
+
     }
 
 

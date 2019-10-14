@@ -8,8 +8,8 @@ namespace Tetris
 {
     public class MinoGenerator
     {
-        
-
+        private Queue<int> nexts = new Queue<int>();
+        public 
 
         public Mino Generate() {
 
