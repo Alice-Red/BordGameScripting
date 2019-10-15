@@ -28,6 +28,20 @@ namespace Tetris
             Rotate = r.RangeMove(-1, 2);
         }
 
+        public int[,] Shape() {
+            var sh = Minos.MinoP[Mino];
+            var r = Rotate;
+
+            while (r == 0) {
+                if (r < 0)
+                    sh = Tetris.TetrisUtils.RotateAnticlockwise(sh);
+                else if (r > 0)
+                    sh = Tetris.TetrisUtils.RotateClockwise(sh);
+            }
+            return sh;
+        }
+
+
 
 
 

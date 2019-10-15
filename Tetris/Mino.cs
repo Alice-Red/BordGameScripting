@@ -8,6 +8,7 @@ namespace Tetris
 {
     public enum Mino
     {
+        None = 0,
         O = 1,
         T = 2,
         I = 3,

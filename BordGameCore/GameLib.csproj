@@ -63,6 +63,7 @@
     <Compile Include="Core\Base\PlayerColor2P.cs" />
     <Compile Include="Core\Base\PlayerColor4P.cs" />
     <Compile Include="Core\BordGame.cs" />
+    <Compile Include="Core\MultiGame.cs" />
     <Compile Include="Core\OnDrawArgs.cs" />
     <Compile Include="Core\SingleGame.cs" />
     <Compile Include="Core\Util\Calculation.cs" />

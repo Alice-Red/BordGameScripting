@@ -41,7 +41,7 @@ namespace Tetris
             private set { nextCount = value; }
         }
 
-        public MinoGenerator(int nextcount) {
+        public MinoGenerator(int nextcount = 5) {
             this.nextCount = nextcount;
             _nexts = new Queue<int>();
 

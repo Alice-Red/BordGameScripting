@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GameLib;
 using GameLib.Core;
+using GameLib.Core.Util;
+using RUtil;
 
 namespace Tetris
 {
@@ -28,7 +30,14 @@ namespace Tetris
         private void TetrisMain_OnDraw_Console(Game sender, OnDrawArgs e) {
             StringBuilder sb = new StringBuilder();
 
+            Enumerable.Range(0, 4).ForEach(i => {
+                TField.Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("");
+            });
 
+            var f = TField.GetRect(RawColumn.New(1, 20), RawColumn.New(10, 39));
+            foreach (var item in f) {
+                sb.AppendLine(item.Select(s => s == 0 ? "　" : "■").Join(""));
+            }
 
             Console.Clear();
             Console.WriteLine(sb.ToString());

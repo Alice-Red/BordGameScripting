@@ -17,10 +17,10 @@ namespace Tetris
     public class TetrisField : GridField
     {
         public const string ID = "Tetris";
+        public FallingBlock Current;
+        public MinoGenerator Generator = new MinoGenerator();
 
-        public TetrisField() : base(11, 41) {
-
-        }
+        public TetrisField() : base(11, 41) { }
 
         internal IEnumerable<int[]> GetRect(RawColumn point1, RawColumn point2) {
             var point = TetrisUtils.NomalizeRect(point1, point2);
@@ -35,7 +35,7 @@ namespace Tetris
             }
         }
 
-        
+
 
 
 

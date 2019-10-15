@@ -22,5 +22,32 @@ namespace Tetris
 
             return (topLeft, rightBottom);
         }
+
+        public static int[,] RotateClockwise(int[,] g) {
+            // 引数の2次元配列 g を時計回りに回転させたものを返す
+            int rows = g.GetLength(0);
+            int cols = g.GetLength(1);
+            var t = new int[cols, rows];
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    t[j, rows - i - 1] = g[i, j];
+                }
+            }
+            return t;
+        }
+
+        public static int[,] RotateAnticlockwise(int[,] g) {
+            // 引数の2次元配列 g を反時計回りに回転させたものを返す
+            int rows = g.GetLength(0);
+            int cols = g.GetLength(1);
+            var t = new int[cols, rows];
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    t[cols - j - 1, i] = g[i, j];
+                }
+            }
+            return t;
+        }
+
     }
 }
