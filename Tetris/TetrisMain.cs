@@ -34,5 +34,17 @@ namespace Tetris
             Console.WriteLine(sb.ToString());
 
         }
+
+        public override void Start() {
+
+        }
+
+        public override void UpDate() {
+
+        }
+
+        public override void End() {
+
+        }
     }
 }

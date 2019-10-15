@@ -62,8 +62,14 @@ namespace Tetris
             { 0, 0, 0, 0 },
         };
 
-        public static Dictionary<Mino, int[,]> Mino = new Dictionary<Mino, int[,]>() {
-
+        public static readonly Dictionary<Mino, int[,]> MinoP = new Dictionary<Mino, int[,]>() {
+           { Mino.O, O },
+           { Mino.T, T },
+           { Mino.I, I },
+           { Mino.L, L },
+           { Mino.J, J },
+           { Mino.S, S },
+           { Mino.Z, Z },
         };
 
 

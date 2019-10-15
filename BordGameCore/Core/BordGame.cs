@@ -40,7 +40,6 @@ namespace GameLib.Core
             }
         }
 
-
         public override void Run() {
             if (Running)
                 return;

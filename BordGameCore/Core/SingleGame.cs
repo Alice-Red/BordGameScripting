@@ -36,15 +36,15 @@ namespace GameLib.Core
             End();
         }
 
-        public void Start() {
+        public virtual void Start() {
 
         }
 
-        public void UpDate() {
+        public virtual void UpDate() {
 
         }
 
-        public void End() {
+        public virtual void End() {
 
         }
 
