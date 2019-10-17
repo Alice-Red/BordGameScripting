@@ -11,11 +11,12 @@ using RUtil;
 
 namespace Tetris
 {
-    public class TetrisMain : SingleGame
-    {
+    public class TetrisMain : SingleGame {
 
-        TetrisField TField = new TetrisField();
+        TetrisField TField;
+        public int ServerRate = 10;
 
+        private int serverSleep => (1000.0 / ServerRate).Round();
 
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
@@ -45,7 +46,7 @@ namespace Tetris
         }
 
         public override void Start() {
-
+            TField = new TetrisField();
         }
 
         public override void UpDate() {

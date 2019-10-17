@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NO_MAIN</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -58,6 +58,10 @@
     <ProjectReference Include="..\BordGameCore\GameLib.csproj">
       <Project>{90073e79-d901-44be-9c5c-6f1d6dc6fe61}</Project>
       <Name>GameLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tetris\Tetris.csproj">
+      <Project>{624682dd-86c3-4840-b926-c326dcc855fb}</Project>
+      <Name>Tetris</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

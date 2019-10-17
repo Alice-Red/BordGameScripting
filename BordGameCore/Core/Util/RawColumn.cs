@@ -98,6 +98,14 @@ namespace GameLib.Core.Util
             return new RawColumn(left.Raw - right.Raw, left.Column - right.Column);
         }
 
+        public static RawColumn operator +(RawColumn left, int right) {
+            return new RawColumn(left.Raw + right, left.Column + right);
+        }
+
+        public static RawColumn operator -(RawColumn left, int right) {
+            return new RawColumn(left.Raw - right, left.Column - right);
+        }
+
         public static RawColumn operator *(RawColumn left, int right) {
             return new RawColumn(left.Raw * right, left.Column * right);
         }

@@ -15,11 +15,14 @@ namespace Tetris
 
         public Mino Mino;
 
+        public MainPartConfiguration State;
+
         public int Rotate;
 
         public FallingBlock(RawColumn position, Mino mino, int rotate) {
             Position = position;
             Mino = mino;
+            State = MainPartConfiguration.None;
             Rotate = rotate;
         }
 
@@ -34,16 +37,12 @@ namespace Tetris
 
             while (r == 0) {
                 if (r < 0)
-                    sh = Tetris.TetrisUtils.RotateAnticlockwise(sh);
+                    sh = TetrisUtils.RotateAnticlockwise(sh);
                 else if (r > 0)
-                    sh = Tetris.TetrisUtils.RotateClockwise(sh);
+                    sh = TetrisUtils.RotateClockwise(sh);
             }
             return sh;
         }
-
-
-
-
 
     }
 }

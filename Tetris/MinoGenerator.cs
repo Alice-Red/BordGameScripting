@@ -22,7 +22,7 @@ namespace Tetris
         private Queue<int> _nexts;
         private Queue<int> nexts {
             get {
-                while (_nexts.Count() < NextCount) {
+                while (_nexts.Count() <= NextCount) {
                     int index = GameLib.API.Util.DICE(Buffer.Length) - 1;
                     _nexts.Enqueue(Buffer[index]);
                     buffer = Buffer.Remove(index).ToArray();

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FallingBlock.cs" />
+    <Compile Include="MainPartConfiguration.cs" />
     <Compile Include="MinoGenerator.cs" />
     <Compile Include="Mino.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
