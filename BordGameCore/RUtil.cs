@@ -352,7 +352,6 @@ namespace RUtil
             source.Add(item);
             return item;
         }
-
         /// <summary>
         /// 配列にアイテムを追加します
         /// </summary>
@@ -398,8 +397,25 @@ namespace RUtil
         /// <typeparam name="TValue"></typeparam>
         /// <returns></returns>
         public static TValue AddGet<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key, TValue value) {
-            source[key] = value;
+            if (!source.ContainsKey(key))
+                source.Add(key, value);
+            else
+                source[key] = value;
             return value;
+        }
+
+        /// <summary>
+        /// シーケンスの指定した物を返します．なければ勝手に追加します．
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static TValue SetAndGet<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key) {
+            if (!source.ContainsKey(key))
+                source.Add(key, default(TValue));
+            return source[key];
         }
 
         /// <summary>
@@ -535,9 +551,10 @@ namespace RUtil
         /// <param name="index"></param>
         /// <returns></returns>
         public static IEnumerable<T> Column<T>(this IEnumerable<T[]> source, int index) {
-            if (source.Count() >= 1 && source.ElementAt(0).Length > index)
+            int length = source.Select(s => s.Length).Max();
+            if (length > index)
                 foreach (var item in source)
-                    yield return item[index];
+                    yield return item.Length <= index ? item[index] : default(T);
         }
 
         /// <summary>
@@ -548,9 +565,42 @@ namespace RUtil
         /// <param name="index"></param>
         /// <returns></returns>
         public static IEnumerable<T> Column<T>(this IEnumerable<IEnumerable<T>> source, int index) {
-            if (source.Count() >= 1 && source.ElementAt(0).Count() > index)
-                foreach (var item in source)
-                    yield return item.ElementAt(index);
+            int length = source.Select(s => s.Count()).Max();
+            if (length > index)
+                foreach (var item in source) {
+                    var tmp = item.ToArray();
+                    yield return tmp.Length <= index ? tmp[index] : default(T);
+                }
+        }
+
+        /// <summary>
+        /// 列を列挙します
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> Columns<T>(this T[,] source) {
+            int SecondDim = source.GetLength(1);
+            for (int i = 0; i < SecondDim; i++)
+                yield return source.Column(i);
+        }
+
+        /// <summary>
+        /// 列を列挙します
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> Columns<T>(this IEnumerable<T[]> source) {
+            int length = source.Select(s => s.Length).Max();
+            for (int i = 0; i < length; i++)
+                yield return source.Column(i);
+        }
+
+        /// <summary>
+        /// 列を列挙します
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> Columns<T>(this IEnumerable<IEnumerable<T>> source) {
+            int length = source.Select(s => s.Count()).Max();
+            for (int i = 0; i < length; i++)
+                yield return source.Column(i);
         }
 
         /// <summary>
@@ -1177,7 +1227,16 @@ namespace RUtil
         //    var items = type.GetMethods();
         //    return items;
         //}
-
+        public static T[,] For<T>(this T[,] target, Action<int, int, T> action) {
+            int FirstDim = target.GetLength(0);
+            int SecondDim = target.GetLength(1);
+            for (int i = 0; i < FirstDim; i++) {
+                for (int j = 0; j < SecondDim; j++) {
+                    action(i, j, target[i, j]);
+                }
+            }
+            return target;
+        }
 
         #endregion
 

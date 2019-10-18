@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using GameLib.API;
 using GameLib.Core.Base;
 using GameLib.Core.Util;
@@ -56,12 +57,12 @@ namespace Tetris
         }
 
         public void ScanErase() {
-            var eraseList= GetShowableField().Select((s, i) => {
+            var eraseList = GetShowableField().Select((s, i) => {
                 if (!s.Contains(0))
                     return (i, 1);
                 else
                     return (i, 0);
-            }).Where(f=>f.Item2==1).Select(h=>h.i).ToArray();
+            }).Where(f => f.Item2 == 1).Select(h => h.i).ToArray();
 
             if (eraseList.Length > 0)
                 EraseLine(eraseList);
@@ -85,7 +86,21 @@ namespace Tetris
 
 
         public void Fall() {
-            Current.Position.Y -= 1;
+            bool flg = true;
+            Current.State = MainPartConfiguration.Floating;
+            var t = Current.Shape().For((i, j, s) => {
+                if (s != 0 && Field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
+                    flg = false;
+            });
+            if (flg)
+                Current.Position.Y -= 1;
+            else
+                Current.State = MainPartConfiguration.Waiting;
+        }
+
+        public void Place() {
+            var hitPlaces = Current.Shape().Columns().Join("").LastIndexOf("1");
+
         }
 
 

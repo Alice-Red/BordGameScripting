@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
@@ -133,4 +134,16 @@ namespace GameLib.Core.Util
         }
 
     }
+
+    public static class RawColumnUtil
+    {
+        public static T FromRC<T>(this T[,] source, RawColumn rc) {
+            return source[rc.Raw, rc.Column];
+        }
+
+
+    }
+
+
+
 }

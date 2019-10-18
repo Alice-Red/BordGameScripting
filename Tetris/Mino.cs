@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Tetris
 {
@@ -73,6 +74,15 @@ namespace Tetris
            { Mino.Z, Z },
         };
 
+        public static readonly Dictionary<Mino, Color> Color = new Dictionary<Mino, Color>() {
+           { Mino.O, System.Drawing.Color.FromArgb(255, 255, 255,   8) },
+           { Mino.T, System.Drawing.Color.FromArgb(255, 182,   0, 217) },
+           { Mino.I, System.Drawing.Color.FromArgb(255,  26, 208, 220) },
+           { Mino.L, System.Drawing.Color.FromArgb(255, 255, 116,   0) },
+           { Mino.J, System.Drawing.Color.FromArgb(255,  41,  41, 238) },
+           { Mino.S, System.Drawing.Color.FromArgb(255,  88, 140,  87) },
+           { Mino.Z, System.Drawing.Color.FromArgb(255, 197,  16,  16) },
+        };
 
     }
 
