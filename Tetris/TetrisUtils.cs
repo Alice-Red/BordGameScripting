@@ -49,5 +49,9 @@ namespace Tetris
             return t;
         }
 
+        public static int BackJump(int num, int area) {
+            return area - num;
+        }
+
     }
 }

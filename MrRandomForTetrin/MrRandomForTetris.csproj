@@ -44,5 +44,15 @@
     <Compile Include="MrRandom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BordGameCore\GameLib.csproj">
+      <Project>{90073E79-D901-44BE-9C5C-6F1D6DC6FE61}</Project>
+      <Name>GameLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tetris\Tetris.csproj">
+      <Project>{624682dd-86c3-4840-b926-c326dcc855fb}</Project>
+      <Name>Tetris</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

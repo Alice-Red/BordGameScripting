@@ -43,12 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
     <Compile Include="FallingBlock.cs" />
+    <Compile Include="InputCommand.cs" />
     <Compile Include="MainPartConfiguration.cs" />
     <Compile Include="MinoGenerator.cs" />
     <Compile Include="Mino.cs" />
+    <Compile Include="OperationSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TetrisField.cs" />
+    <Compile Include="TetrisFieldSandBox.cs" />
+    <Compile Include="TetrisInputter.cs" />
     <Compile Include="TetrisMain.cs" />
     <Compile Include="TetrisUtils.cs" />
   </ItemGroup>

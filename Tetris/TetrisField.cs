@@ -56,25 +56,6 @@ namespace Tetris
             return tmp.To2D();
         }
 
-        public void ScanErase() {
-            var eraseList = GetShowableField().Select((s, i) => {
-                if (!s.Contains(0))
-                    return (i, 1);
-                else
-                    return (i, 0);
-            }).Where(f => f.Item2 == 1).Select(h => h.i).ToArray();
-
-            if (eraseList.Length > 0)
-                EraseLine(eraseList);
-        }
-
-        private void EraseLine(params int[] lines) {
-
-        }
-
-
-
-
         private void GenerateMino() {
             Current = new FallingBlock() {
                 Mino = Generator.Generate(),
@@ -101,6 +82,48 @@ namespace Tetris
         public void Place() {
             var hitPlaces = Current.Shape().Columns().Join("").LastIndexOf("1");
 
+
+
+        }
+
+        // 消せるところ
+        public void ScanErase() {
+            var eraseList = GetShowableField().Select((s, i) => {
+                if (!s.Contains(0))
+                    return (i, 1);
+                else
+                    return (i, 0);
+            }).Where(f => f.Item2 == 1).Select(h => h.i).ToArray();
+
+            if (eraseList.Length > 0)
+                EraseLine(eraseList);
+        }
+
+        // ライン消し
+        private void EraseLine(params int[] lines) {
+            var tmp = field.ToJagged().Reverse();
+            var senil = lines.Select(s => TetrisUtils.BackJump(s, 40)).ToArray();
+
+            var result = tmp.Where((s, i) => i.Any(senil));
+
+            int[] empty = new int[] { -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1 };
+
+            for (int i = 0; i < lines.Length; i++) {
+                result.Insert(empty);
+            }
+            field = result.Reverse().To2D();
+        }
+
+        private void Obstacle(int line) {
+            int index = Util.DICE(10);
+            int[] empty = new int[] { -1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, -1 };
+            empty[index + 1] = 0;
+
+            var result = field.ToJagged();
+            for (int i = 0; i < line; i++) {
+                result.Insert(empty, 40);
+            }
+            field = result.To2D();
         }
 
 

@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tetris;
 
 namespace MrRandomForTetris
 {
-    public class MrRandom
+    public class MrRandom : TetrisInputter
     {
+
+        const string NAME = "Mr.Random";
+
+        public override string Name() {
+            return NAME;
+        }
+
+        public override OperationSet Inputs(TetrisField field) {
+            //field.Current;
+            OperationSet opset = new OperationSet();
+            opset.Store(InputCommand.HardDrop);
+
+            return opset;
+        }
 
     }
 }

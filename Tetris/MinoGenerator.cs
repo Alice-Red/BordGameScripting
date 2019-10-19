@@ -33,9 +33,11 @@ namespace Tetris
 
 
         public Mino[] Nexts => nexts.Select(s => s.ToEnum<Mino>()).ToArray();
+
         public Mino Current;
 
         private int nextCount = 0;
+
         public int NextCount {
             get { return nextCount; }
             private set { nextCount = value; }
@@ -44,10 +46,9 @@ namespace Tetris
         public MinoGenerator(int nextcount = 5) {
             this.nextCount = nextcount;
             _nexts = new Queue<int>();
-
         }
 
-        public Mino Generate() {
+        internal Mino Generate() {
             Current = nexts.Dequeue().ToEnum<Mino>();
             return Current;
         }

@@ -470,6 +470,37 @@ namespace RUtil
         }
 
         /// <summary>
+        /// 指定位置に要素をぶち込みます．
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="item"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Insert<T>(this T[] source, T item, int index) {
+            for (int i = 0; i < source.Length; i++) {
+                if (index == i)
+                    yield return item;
+                yield return source[i];
+            }
+        }
+
+        /// <summary>
+        /// 末尾に要素をぶち込みます．
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="item"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Insert<T>(this IEnumerable<T> source, T item) {
+            foreach (var t in source) {
+                yield return t;
+            }
+            yield return item;
+        }
+
+        /// <summary>
         /// 指定された数のシーケンス内の要素をバイパスし、残りの要素を返します。
         /// </summary>
         /// <typeparam name="T">source のメンバーの型。</typeparam>
