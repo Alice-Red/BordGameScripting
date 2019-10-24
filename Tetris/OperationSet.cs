@@ -10,7 +10,7 @@ namespace Tetris
 {
     public class OperationSet : IInputObjectContainer
     {
-        public List<Command> cmds = new List<Command>();
+        private List<Command> cmds = new List<Command>();
 
         public Command[] Commands {
             get { return cmds.ToArray(); }

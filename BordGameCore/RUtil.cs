@@ -417,7 +417,7 @@ namespace RUtil
                 source.Add(key, default(TValue));
             return source[key];
         }
-
+               
         /// <summary>
         /// シーケンスの指定されたキーを返します。シーケンスに要素が含まれていない場合は既定値を返します。
         /// </summary>

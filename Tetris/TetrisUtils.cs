@@ -9,6 +9,8 @@ namespace Tetris
 {
     public class TetrisUtils
     {
+        public static readonly RawColumn GeneratePosition = new RawColumn(4, 16);
+
         public static (RawColumn, RawColumn) NomalizeRect(RawColumn point1, RawColumn point2) {
             var topLeft = RawColumn.New(
                 Math.Min(point1.Raw, point2.Raw),
@@ -52,6 +54,13 @@ namespace Tetris
         public static int BackJump(int num, int area) {
             return area - num;
         }
+
+        public static RawColumn[] Direction4 = new RawColumn[] {
+            RawColumn.New( -1,  0 ),
+            RawColumn.New(  0, -1 ),
+            RawColumn.New(  1,  0 ),
+            RawColumn.New(  0,  1 ),
+        };
 
     }
 }

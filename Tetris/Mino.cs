@@ -17,6 +17,8 @@ namespace Tetris
         J = 5,
         S = 6,
         Z = 7,
+
+        Obstacle = 9
     }
 
     public class Minos
@@ -82,6 +84,7 @@ namespace Tetris
            { Mino.J, System.Drawing.Color.FromArgb(255,  41,  41, 238) },
            { Mino.S, System.Drawing.Color.FromArgb(255,  88, 140,  87) },
            { Mino.Z, System.Drawing.Color.FromArgb(255, 197,  16,  16) },
+           { Mino.Obstacle, System.Drawing.Color.FromArgb(255, 148,  148,  148)},
         };
 
     }

@@ -11,12 +11,12 @@ using RUtil;
 
 namespace Tetris
 {
-    public class TetrisMain : SingleGame {
+    public class TetrisMain : SingleGame
+    {
 
         TetrisField TField;
-        public int ServerRate = 10;
+        OperationSet opSet;
 
-        private int serverSleep => (1000.0 / ServerRate).Round();
 
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
@@ -35,7 +35,7 @@ namespace Tetris
                 TField.Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("");
             });
 
-            var f = TField.GetRect(RawColumn.New(1, 20), RawColumn.New(10, 39));
+            var f = TField.DrawableField().ToJagged();
             foreach (var item in f) {
                 sb.AppendLine(item.Select(s => s == 0 ? "　" : "■").Join(""));
             }
@@ -47,10 +47,35 @@ namespace Tetris
 
         public override void Start() {
             TField = new TetrisField();
+            opSet = new OperationSet();
         }
 
         public override void UpDate() {
+            foreach (var item in opSet.Commands) {
+                switch (item.command) {
+                    case InputCommand.None:
+                        break;
+                    case InputCommand.HardDrop:
 
+                        break;
+                    case InputCommand.WaitDrop:
+                        break;
+                    case InputCommand.MoveLeft:
+                        break;
+                    case InputCommand.MoveRight:
+                        break;
+                    case InputCommand.RotateLeft:
+                        break;
+                    case InputCommand.RotateRight:
+                        break;
+                    case InputCommand.Hold:
+                        break;
+                    case InputCommand.Command:
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         public override void End() {
