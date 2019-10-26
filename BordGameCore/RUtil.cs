@@ -417,7 +417,7 @@ namespace RUtil
                 source.Add(key, default(TValue));
             return source[key];
         }
-               
+
         /// <summary>
         /// シーケンスの指定されたキーを返します。シーケンスに要素が含まれていない場合は既定値を返します。
         /// </summary>
@@ -1163,9 +1163,10 @@ namespace RUtil
         /// 指定された Type の継承元であるすべての型を取得します
         /// </summary>
         public static IEnumerable<Type> GetBaseTypes(this Type self) {
-            for (var baseType = self.BaseType; null != baseType; baseType = baseType.BaseType) {
-                yield return baseType;
-            }
+            if (self != null)
+                for (var baseType = self.BaseType; null != baseType; baseType = baseType.BaseType) {
+                    yield return baseType;
+                }
         }
 
         #endregion

@@ -56,6 +56,7 @@
     <Compile Include="TetrisGameSwitch.cs" />
     <Compile Include="TetrisInputter.cs" />
     <Compile Include="TetrisMain.cs" />
+    <Compile Include="TetrisMainMulti.cs" />
     <Compile Include="TetrisUtils.cs" />
   </ItemGroup>
   <ItemGroup>

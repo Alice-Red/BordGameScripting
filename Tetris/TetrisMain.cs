@@ -5,22 +5,25 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib;
+using GameLib.API;
 using GameLib.Core;
 using GameLib.Core.Util;
 using RUtil;
 
 namespace Tetris
 {
+    [GameAddon(ID)]
     public class TetrisMain : SingleGame
     {
 
+        public const string ID = "Tetris";
         TetrisField TField;
         OperationSet opSet;
 
 
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
-            OnDraw += TetrisMain_OnDraw_GDI;
+            //OnDraw += TetrisMain_OnDraw_GDI;
 
         }
 
@@ -45,12 +48,13 @@ namespace Tetris
 
         }
 
-        public override void Start() {
+        public new void Start() {
             TField = new TetrisField();
             opSet = new OperationSet();
+            Console.WriteLine("Inited.");
         }
 
-        public override void UpDate() {
+        public new void UpDate() {
             foreach (var item in opSet.Commands) {
                 switch (item.command) {
                     case InputCommand.None:
@@ -78,7 +82,7 @@ namespace Tetris
             }
         }
 
-        public override void End() {
+        public new void End() {
 
         }
     }

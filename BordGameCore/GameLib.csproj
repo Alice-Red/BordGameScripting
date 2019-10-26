@@ -53,10 +53,7 @@
     <Compile Include="API\GameField.cs" />
     <Compile Include="API\GameInputter.cs" />
     <Compile Include="API\IInputObjectContainer.cs" />
-    <Compile Include="API\IMenu.cs" />
     <Compile Include="API\IO.cs" />
-    <Compile Include="API\Initializer.cs" />
-    <Compile Include="API\IArgmentObjectContainer.cs" />
     <Compile Include="Core\Base\BordGameArgmentObjectContainer.cs" />
     <Compile Include="Core\Base\GridField.cs" />
     <Compile Include="Core\Base\PlayerColor1P.cs" />

@@ -41,7 +41,7 @@ namespace GameLib.API
                     LibType = LibraryType.Other;
                     ID = item.GetAttributeValue<GameAddonAttribute>().GameID;
 
-                } else if (item.GetBaseTypes().Contains(typeof(GameInputter))) {
+                } else if (!item.IsAbstract && item.GetBaseTypes().Contains(typeof(GameInputter))) {
                     LibType = LibraryType.Inputter;
                     ID = item.GetAttributeValue<GameAddonAttribute>().GameID;
 

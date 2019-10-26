@@ -14,10 +14,8 @@ using RUtil;
 namespace Tetris
 {
 
-    [GameAddon(ID)]
     public class TetrisField : GridField
     {
-        public const string ID = "Tetris";
         public FallingBlock Current;
         public MinoGenerator Generator;
         public Mino Holding = Mino.None;
@@ -33,7 +31,7 @@ namespace Tetris
 
             for (int i = point.Item1.Raw; i <= point.Item2.Raw; i++) {
                 for (int j = point.Item1.Column; j <= point.Item2.Column; j++) {
-                    tmp.Add(field[i, j]);
+                    tmp.Add(Field[i, j]);
                 }
                 yield return tmp.ToArray();
                 tmp = new List<int>();

@@ -49,10 +49,12 @@ namespace GameLib.Core
             Menu();
             Draw();
             do {
+                Running = true;
                 Input();
                 Process();
                 Draw();
             } while (Loser == 0);
+            Running = false;
             Result();
         }
 

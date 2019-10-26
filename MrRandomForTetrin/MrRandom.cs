@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLib.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using Tetris;
 
 namespace MrRandomForTetris
 {
+    [GameAddon(TetrisMain.ID)]
     public class MrRandom : TetrisInputter
     {
 

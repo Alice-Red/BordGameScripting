@@ -7,8 +7,8 @@
     <ProjectGuid>{3610CA8D-EE3B-4144-A970-9EFB3BCA0601}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MrRandomForTetrin</RootNamespace>
-    <AssemblyName>MrRandomForTetrin</AssemblyName>
+    <RootNamespace>MrRandomForTetris</RootNamespace>
+    <AssemblyName>MrRandomForTetris</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
