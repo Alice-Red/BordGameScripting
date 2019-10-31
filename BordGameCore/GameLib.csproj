@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="API\EventArgments.cs" />
     <Compile Include="API\GameAddonAttribute.cs" />
-    <Compile Include="API\InputterAttribute.cs" />
     <Compile Include="API\LibraryLoader.cs" />
     <Compile Include="API\LibraryObject.cs" />
     <Compile Include="API\LibraryType.cs" />
@@ -62,6 +61,7 @@
     <Compile Include="Core\BordGame.cs" />
     <Compile Include="Core\MultiGame.cs" />
     <Compile Include="Core\OnDrawArgs.cs" />
+    <Compile Include="Core\OnInputArgs.cs" />
     <Compile Include="Core\SingleGame.cs" />
     <Compile Include="Core\Util\Calculation.cs" />
     <Compile Include="Core\Util\ConsoleOut.cs" />

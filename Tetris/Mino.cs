@@ -36,10 +36,10 @@ namespace Tetris
             { 0, 0, 0, 0 },
         };
         public static readonly int[,] I = new int[,] {
-            { 0, 0, 1, 0 },
-            { 0, 0, 1, 0 },
-            { 0, 0, 1, 0 },
-            { 0, 0, 1, 0 },
+            { 0, 0, 0, 0 },
+            { 0, 0, 0, 0 },
+            { 1, 1, 1, 1 },
+            { 0, 0, 0, 0 },
         };
         public static readonly int[,] L = new int[,] {
             { 0, 1, 0, 0 },

@@ -32,12 +32,12 @@ namespace GameLib.API
             var types = assembly.GetExportedTypes();
             LibType = LibraryType.None;
             foreach (var item in types) {
-                if (item.IsSubclassOf(typeof(Game))) {
+                if (!item.IsAbstract && item.GetBaseTypes().Contains(typeof(Game))) {
                     LibType = LibraryType.Game;
                     ID = item.GetAttributeValue<GameAddonAttribute>().GameID;
                     //ID = ((GameAddonAttribute) Attribute.GetCustomAttribute(item, typeof(GameAddonAttribute))).GameID;
                     break;
-                }else if (item.IsSubclassOf(typeof(IDrawer))) {
+                } else if (item.IsSubclassOf(typeof(IDrawer))) {
                     LibType = LibraryType.Other;
                     ID = item.GetAttributeValue<GameAddonAttribute>().GameID;
 

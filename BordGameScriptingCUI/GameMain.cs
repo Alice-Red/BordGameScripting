@@ -15,8 +15,7 @@ namespace BordGameScriptingCUI
     {
 
         GameLib.Core.Game game;
-        GameInputter pl1;
-        GameInputter pl2;
+        List<GameInputter> pls = new List<GameInputter>();
 
 
 
@@ -40,7 +39,7 @@ namespace BordGameScriptingCUI
             for (int i = 0; i < igames.Length; i++) {
                 Console.WriteLine($"{i}: {(igames[i] as Game).ToString()}");
             }
-            Console.Write(">>");
+            Console.Write("Select Game >>");
             var n = Console.ReadLine().ParseInt();
             game = igames[n] as Game;
             var id = game.GetType().GetAttributeValue<GameAddonAttribute>().GameID;
@@ -49,11 +48,15 @@ namespace BordGameScriptingCUI
             for (int i = 0; i < iinputters.Length; i++) {
                 Console.WriteLine($"{i}: {(iinputters[i] as GameInputter).ToString()}");
             }
-            Console.Write("1P>>");
-            var n2 = Console.ReadLine().ParseInt();
+            for (int i = 0; i < game.MaxPlayer; i++) {
+                Console.Write($"Player{i + 1} >>");
+                var n2 = Console.ReadLine().ParseInt();
+                if (iinputters.Length <= n2)
+                    break;
+                pls.Add((GameInputter) Activator.CreateInstance(iinputters[n2].GetType()));
 
-            pl1 = (GameInputter) Activator.CreateInstance(iinputters[n2].GetType());
-
+            }
+            game.StorePlayer(pls.ToArray());
 
             //for (int i = 0; i < tinputters.Length; i++) {
             //    Console.WriteLine($"{i}: {(iinputters[i] as GameInputter).ToString()}");

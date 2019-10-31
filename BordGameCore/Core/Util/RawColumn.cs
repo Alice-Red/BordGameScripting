@@ -130,7 +130,7 @@ namespace GameLib.Core.Util
 
         }
         public static bool operator >=(RawColumn left, RawColumn right) {
-            return (left.Raw < right.Raw || (left.Raw == right.Raw && left.Column >= right.Column));
+            return (left.Raw > right.Raw || (left.Raw == right.Raw && left.Column >= right.Column));
         }
 
     }

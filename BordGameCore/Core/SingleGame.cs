@@ -10,8 +10,9 @@ using System.Diagnostics;
 
 namespace GameLib.Core
 {
-    public class SingleGame : Game
+    public abstract class SingleGame : Game
     {
+        public override int MaxPlayer { get; } = 1;
 
         protected int Loser = 0;
         protected int turn = 1;
@@ -27,6 +28,8 @@ namespace GameLib.Core
         public delegate void OnDrawHandler(Game sender, OnDrawArgs e);
         public event OnDrawHandler OnDraw;
 
+        public delegate void OnInputHandler(SingleGame sender, OnInputArgs e);
+        public event OnInputHandler OnInput;
 
 
         public override void Run() {
@@ -35,31 +38,26 @@ namespace GameLib.Core
             Start();
             if (Inited == false)
                 return;
-            OnDraw(this, new OnDrawArgs());
+
+            OnDraw?.Invoke(this, new OnDrawArgs());
             do {
                 sw.Start();
                 UpDate();
-                OnDraw(this, new OnDrawArgs());
+                OnDraw?.Invoke(this, new OnDrawArgs());
                 sw.Stop();
 
                 if (serverSleep - sw.ElapsedMilliseconds > 0)
                     Thread.Sleep((int) (serverSleep - sw.ElapsedMilliseconds));
-
+                sw.Reset();
             } while (Loser == 0);
             End();
         }
 
-        public virtual void Start() {
+        public abstract void Start();
 
-        }
+        public abstract void UpDate();
 
-        public virtual void UpDate() {
-
-        }
-
-        public virtual void End() {
-
-        }
+        public abstract void End();
 
     }
 }

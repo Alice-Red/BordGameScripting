@@ -35,11 +35,14 @@ namespace Tetris
             var sh = Minos.MinoP[Mino];
             var r = Rotate;
 
-            while (r == 0) {
-                if (r < 0)
+            while (r != 0) {
+                if (r < 0) {
                     sh = TetrisUtils.RotateAnticlockwise(sh);
-                else if (r > 0)
+                    r += 1;
+                } else if (r > 0) {
                     sh = TetrisUtils.RotateClockwise(sh);
+                    r -= 1;
+                }
             }
             return sh;
         }

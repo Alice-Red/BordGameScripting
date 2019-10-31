@@ -22,6 +22,10 @@ namespace Gomoku
         public Gomoku(Type pl1, Type pl2) : base(pl1, pl2) {
         }
 
+        public override void StorePlayer(params GameInputter[] players) {
+
+        }
+
         protected override void Init() {
             this.Drawer = new GomokuDraw();
             Field = new GomokuField();

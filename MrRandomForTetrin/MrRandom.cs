@@ -22,6 +22,7 @@ namespace MrRandomForTetris
             //field.Current;
             OperationSet opset = new OperationSet();
             opset.Store(InputCommand.HardDrop);
+            
 
             return opset;
         }
