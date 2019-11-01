@@ -20,7 +20,7 @@ namespace Tetris
         public MinoGenerator Generator;
         public Mino Holding = Mino.None;
         public bool CanHold = false;
-        public bool OnGround = false;
+        //public bool OnGround = false;
 
         public TetrisField() : base(12, 41) {
             CreateField();
@@ -62,8 +62,8 @@ namespace Tetris
             var now = Current.Shape().ToJagged();
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
-                    var rc = Current.Position - RawColumn.New(20, 0) + RawColumn.New(i, j);
-                    if (rc >= RawColumn.New(0, 0) && rc <= RawColumn.New(19, 10) && now[i][j] == 1)
+                    var rc = Current.Position - RawColumn.New(20, 1) + RawColumn.New(i, j);
+                    if (rc.Raw.InBetween(0, 19) && rc.Column.InBetween(0, 9) && now[i][j] == 1)
                         tmp[rc.Raw][rc.Column] = now[i][j];
                 }
             }
@@ -77,27 +77,26 @@ namespace Tetris
                 Position = TetrisUtils.GeneratePosition,
                 Rotate = 0
             };
-            
+
         }
 
         public bool Fall() {
-            if (Current.State == MainPartConfiguration.Waiting) {
-                if (OnGround)
-                    Place();
-                OnGround.Toggle();
-                return false;
-            }
+            //if (Current.State == MainPartConfiguration.Waiting) {
+            //    Place();
+            //    return false;
+            //}
             bool flg = true;
             Current.State = MainPartConfiguration.Floating;
             var t = Current.Shape().For((i, j, s) => {
-                if (s != 0 && Field.FromRC(Current.Position + new RawColumn(i + 1, j + 1)) != 0)
+                if (s != 0 && Field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
                     flg = false;
             });
             if (flg) {
                 Current.Position.Y += 1;
                 return true;
             } else {
-                Current.State = MainPartConfiguration.Waiting;
+                //Current.State = MainPartConfiguration.Waiting;
+                Place();
                 return false;
             }
         }
@@ -106,7 +105,7 @@ namespace Tetris
         public void Place() {
 
             Overlapped().ForEach(s => {
-                field[s.Raw, s.Column + 1] = (int) Current.Mino;
+                field[s.Raw, s.Column] = (int) Current.Mino;
             });
 
 
@@ -116,13 +115,21 @@ namespace Tetris
         }
 
         public void HardDrop() {
-            while (!Fall())
+            while (Fall())
                 ;
-            Current.State = MainPartConfiguration.Placed;
+            //Current.State = MainPartConfiguration.Placed;
+
         }
+
+        //public void WaitDrop() {
+
+        //}
 
 
         public bool Rotate(bool left) {
+            if (Current.State == MainPartConfiguration.Placed || Current.State == MainPartConfiguration.Generated)
+                return false;
+
             var shape = left ? TetrisUtils.RotateAnticlockwise(Current.Shape()) : TetrisUtils.RotateClockwise(Current.Shape());
 
             RawColumn[] tryList = new RawColumn[] {
@@ -135,6 +142,8 @@ namespace Tetris
                 if (Canput(Current.Position + item, shape)) {
                     Current.Position += item;
                     Current.Rotate += left ? -1 : 1;
+                    Current.State = MainPartConfiguration.Falling;
+                    //OnGround = false;
                     return true;
                 }
             }
@@ -146,6 +155,8 @@ namespace Tetris
         public bool Move(bool left) {
             var diff = left ? RawColumn.New(0, -1) : RawColumn.New(0, 1);
             var t = Overlapped().Select(s => s + diff).ToArray();
+            if (Current.State != MainPartConfiguration.Waiting)
+                Current.State = MainPartConfiguration.Falling;
 
             foreach (var item in t) {
                 if (Field.FromRC(item) != 0)
@@ -153,6 +164,9 @@ namespace Tetris
             }
 
             Current.Position += left ? RawColumn.New(0, -1) : RawColumn.New(0, 1);
+            //OnGround = false;
+            Current.State = MainPartConfiguration.Falling;
+
             return true;
         }
 
@@ -168,7 +182,7 @@ namespace Tetris
 
 
         // 消せるところ
-        public void ScanErase() {
+        public int ScanErase() {
             var eraseList = GetShowableField().Select((s, i) => {
                 if (!s.Contains(0))
                     return (i, 1);
@@ -178,6 +192,7 @@ namespace Tetris
 
             if (eraseList.Length > 0)
                 EraseLine(eraseList);
+            return eraseList.Length;
         }
 
         // ライン消し
@@ -257,7 +272,7 @@ namespace Tetris
         }
 
         public bool Canput(RawColumn rc, int[,] shape) {
-            return Overlapped(rc, shape).All(s => Field.FromRC(s) == 0);
+            return Overlapped(rc, shape).All(s => Field.FromRC(s, -1) == 0);
         }
 
         public override bool Canput(int r, int c, int t) {
@@ -268,7 +283,7 @@ namespace Tetris
             var deadRect = GetRect(RawColumn.New(0, 4), RawColumn.New(19, 7));
             bool flg = false;
             deadRect.ForEach(f => {
-                f.ForEach(h => flg = h != 0);
+                f.ForEach(h => flg |= h != 0);
             });
             return flg ? -1 : 0;
         }

@@ -19,12 +19,14 @@ namespace MrRandomForTetris
         }
 
         public override OperationSet Inputs(TetrisField field) {
-            //field.Current;
+
             OperationSet opset = new OperationSet();
-            opset.Store(InputCommand.HardDrop);
-            
+            opset.Store(Util.DICE(100) <= 50 ? InputCommand.MoveLeft : InputCommand.MoveRight, Util.DICE(6) - 1);
+            opset.Store(Util.DICE(100) <= 50 ? InputCommand.RotateLeft : InputCommand.RotateRight, Util.DICE(4) - 1);
+
 
             return opset;
+            //.Store(InputCommand.HardDrop);
         }
 
     }

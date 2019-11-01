@@ -18,21 +18,24 @@ namespace Tetris
 
         public string player;
 
-        public void Store(InputCommand command) {
+        public OperationSet Store(InputCommand command) {
             if (((int) command).Any(1, 2))
                 cmds.Add(new Command(command, 0));
+            return this;
         }
 
-        public void Store(InputCommand command, int num) {
+        public OperationSet Store(InputCommand command, int num) {
             if (((int) command).Any(3, 4, 5, 6)) {
                 cmds.Add(new Command(command, num));
             }
+            return this;
         }
 
-        public void Store(InputCommand command, string message) {
+        public OperationSet Store(InputCommand command, string message) {
             if (((int) command).Any(0, 9)) {
                 cmds.Add(new Command(command, message));
             }
+            return this;
         }
     }
 }

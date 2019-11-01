@@ -55,6 +55,7 @@
     <Compile Include="OperationSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TetrisField.cs" />
+    <Compile Include="TetrisFieldLog.cs" />
     <Compile Include="TetrisFieldSandBox.cs" />
     <Compile Include="TetrisGameSwitch.cs" />
     <Compile Include="TetrisInputter.cs" />

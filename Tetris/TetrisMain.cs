@@ -25,11 +25,9 @@ namespace Tetris
         public string Err = "";
         private double FallRate = 1;
 
-
-
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
-            this.ServerRate = 20;
+            this.ServerRate = 5;
             //OnDraw += TetrisMain_OnDraw_GDI;
 
         }
@@ -37,12 +35,8 @@ namespace Tetris
             System.Diagnostics.Debug.WriteLine($"{players[0] is TetrisInputter}");
 
             if (players.Length >= 1) {
+                pl = (TetrisInputter) Activator.CreateInstance(players[0].GetType());
 
-                var tmpPl = (TetrisInputter) Activator.CreateInstance(players[0].GetType());
-                pl = tmpPl;
-
-
-                //pl = players[0];
             } else
                 Err = "Player Cast faile.";
         }
@@ -58,10 +52,12 @@ namespace Tetris
                 sb.AppendLine(TField.Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join(""));
             });
 
+            sb.AppendLine("-－－－－－－－－－－-");
             var f = TField.DrawableField();
             foreach (var item in f) {
-                sb.AppendLine(item.Select(s => s == 0 ? "　" : "■").Join(""));
+                sb.AppendLine("|" + item.Select(s => s == 0 ? "　" : "■").Join("") + "|");
             }
+            sb.AppendLine("-－－－－－－－－－－-");
 
             Console.Clear();
             Console.WriteLine(sb.ToString());
@@ -71,7 +67,7 @@ namespace Tetris
         public override void Start() {
             TField = new TetrisField();
             opSet = new OperationSet();
-            Console.WriteLine("Inited.");
+            System.Diagnostics.Debug.WriteLine("Inited.");
         }
 
         public override void UpDate() {
@@ -80,7 +76,7 @@ namespace Tetris
                 Loser = -2;
                 return;
             }
-            opSet = pl?.Inputs(TField);
+            opSet = pl.Inputs(TField);
 
             foreach (var item in opSet.Commands) {
                 switch (item.command) {
@@ -93,16 +89,24 @@ namespace Tetris
                         TField.Fall();
                         break;
                     case InputCommand.MoveLeft:
-                        Enumerable.Repeat(TField.Move(true), item.value);
+                        for (int i = 0; i < item.value; i++) {
+                            TField.Move(true);
+                        }
                         break;
                     case InputCommand.MoveRight:
-                        Enumerable.Repeat(TField.Move(false), item.value);
+                        for (int i = 0; i < item.value; i++) {
+                            TField.Move(false);
+                        }
                         break;
                     case InputCommand.RotateLeft:
-                        Enumerable.Repeat(TField.Rotate(true), item.value);
+                        for (int i = 0; i < item.value; i++) {
+                            TField.Rotate(true);
+                        }
                         break;
                     case InputCommand.RotateRight:
-                        Enumerable.Repeat(TField.Rotate(false), item.value);
+                        for (int i = 0; i < item.value; i++) {
+                            TField.Rotate(false);
+                        }
                         break;
                     case InputCommand.Hold:
                         break;
@@ -113,7 +117,7 @@ namespace Tetris
                 }
             }
 
-            TField.Fall();
+            TField.HardDrop();
 
             TField.ScanErase();
 

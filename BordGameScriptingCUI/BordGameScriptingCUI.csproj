@@ -59,10 +59,6 @@
       <Project>{90073e79-d901-44be-9c5c-6f1d6dc6fe61}</Project>
       <Name>GameLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tetris\Tetris.csproj">
-      <Project>{624682dd-86c3-4840-b926-c326dcc855fb}</Project>
-      <Name>Tetris</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

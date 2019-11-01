@@ -9,13 +9,10 @@ namespace Tetris
 {
     public abstract class TetrisInputter : GameInputter
     {
-        public abstract override string Name();
-
         public abstract OperationSet Inputs(TetrisField field);
 
         public override IInputObjectContainer Input(GameField field) {
             return this.Inputs((TetrisField) field);
         }
-
     }
 }

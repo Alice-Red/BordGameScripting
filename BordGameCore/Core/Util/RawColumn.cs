@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
+using RUtil;
 
 namespace GameLib.Core.Util
 {
@@ -137,8 +138,12 @@ namespace GameLib.Core.Util
 
     public static class RawColumnUtil
     {
-        public static T FromRC<T>(this T[,] source, RawColumn rc) {
-            return source[rc.Raw, rc.Column];
+        public static T FromRC<T>(this T[,] source, RawColumn rc, T defaultValue = default(T)) {
+            if (rc.Raw.InBetween(0, source.GetLength(0) - 1) && rc.Column.InBetween(0, source.GetLength(1) - 1))
+                return source[rc.Raw, rc.Column];
+            else
+                return defaultValue;
+
         }
 
 
