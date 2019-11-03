@@ -17,15 +17,16 @@ namespace Tetris
     public class TetrisField : GridField
     {
         public FallingBlock Current;
-        public MinoGenerator Generator;
+        //public MinoGenerator Generator;
         public Mino Holding = Mino.None;
         public bool CanHold = false;
+        public bool SuperFast = false;
         //public bool OnGround = false;
 
         public TetrisField() : base(12, 41) {
             CreateField();
-            Generator = new MinoGenerator();
-            this.GenerateMino();
+            //Generator = new MinoGenerator();
+            //this.GenerateMino();
         }
 
         private void CreateField() {
@@ -70,21 +71,10 @@ namespace Tetris
             return tmp;
         }
 
-        private void GenerateMino() {
-            Current = new FallingBlock() {
-                Mino = Generator.Generate(),
-                State = MainPartConfiguration.Generated,
-                Position = TetrisUtils.GeneratePosition,
-                Rotate = 0
-            };
-
-        }
-
         public bool Fall() {
-            //if (Current.State == MainPartConfiguration.Waiting) {
-            //    Place();
-            //    return false;
-            //}
+            if (Current.State.Any(MainPartConfiguration.Placed))
+                return false;
+
             bool flg = true;
             Current.State = MainPartConfiguration.Floating;
             var t = Current.Shape().For((i, j, s) => {
@@ -111,7 +101,7 @@ namespace Tetris
 
             Current.State = MainPartConfiguration.Placed;
             //CheckWinner();
-            GenerateMino();
+            //GenerateMino();
         }
 
         public void HardDrop() {
@@ -127,16 +117,16 @@ namespace Tetris
 
 
         public bool Rotate(bool left) {
-            if (Current.State == MainPartConfiguration.Placed || Current.State == MainPartConfiguration.Generated)
+            if (Current.State.Any(MainPartConfiguration.Placed))
                 return false;
 
             var shape = left ? TetrisUtils.RotateAnticlockwise(Current.Shape()) : TetrisUtils.RotateClockwise(Current.Shape());
 
             RawColumn[] tryList = new RawColumn[] {
-                new RawColumn( 0, 0),
-                new RawColumn( 1, 0),
-                new RawColumn(-2, 0),
-            };
+                    new RawColumn( 0, 0),
+                    new RawColumn( 1, 0),
+                    new RawColumn(-2, 0),
+                };
 
             foreach (var item in tryList) {
                 if (Canput(Current.Position + item, shape)) {
@@ -149,6 +139,7 @@ namespace Tetris
             }
 
             return false;
+
 
         }
 

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="API\EventArgments.cs" />
     <Compile Include="API\GameAddonAttribute.cs" />
+    <Compile Include="API\GameClient.cs" />
     <Compile Include="API\LibraryLoader.cs" />
     <Compile Include="API\LibraryObject.cs" />
     <Compile Include="API\LibraryType.cs" />

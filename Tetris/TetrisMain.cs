@@ -24,10 +24,11 @@ namespace Tetris
         OperationSet opSet;
         public string Err = "";
         private double FallRate = 1;
+        protected MinoGenerator Generator;
 
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
-            this.ServerRate = 5;
+            this.ServerRate = 1;
             //OnDraw += TetrisMain_OnDraw_GDI;
 
         }
@@ -49,7 +50,7 @@ namespace Tetris
             StringBuilder sb = new StringBuilder();
 
             Enumerable.Range(0, 4).ForEach(i => {
-                sb.AppendLine(TField.Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join(""));
+                sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join(""));
             });
 
             sb.AppendLine("-－－－－－－－－－－-");
@@ -64,9 +65,20 @@ namespace Tetris
 
         }
 
+        public void GenerateMino() {
+            TField.Current = new FallingBlock() {
+                Mino = Generator.Generate(),
+                State = MainPartConfiguration.Generated,
+                Position = TetrisUtils.GeneratePosition,
+                Rotate = 0
+            };
+        }
+
         public override void Start() {
             TField = new TetrisField();
             opSet = new OperationSet();
+            Generator = new MinoGenerator();
+            GenerateMino();
             System.Diagnostics.Debug.WriteLine("Inited.");
         }
 
@@ -120,6 +132,8 @@ namespace Tetris
             TField.HardDrop();
 
             TField.ScanErase();
+            GenerateMino();
+
 
             Loser = TField.CheckWinner();
 

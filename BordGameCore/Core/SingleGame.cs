@@ -12,7 +12,7 @@ namespace GameLib.Core
 {
     public abstract class SingleGame : Game
     {
-        public override int MaxPlayer { get; } = 1;
+        public override int MaxPlayer { get; protected set; } = 1;
 
         protected int Loser = 0;
         protected int turn = 1;

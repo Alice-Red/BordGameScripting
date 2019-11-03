@@ -71,7 +71,7 @@ namespace GameLib.Core
                     current = PL2.Input(Field);
                     break;
             }
-            
+
         }
 
         protected abstract void Process();

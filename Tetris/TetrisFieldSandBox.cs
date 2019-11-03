@@ -11,7 +11,6 @@ namespace Tetris
         public TetrisFieldSandBox(TetrisField f) {
             this.field = f.Field;
             this.Current = f.Current;
-            this.Generator = f.Generator;
         }
 
         //public void 

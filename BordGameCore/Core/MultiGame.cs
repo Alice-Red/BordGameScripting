@@ -12,26 +12,20 @@ namespace GameLib.Core
 {
     public abstract class MultiGame : Game
     {
-        public override int MaxPlayer { get; } = 99;
+        public override int MaxPlayer { get; protected set; } = 99;
 
         protected int Loser = 0;
         protected int turn = 1;
         protected bool Running = false;
         private bool Inited = true;
         public GameField Field;
-        public int ServerRate = 10;
+        public double ServerRate = 1;
         private Stopwatch sw = new Stopwatch();
 
         private int serverSleep => (1000.0 / ServerRate).Round();
 
-
-        protected MultiGame() {
-            Inited = false;
-        }
-
-        protected MultiGame(params GameInputter[] player) {
-
-        }
+        public delegate void OnDrawHandler(Game sender, OnDrawArgs e);
+        public event OnDrawHandler OnDraw;
 
         public override void Run() {
             if (Running)
@@ -39,14 +33,16 @@ namespace GameLib.Core
             Start();
             if (Inited == false)
                 return;
+            OnDraw?.Invoke(this, new OnDrawArgs());
             do {
                 sw.Start();
                 UpDate();
+                OnDraw?.Invoke(this, new OnDrawArgs());
                 sw.Stop();
 
                 if (serverSleep - sw.ElapsedMilliseconds > 0)
                     Thread.Sleep((int) (serverSleep - sw.ElapsedMilliseconds));
-
+                sw.Reset();
             } while (Loser == 0);
             End();
         }
