@@ -78,10 +78,7 @@ namespace Tetris
                     Position = TetrisUtils.GeneratePosition,
                     Rotate = 0
                 };
-
             }
-
-
         }
 
         public override void UpDate() {
@@ -125,10 +122,10 @@ namespace Tetris
                 //});
             }
 
-            //for (int i = 0; i < inputStructs.Length; i++) {
-            //    while (PlayersFields[i].Current.State != MainPartConfiguration.Generated)
-            //        System.Threading.Thread.Sleep(1);
-            //}
+            for (int i = 0; i < Players.Length; i++) {
+                while (PlayersFields[i].Current.State != MainPartConfiguration.Generated)
+                    System.Threading.Thread.Sleep(1);
+            }
 
             GenerateMino();
             Losers = PlayersFields.Select(s => s.CheckWinner()).ToArray();
