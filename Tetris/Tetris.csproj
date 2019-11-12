@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command.cs" />
+    <Compile Include="CommandStruct.cs" />
     <Compile Include="FallingBlock.cs" />
     <Compile Include="InputCommand.cs" />
     <Compile Include="MainPartConfiguration.cs" />

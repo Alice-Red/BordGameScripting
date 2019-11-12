@@ -94,23 +94,23 @@ namespace Tetris
                 foreach (var item in inputStructs.Commands) {
                     switch (item.command) {
                         case InputCommand.MoveLeft:
-                            for (int k = 0; k < item.value; k++) {
-                                PlayersFields[i].Move(true);
+                            for (int k = 0; k < Math.Abs(item.value); k++) {
+                                PlayersFields[i].Move(item.value >= 1);
                             }
                             break;
                         case InputCommand.MoveRight:
-                            for (int k = 0; k < item.value; k++) {
-                                PlayersFields[i].Move(false);
+                            for (int k = 0; k < Math.Abs(item.value); k++) {
+                                PlayersFields[i].Move(item.value <= -1);
                             }
                             break;
                         case InputCommand.RotateLeft:
-                            for (int k = 0; k < item.value; k++) {
-                                PlayersFields[i].Rotate(true);
+                            for (int k = 0; k < Math.Abs(item.value); k++) {
+                                PlayersFields[i].Rotate(item.value >= 1);
                             }
                             break;
                         case InputCommand.RotateRight:
-                            for (int k = 0; k < item.value; k++) {
-                                PlayersFields[i].Rotate(false);
+                            for (int k = 0; k < Math.Abs(item.value); k++) {
+                                PlayersFields[i].Rotate(item.value <= -1);
                             }
                             break;
                         default:
