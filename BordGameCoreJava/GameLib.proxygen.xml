@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<jni4net-proxygen xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://jni4net.sf.net/0.8.7.0/toolConfig.xsd">
+  <TargetDirJvm>D:\Java_Cs\Visual Studio 2019\Projects\BordGameScripting\BordGameCoreJava\jvm</TargetDirJvm>
+  <TargetDirClr>D:\Java_Cs\Visual Studio 2019\Projects\BordGameScripting\BordGameCoreJava\clr</TargetDirClr>
+  <AssemblyReference Assembly="D:\Java_Cs\Visual Studio 2019\Projects\BordGameScripting\BordGameCore\bin\Debug\GameLib.dll" Generate="true" />
+</jni4net-proxygen>

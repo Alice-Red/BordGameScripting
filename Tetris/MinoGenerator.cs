@@ -31,7 +31,6 @@ namespace Tetris
             }
         }
 
-
         public Mino[] Nexts => nexts.Select(s => s.ToEnum<Mino>()).ToArray();
 
         public Mino Current;

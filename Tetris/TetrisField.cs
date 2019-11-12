@@ -40,7 +40,7 @@ namespace Tetris
         }
 
 
-        internal IEnumerable<int[]> GetRect(RawColumn point1, RawColumn point2) {
+        public IEnumerable<int[]> GetRect(RawColumn point1, RawColumn point2) {
             var point = TetrisUtils.NomalizeRect(point1, point2);
             var tmp = new List<int>();
 
@@ -191,7 +191,7 @@ namespace Tetris
             var tmp = field.ToJagged().Reverse();
             var senil = lines.Select(s => TetrisUtils.BackJump(s, 40)).ToArray();
 
-            var result = tmp.Where((s, i) => i.Any(senil));
+            var result = tmp.Where((s, i) => !i.Any(senil));
 
             int[] empty = new int[] { -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1 };
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using GameLib.Core.Util;
 using RUtil;
 
 namespace GameLib.API
@@ -26,31 +27,21 @@ namespace GameLib.API
             return Math.Min(a, b) + DICE(Math.Max(a, b) - Math.Min(a, b) + 1) - 1;
         }
 
-        public static T Random<T>(this IEnumerable<T> source) {
-            int n = source.Count();
-            return source.ElementAt(DICE(n) - 1);
-        }
+        //public static object Random(this IEnumerable<object> source, Type T) {
+        //    int n = source.Count();
+        //    return source.ElementAt(DICE(n) - 1);
+        //}
 
-        public static T[] Shuffle<T>(this T[] source) {
-            var result = new List<T>();
-            for(int i = 1; i < source.Length; i++) {
-                int a = DICE(source.Length) - 1;
-                result.Add(source[a]);
-                source = source.Remove(a).ToArray();
-            }
-            result.Add(source.First());
-            return result.ToArray();
-        }
+        //public static T[] Shuffle<T>(this T[] source) {
+        //    var result = new List<T>();
+        //    for(int i = 1; i < source.Length; i++) {
+        //        int a = DICE(source.Length) - 1;
+        //        result.Add(source[a]);
+        //        source = source.Remove(a).ToArray();
+        //    }
+        //    result.Add(source.First());
+        //    return result.ToArray();
+        //}
 
-        public static bool Include<T>(this T[] source, T[] target, bool strict = false) {
-            var sequence = source.ToList();
-            for (int i = 0; i < target.Length; i++) {
-                if (!sequence.Contains(target[i]))
-                    return false;
-                sequence.Remove(target[i]);
-            }
-
-            return true;
-        }
     }
 }

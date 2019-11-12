@@ -146,6 +146,15 @@ namespace GameLib.Core.Util
 
         }
 
+        public static bool Include(this RawColumn[] source, RawColumn[] target, bool strict = false) {
+            var sequence = source.ToList();
+            for (int i = 0; i < target.Length; i++) {
+                if (!sequence.Contains(target[i]))
+                    return false;
+                sequence.Remove(target[i]);
+            }
+            return true;
+        }
 
     }
 

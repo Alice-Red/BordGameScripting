@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
 using GameLib.Core;
+using GameLib.Core.Util;
 using RUtil;
 
 namespace Tetris
@@ -26,7 +28,7 @@ namespace Tetris
 
         public TetrisMainMulti() : base() {
             this.MaxPlayer = 2;
-            this.ServerRate = 2;
+            this.ServerRate = 5;
         }
 
         public TetrisMainMulti(params TetrisInputter[] players) : base() {
@@ -41,7 +43,7 @@ namespace Tetris
             });
 
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", Players.Length).Join(" "));
-            var fs = PlayersFields.Select(s => s.DrawableField()).ToArray();
+            var fs = PlayersFields.Select(s => s.GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10)).ToArray()).ToArray();
             for (int i = 0; i < 20; i++) {
                 sb.AppendLine(fs.Select(h => ("|" + h[i].Select(s => s == 0 ? "　" : "■").Join("") + "|")).Join(" "));
             }
@@ -122,10 +124,6 @@ namespace Tetris
                 //});
             }
 
-            for (int i = 0; i < Players.Length; i++) {
-                while (PlayersFields[i].Current.State != MainPartConfiguration.Generated)
-                    System.Threading.Thread.Sleep(1);
-            }
 
             GenerateMino();
             Losers = PlayersFields.Select(s => s.CheckWinner()).ToArray();
