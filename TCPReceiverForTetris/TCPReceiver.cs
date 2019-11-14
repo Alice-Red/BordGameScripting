@@ -12,6 +12,7 @@ using Tetris;
 
 namespace TCPReceiverForTetris
 {
+    [GameAddon(TetrisMain.ID)]
     public class TCPReceiver : TetrisInputter
     {
         Server server = new Server();

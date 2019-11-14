@@ -31,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RTcp">
+    <Reference Include="RTcp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BordGameCore\RLib\RTcp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -60,4 +61,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)BordGameScriptingCUI\bin\Debug\Lib\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

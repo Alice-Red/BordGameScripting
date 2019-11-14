@@ -48,6 +48,7 @@ namespace BordGameScriptingCUI
             for (int i = 0; i < iinputters.Length; i++) {
                 Console.WriteLine($"{i}: {(iinputters[i] as GameInputter).ToString()}");
             }
+
             for (int i = 0; i < game.MaxPlayer; i++) {
                 Console.Write($"Player{i + 1} >>");
                 var n2 = Console.ReadLine().ParseInt();
