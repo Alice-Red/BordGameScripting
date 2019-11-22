@@ -15,5 +15,6 @@ namespace BordGameScripting
         public Form1() {
             InitializeComponent();
         }
+
     }
 }

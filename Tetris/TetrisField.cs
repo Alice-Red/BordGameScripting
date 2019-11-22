@@ -91,7 +91,6 @@ namespace Tetris
             }
         }
 
-
         public void Place() {
 
             Overlapped().ForEach(s => {
@@ -108,13 +107,11 @@ namespace Tetris
             while (Fall())
                 ;
             //Current.State = MainPartConfiguration.Placed;
-
         }
 
         //public void WaitDrop() {
 
         //}
-
 
         public bool Rotate(bool left) {
             if (Current.State.Any(MainPartConfiguration.Placed))
@@ -137,10 +134,7 @@ namespace Tetris
                     return true;
                 }
             }
-
             return false;
-
-
         }
 
         public bool Move(bool left) {
@@ -169,8 +163,6 @@ namespace Tetris
 
             //Current.State = MainPartConfiguration.Placed;
         }
-
-
 
         // 消せるところ
         public int ScanErase() {
@@ -225,6 +217,7 @@ namespace Tetris
             });
             return result;
         }
+
         private List<RawColumn> Surroundings(params RawColumn[] rc) {
             List<RawColumn> result = new List<RawColumn>();
             Current.Shape().For((i, j, s) => {
@@ -249,6 +242,7 @@ namespace Tetris
                 }
             }
         }
+
         public static IEnumerable<RawColumn> Overlapped(RawColumn position, int[,] obj) {
 
             int FirstDim = obj.GetLength(0);

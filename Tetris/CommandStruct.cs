@@ -9,7 +9,7 @@ namespace Tetris
     public class CommandStruct
     {
         public string Head;
-        public Dictionary<string, string[]> Values;
+        public Dictionary<string, string[]> Values = new Dictionary<string, string[]>();
 
         public CommandStruct(string value) {
             var ar = value.Split('|').ToArray();
@@ -17,6 +17,9 @@ namespace Tetris
 
             for (int i = 1; i < ar.Length; i++) {
                 if (ar[i].Contains(',')) {
+                    var tmp = ar[i].Split(':');
+                    Values.Add(tmp.FirstOrDefault(), tmp.LastOrDefault().Split(','));
+                } else {
                     var tmp = ar[i].Split(':');
                     Values.Add(tmp.FirstOrDefault(), tmp.LastOrDefault().Split(','));
                 }

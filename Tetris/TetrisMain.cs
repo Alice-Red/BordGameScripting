@@ -30,6 +30,7 @@ namespace Tetris
             OnDraw += TetrisMain_OnDraw_Console;
             this.ServerRate = 1;
             //OnDraw += TetrisMain_OnDraw_GDI;
+            //OnDraw -= TetrisMain_OnDraw_GDI;
 
         }
         public override void StorePlayer(params GameInputter[] players) {

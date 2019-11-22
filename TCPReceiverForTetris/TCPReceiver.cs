@@ -22,17 +22,22 @@ namespace TCPReceiverForTetris
         bool CommandReturned = false;
 
 
-        List<CommandStruct> CommandsStore;
+        List<CommandStruct> CommandsStore= new List<CommandStruct>();
+
+        public TCPReceiver() {
+            Initialize();
+        }
+
 
         private void Initialize() {
             server.Create(34481);
-            server.ConnetionSuccessfull += Server_ConnetionSuccessfull;
+            server.ConnectionSuccessfull += Server_ConnectionSuccessfull;
             server.MessageReceived += Server_MessageReceived;
-
+            server.Boot();
             init = true;
         }
 
-        private void Server_ConnetionSuccessfull(Server sender, ConnetionSuccessfullArgs e) {
+        private void Server_ConnectionSuccessfull(Server sender, ConnetionSuccessfullArgs e) {
             if (ConnectingIP == "") {
                 ConnectingIP = e.IpAddress;
                 Connecting = true;
@@ -59,14 +64,16 @@ namespace TCPReceiverForTetris
                 Initialize();
             //OpenFileDialog fileDialog = new OpenFileDialog();
             //fileDialog.
+            while (!Connecting)
+                ;
             CommandReturned = false;
             server.Send((s, i) => i == 0, FieldToString(field));
             while (!CommandReturned)
                 ;
             var ttt = CommandsStore.Where(s => s.Head == "INPUT").LastOrDefault();
             OperationSet opset = new OperationSet();
-            opset.Store(InputCommand.MoveLeft, int.Parse(ttt.Values["Move"][0]));
             opset.Store(InputCommand.RotateLeft, int.Parse(ttt.Values["Rotate"][0]));
+            opset.Store(InputCommand.MoveLeft, int.Parse(ttt.Values["Move"][0]));
             return opset;
         }
 

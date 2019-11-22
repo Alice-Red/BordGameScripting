@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RUtil;
 
 namespace Tetris
 {
@@ -13,7 +14,18 @@ namespace Tetris
             this.Current = f.Current;
         }
 
-        //public void 
+
+
+
+        //public int ExistHole() {
+
+        //}
+
+
+        //private IEnumerable<int> Void() {
+        //    var source = this.GetShowableField();
+        //    source
+        //}
 
 
     }

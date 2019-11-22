@@ -31,38 +31,38 @@ namespace Tetris
         };
         public static readonly int[,] T = new int[,] {
             { 0, 0, 0, 0 },
-            { 0, 1, 1, 1 },
-            { 0, 0, 1, 0 },
+            { 0, 1, 0, 0 },
+            { 1, 1, 1, 0 },
             { 0, 0, 0, 0 },
         };
         public static readonly int[,] I = new int[,] {
             { 0, 0, 0, 0 },
-            { 0, 0, 0, 0 },
             { 1, 1, 1, 1 },
+            { 0, 0, 0, 0 },
             { 0, 0, 0, 0 },
         };
         public static readonly int[,] L = new int[,] {
-            { 0, 1, 0, 0 },
-            { 0, 1, 0, 0 },
-            { 0, 1, 1, 0 },
+            { 0, 0, 0, 0 },
+            { 0, 0, 1, 0 },
+            { 1, 1, 1, 0 },
             { 0, 0, 0, 0 },
         };
         public static readonly int[,] J = new int[,] {
-            { 0, 0, 1, 0 },
-            { 0, 0, 1, 0 },
-            { 0, 1, 1, 0 },
+            { 0, 0, 0, 0 },
+            { 0, 1, 0, 0 },
+            { 0, 1, 1, 1 },
             { 0, 0, 0, 0 },
         };
         public static readonly int[,] S = new int[,] {
             { 0, 0, 0, 0 },
-            { 0, 0, 1, 1 },
             { 0, 1, 1, 0 },
+            { 1, 1, 0, 0 },
             { 0, 0, 0, 0 },
         };
         public static readonly int[,] Z = new int[,] {
             { 0, 0, 0, 0 },
+            { 1, 1, 0, 0 },
             { 0, 1, 1, 0 },
-            { 0, 0, 1, 1 },
             { 0, 0, 0, 0 },
         };
 

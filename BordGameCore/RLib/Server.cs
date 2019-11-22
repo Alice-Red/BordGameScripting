@@ -19,7 +19,7 @@ namespace RUtil.Tcp
         public event MessageReceivedHundler MessageReceived;
 
         public delegate void ConnetionSuccessfullHundler(Server sender, ConnetionSuccessfullArgs e);
-        public event ConnetionSuccessfullHundler ConnetionSuccessfull;
+        public event ConnetionSuccessfullHundler ConnectionSuccessfull;
 
         public delegate void DisConnectedHundler(Server sender, DisConnectedArgs e);
         public event DisConnectedHundler DisConnected;
@@ -65,6 +65,12 @@ namespace RUtil.Tcp
         public void Boot() {
             Socket socket = new Socket(SocketType.Stream, ProtocolType.IP);
 
+            var ipGlobalProp = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties();
+            var usedPorts = ipGlobalProp.GetActiveTcpConnections();
+            while (usedPorts.Select(s => s.LocalEndPoint.Port).Contains(port)) {
+                port += 1;
+            }
+
             socket.Bind(new IPEndPoint(IPAddress.Any, Port));
             socket.Listen(8);
 
@@ -78,7 +84,7 @@ namespace RUtil.Tcp
             string hostname = Dns.GetHostName();
             // ホスト名からIPアドレスを取得する
             IPAddress[] adrList = Dns.GetHostAddresses(hostname);
-            ServerAwaked?.Invoke(this, new ServerAwakedArgs(string.Join(" || ", adrList.Select(s => s.ToString()))));
+            ServerAwaked?.Invoke(this, new ServerAwakedArgs(adrList.Select(s => s.ToString()).ToArray(), Port));
             server.BeginAccept(new AsyncCallback(AcceptCallback), server);
         }
 
@@ -91,7 +97,7 @@ namespace RUtil.Tcp
             try {
                 client = server.EndAccept(ar);
                 server.BeginAccept(new AsyncCallback(AcceptCallback), server);
-                ConnetionSuccessfull?.Invoke(this, new ConnetionSuccessfullArgs(client.RemoteEndPoint.ToString()));
+                ConnectionSuccessfull?.Invoke(this, new ConnetionSuccessfullArgs(client.RemoteEndPoint.ToString()));
                 ConnectingList.Add(ID, client);
                 ID++;
                 ConnectedCount++;

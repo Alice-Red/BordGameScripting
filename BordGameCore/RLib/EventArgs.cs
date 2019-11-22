@@ -45,9 +45,10 @@ namespace RUtil.Tcp
 
     public class ServerAwakedArgs : EventArgs
     {
-        public string IpAddress { get; }
+        public string[] IpAddress { get; }
+        public int Port { get; }
 
-        public ServerAwakedArgs(string ipAddress) {
+        public ServerAwakedArgs(string[] ipAddress, int port) {
             IpAddress = ipAddress;
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace RUtil.Tcp
@@ -45,13 +45,29 @@ namespace RUtil.Tcp
         }
 
         public void Create(string address, int port) {
-            HostAddress = address;
-            Port = port;
+
+            if (Regex.IsMatch(address, @"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+")) {
+                HostAddress = address.Split(':')[0];
+                Port = int.Parse(address.Split(':')[1]);
+            } else if (Regex.IsMatch(address, @"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}")) {
+                HostAddress = address;
+                Port = port;
+            } else if (Regex.IsMatch(address, @"^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}:\d+$")) {
+                HostAddress = System.Net.Dns.GetHostEntry(address.Split(':')[0]).AddressList[0].ToString();
+                Port = int.Parse(address.Split(':')[1]);
+            } else if (Regex.IsMatch(address, @"^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$")) {
+                HostAddress = System.Net.Dns.GetHostEntry(address).AddressList[0].ToString();
+                Port = port;
+
+            }
+
+
+            //HostAddress = System.Net.Dns.GetHostEntry(address).AddressList[0].ToString();
+
+            //HostAddress = address;
+            //Port = port;
         }
 
-        ~Client() {
-            //Send("");
-        }
         //非同期データ受信のための状態オブジェクト
         private class AsyncStateObject
         {

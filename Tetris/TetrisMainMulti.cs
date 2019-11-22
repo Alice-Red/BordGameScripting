@@ -95,12 +95,12 @@ namespace Tetris
                     switch (item.command) {
                         case InputCommand.MoveLeft:
                             for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Move(item.value >= 1);
+                                PlayersFields[i].Move(item.value <= 1);
                             }
                             break;
                         case InputCommand.MoveRight:
                             for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Move(item.value <= -1);
+                                PlayersFields[i].Move(item.value >= -1);
                             }
                             break;
                         case InputCommand.RotateLeft:
