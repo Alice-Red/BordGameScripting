@@ -95,22 +95,22 @@ namespace Tetris
                     switch (item.command) {
                         case InputCommand.MoveLeft:
                             for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Move(item.value <= 1);
+                                PlayersFields[i].Move(item.value <= -1);
                             }
                             break;
                         case InputCommand.MoveRight:
                             for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Move(item.value >= -1);
+                                PlayersFields[i].Move(item.value >= 1);
                             }
                             break;
                         case InputCommand.RotateLeft:
                             for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Rotate(item.value >= 1);
+                                PlayersFields[i].Rotate(item.value >= -1);
                             }
                             break;
                         case InputCommand.RotateRight:
                             for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Rotate(item.value <= -1);
+                                PlayersFields[i].Rotate(item.value <= 1);
                             }
                             break;
                         default:
@@ -120,7 +120,11 @@ namespace Tetris
 
                 }
                 PlayersFields[i].HardDrop();
-                PlayersFields[i].ScanErase();
+                int obsrt = PlayersFields[i].ScanErase();
+                if (obsrt != 0) {
+                    var target = Enumerable.Range(0, PlayersFields.Length).Random();
+                    PlayersFields[target].Obstacle(obsrt);
+                }
                 //});
             }
 

@@ -181,26 +181,26 @@ namespace Tetris
         // ライン消し
         private void EraseLine(params int[] lines) {
             var tmp = field.ToJagged().Reverse();
-            var senil = lines.Select(s => TetrisUtils.BackJump(s, 40)).ToArray();
+            var senil = lines.Select(s => TetrisUtils.BackJump(s, 20)).ToArray();
 
             var result = tmp.Where((s, i) => !i.Any(senil));
 
             int[] empty = new int[] { -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1 };
 
             for (int i = 0; i < lines.Length; i++) {
-                result.Insert(empty);
+                result = result.Insert(empty);
             }
             field = result.Reverse().To2D();
         }
 
-        private void Obstacle(int line) {
+        public void Obstacle(int line) {
             int index = Util.DICE(10);
             int[] empty = new int[] { -1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, -1 };
             empty[index + 1] = 0;
 
             var result = field.ToJagged();
             for (int i = 0; i < line; i++) {
-                result.Insert(empty, 40);
+                result = result.Insert(empty, 40).Skip(1).ToArray();
             }
             field = result.To2D();
         }

@@ -58,7 +58,6 @@ namespace RUtil.Tcp
             } else if (Regex.IsMatch(address, @"^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$")) {
                 HostAddress = System.Net.Dns.GetHostEntry(address).AddressList[0].ToString();
                 Port = port;
-
             }
 
 

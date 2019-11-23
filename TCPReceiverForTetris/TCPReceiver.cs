@@ -25,7 +25,6 @@ namespace TCPReceiverForTetris
         List<CommandStruct> CommandsStore= new List<CommandStruct>();
 
         public TCPReceiver() {
-            Initialize();
         }
 
 
@@ -33,8 +32,13 @@ namespace TCPReceiverForTetris
             server.Create(34481);
             server.ConnectionSuccessfull += Server_ConnectionSuccessfull;
             server.MessageReceived += Server_MessageReceived;
+            server.ServerAwaked += Server_ServerAwaked;
             server.Boot();
             init = true;
+        }
+
+        private void Server_ServerAwaked(Server sender, ServerAwakedArgs e) {
+            Console.WriteLine($"{e.IpAddress.Join(" || ")} :: {e.Port}");
         }
 
         private void Server_ConnectionSuccessfull(Server sender, ConnetionSuccessfullArgs e) {
