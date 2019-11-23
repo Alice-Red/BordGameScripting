@@ -22,6 +22,7 @@ namespace Tetris
 
         public TetrisField[] PlayersFields;
         public TetrisInputter[] Players;
+        public OperationSet[] PlayersInputStruct;
         public MinoGenerator Generator;
         public int[] Losers;
 
@@ -39,7 +40,7 @@ namespace Tetris
             StringBuilder sb = new StringBuilder();
 
             Enumerable.Range(0, 4).ForEach(i => {
-                sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join(""));
+                sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("　")).Join(""));
             });
 
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", Players.Length).Join(" "));
@@ -59,6 +60,7 @@ namespace Tetris
             int count = players.Length;
             Players = players.Select(s => (TetrisInputter) s).ToArray();
             PlayersFields = Enumerable.Range(0, count).Select(s => new TetrisField()).ToArray();
+            PlayersInputStruct = Enumerable.Range(0, count).Select(s => new OperationSet()).ToArray();
         }
 
 
@@ -85,61 +87,72 @@ namespace Tetris
 
         public override void UpDate() {
             //var inputStructs = new OperationSet[Players.Length];
+
             System.Diagnostics.Debug.WriteLine($"{turn}");
-            for (int j = 0; j < Players.Length; j++) {
-                int i = j;
-                //Task.Factory.StartNew(() => {
 
-                var inputStructs = Players[i].Inputs(PlayersFields[i]);
-                foreach (var item in inputStructs.Commands) {
-                    switch (item.command) {
-                        case InputCommand.MoveLeft:
-                            for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Move(item.value <= 1);
-                            }
-                            break;
-                        case InputCommand.MoveRight:
-                            for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Move(item.value >= -1);
-                            }
-                            break;
-                        case InputCommand.RotateLeft:
-                            for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Rotate(item.value >= 1);
-                            }
-                            break;
-                        case InputCommand.RotateRight:
-                            for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Rotate(item.value <= -1);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+            if (PlayersFields.Select(s => s.Current.State).All(a => a == MainPartConfiguration.Placed)) {
 
+                GenerateMino();
+                Losers = PlayersFields.Select(s => s.CheckWinner()).ToArray();
 
+                switch (Losers.Count(s => s == 0)) {
+                    case 0:
+                        Loser = -1;
+                        break;
+                    case 1:
+                        Loser = Losers.IndexOf(0) + 1;
+                        break;
+                    default:
+                        break;
                 }
-                PlayersFields[i].HardDrop();
-                PlayersFields[i].ScanErase();
-                //});
+
+                turn++;
+
+            } else if (PlayersFields.Select(s => s.Current.State).All(a => a == MainPartConfiguration.Placed)) {
+
+            } else {
+
+
+                for (int j = 0; j < Players.Length; j++) {
+                    int i = j;
+                    //Task.Factory.StartNew(() => {
+
+                    var inputStructs = Players[i].Inputs(PlayersFields[i]);
+                    foreach (var item in inputStructs.Commands) {
+                        switch (item.command) {
+                            case InputCommand.MoveLeft:
+                                for (int k = 0; k < Math.Abs(item.value); k++) {
+                                    PlayersFields[i].Move(item.value <= 1);
+                                }
+                                break;
+                            case InputCommand.MoveRight:
+                                for (int k = 0; k < Math.Abs(item.value); k++) {
+                                    PlayersFields[i].Move(item.value >= -1);
+                                }
+                                break;
+                            case InputCommand.RotateLeft:
+                                for (int k = 0; k < Math.Abs(item.value); k++) {
+                                    PlayersFields[i].Rotate(item.value >= 1);
+                                }
+                                break;
+                            case InputCommand.RotateRight:
+                                for (int k = 0; k < Math.Abs(item.value); k++) {
+                                    PlayersFields[i].Rotate(item.value <= -1);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+
+
+                    }
+                    //PlayersFields[i].HardDrop();
+                    //PlayersFields[i].ScanErase();
+                    //});
+                }
             }
 
 
-            GenerateMino();
-            Losers = PlayersFields.Select(s => s.CheckWinner()).ToArray();
-
-            switch (Losers.Count(s => s == 0)) {
-                case 0:
-                    Loser = -1;
-                    break;
-                case 1:
-                    Loser = Losers.IndexOf(0) + 1;
-                    break;
-                default:
-                    break;
-            }
-
-            turn++;
 
         }
 
