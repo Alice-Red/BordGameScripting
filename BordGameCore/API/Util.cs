@@ -43,5 +43,15 @@ namespace GameLib.API
             return result.ToArray();
         }
 
+
+        public static int ToZero(this int value, int step) {
+            if (value < 0)
+                return value + step;
+            else if (value > 0)
+                return value - step;
+            else
+                return 0;
+
+        }
     }
 }

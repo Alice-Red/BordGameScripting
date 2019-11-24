@@ -61,8 +61,8 @@ namespace Tetris
         public int[][] DrawableField() {
             var tmp = GetShowableField();
             var now = Current.Shape().ToJagged();
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
+            for (int i = 0; i < now.Length; i++) {
+                for (int j = 0; j < now[i].Length; j++) {
                     var rc = Current.Position - RawColumn.New(20, 1) + RawColumn.New(i, j);
                     if (rc.Raw.InBetween(0, 19) && rc.Column.InBetween(0, 9) && now[i][j] == 1)
                         tmp[rc.Raw][rc.Column] = now[i][j];
@@ -113,11 +113,11 @@ namespace Tetris
 
         //}
 
-        public bool Rotate(bool left) {
+        public bool Rotate(bool right) {
             if (Current.State.Any(MainPartConfiguration.Placed))
                 return false;
 
-            var shape = left ? TetrisUtils.RotateAnticlockwise(Current.Shape()) : TetrisUtils.RotateClockwise(Current.Shape());
+            var shape = right ? TetrisUtils.RotateAnticlockwise(Current.Shape()) : TetrisUtils.RotateClockwise(Current.Shape());
 
             RawColumn[] tryList = new RawColumn[] {
                     new RawColumn( 0, 0),
@@ -128,7 +128,7 @@ namespace Tetris
             foreach (var item in tryList) {
                 if (Canput(Current.Position + item, shape)) {
                     Current.Position += item;
-                    Current.Rotate += left ? -1 : 1;
+                    Current.Rotate += right ? 1 : -1;
                     Current.State = MainPartConfiguration.Falling;
                     //OnGround = false;
                     return true;
@@ -137,8 +137,8 @@ namespace Tetris
             return false;
         }
 
-        public bool Move(bool left) {
-            var diff = left ? RawColumn.New(0, -1) : RawColumn.New(0, 1);
+        public bool Move(bool right) {
+            var diff = right ? RawColumn.New(0, 1) : RawColumn.New(0, -1);
             var t = Overlapped().Select(s => s + diff).ToArray();
             if (Current.State != MainPartConfiguration.Waiting)
                 Current.State = MainPartConfiguration.Falling;
@@ -148,7 +148,7 @@ namespace Tetris
                     return false;
             }
 
-            Current.Position += left ? RawColumn.New(0, -1) : RawColumn.New(0, 1);
+            Current.Position += right ? RawColumn.New(0, 1) : RawColumn.New(0, -1);
             //OnGround = false;
             Current.State = MainPartConfiguration.Falling;
 

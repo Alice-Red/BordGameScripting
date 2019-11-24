@@ -22,6 +22,7 @@ namespace Tetris
 
         public TetrisField[] PlayersFields;
         public TetrisInputter[] Players;
+        public OperationSet[] PlayersInputStruct;
         public MinoGenerator Generator;
         public int[] Losers;
 
@@ -43,7 +44,7 @@ namespace Tetris
             });
 
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", Players.Length).Join(" "));
-            var fs = PlayersFields.Select(s => s.GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10)).ToArray()).ToArray();
+            var fs = PlayersFields.Select(s => s.DrawableField()).ToArray();
             for (int i = 0; i < 20; i++) {
                 sb.AppendLine(fs.Select(h => ("|" + h[i].Select(s => s == 0 ? "　" : "■").Join("") + "|")).Join(" "));
             }
@@ -59,6 +60,7 @@ namespace Tetris
             int count = players.Length;
             Players = players.Select(s => (TetrisInputter) s).ToArray();
             PlayersFields = Enumerable.Range(0, count).Select(s => new TetrisField()).ToArray();
+            PlayersInputStruct = Enumerable.Range(0, count).Select(s => new OperationSet()).ToArray();
         }
 
 
@@ -66,7 +68,7 @@ namespace Tetris
             Generator = new MinoGenerator();
             GenerateMino();
             for (int i = 0; i < PlayersFields.Length; i++) {
-                PlayersFields[i].SuperFast = true;
+                PlayersFields[i].SuperFast = false;
             }
             OnDraw += TetrisMain_OnDraw_Console;
         }
@@ -85,65 +87,75 @@ namespace Tetris
 
         public override void UpDate() {
             //var inputStructs = new OperationSet[Players.Length];
-            System.Diagnostics.Debug.WriteLine($"{turn}");
-            for (int j = 0; j < Players.Length; j++) {
-                int i = j;
-                //Task.Factory.StartNew(() => {
-
-                var inputStructs = Players[i].Inputs(PlayersFields[i]);
-                foreach (var item in inputStructs.Commands) {
-                    switch (item.command) {
-                        case InputCommand.MoveLeft:
-                            for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Move(item.value <= -1);
-                            }
-                            break;
-                        case InputCommand.MoveRight:
-                            for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Move(item.value >= 1);
-                            }
-                            break;
-                        case InputCommand.RotateLeft:
-                            for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Rotate(item.value >= -1);
-                            }
-                            break;
-                        case InputCommand.RotateRight:
-                            for (int k = 0; k < Math.Abs(item.value); k++) {
-                                PlayersFields[i].Rotate(item.value <= 1);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+            //System.Diagnostics.Debug.WriteLine($"{turn}");
 
 
+            if (PlayersFields.Select(s => s.Current.State).All(s => s == MainPartConfiguration.Placed || s == MainPartConfiguration.Generated)) {
+                GenerateMino();
+
+                Losers = PlayersFields.Select(s => s.CheckWinner()).ToArray();
+
+                switch (Losers.Count(s => s == 0)) {
+                    case 0:
+                        Loser = -1;
+                        break;
+                    case 1:
+                        Loser = Losers.IndexOf(0) + 1;
+                        break;
+                    default:
+                        break;
                 }
-                PlayersFields[i].HardDrop();
+
+                for (int i = 0; i < Players.Length; i++) {
+                    PlayersInputStruct[i] = Players[i].Inputs(PlayersFields[i]);
+                }
+
+                turn++;
+
+            }
+
+            for (int i = 0; i < Players.Length; i++) {
+
+                for (int j = 0; j < PlayersInputStruct[i].Commands.Length; j++) {
+                    if (PlayersInputStruct[i].Commands[j].value != 0) {
+                        switch (PlayersInputStruct[i].Commands[j].command) {
+                            case InputCommand.MoveLeft:
+
+                                PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value <= -1);
+                                PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
+                                break;
+                            case InputCommand.MoveRight:
+
+                                PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value >= 1);
+                                PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
+                                break;
+                            case InputCommand.RotateLeft:
+
+                                PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value >= 1);
+                                PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
+                                break;
+                            case InputCommand.RotateRight:
+
+                                PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value <= -1);
+                                PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        break;
+                    }
+                }
+
+                PlayersFields[i].Fall();
+                //PlayersFields[i].HardDrop();
+
                 int obsrt = PlayersFields[i].ScanErase();
                 if (obsrt != 0) {
                     var target = Enumerable.Range(0, PlayersFields.Length).Random();
                     PlayersFields[target].Obstacle(obsrt);
                 }
-                //});
             }
-
-
-            GenerateMino();
-            Losers = PlayersFields.Select(s => s.CheckWinner()).ToArray();
-
-            switch (Losers.Count(s => s == 0)) {
-                case 0:
-                    Loser = -1;
-                    break;
-                case 1:
-                    Loser = Losers.IndexOf(0) + 1;
-                    break;
-                default:
-                    break;
-            }
-
-            turn++;
 
         }
 
