@@ -25,6 +25,8 @@ namespace TCPReceiverForTetris
         List<CommandStruct> CommandsStore= new List<CommandStruct>();
 
         public TCPReceiver() {
+            if (!init)
+                Initialize();
         }
 
 

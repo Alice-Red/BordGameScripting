@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using GameLib.API;
 using GameLib.Core;
 using GameLib.Core.Util;
@@ -29,7 +30,7 @@ namespace Tetris
 
         public TetrisMainMulti() : base() {
             this.MaxPlayer = 2;
-            this.ServerRate = 5;
+            this.ServerRate = 10;
         }
 
         public TetrisMainMulti(params TetrisInputter[] players) : base() {
@@ -39,8 +40,9 @@ namespace Tetris
         private void TetrisMain_OnDraw_Console(Game sender, OnDrawArgs e) {
             StringBuilder sb = new StringBuilder();
 
+            sb.AppendLine();
             Enumerable.Range(0, 4).ForEach(i => {
-                sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join(""));
+                sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("　"));
             });
 
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", Players.Length).Join(" "));
@@ -107,8 +109,14 @@ namespace Tetris
                 }
 
                 for (int i = 0; i < Players.Length; i++) {
-                    PlayersInputStruct[i] = Players[i].Inputs(PlayersFields[i]);
+                    PlayersInputStruct[i] = null;
+                    int a = i;
+                        PlayersInputStruct[a] = Players[a].Inputs(PlayersFields[a]);
+                    //Task.Factory.StartNew(() => {
+                    //});
+                    //Thread.Sleep(1000);
                 }
+
 
                 turn++;
 
@@ -116,36 +124,37 @@ namespace Tetris
 
             for (int i = 0; i < Players.Length; i++) {
 
-                for (int j = 0; j < PlayersInputStruct[i].Commands.Length; j++) {
-                    if (PlayersInputStruct[i].Commands[j].value != 0) {
-                        switch (PlayersInputStruct[i].Commands[j].command) {
-                            case InputCommand.MoveLeft:
+                if (PlayersInputStruct[i] != null)
+                    for (int j = 0; j < PlayersInputStruct[i].Commands.Length; j++) {
+                        if (PlayersInputStruct[i].Commands[j].value != 0) {
+                            switch (PlayersInputStruct[i].Commands[j].command) {
+                                case InputCommand.MoveLeft:
 
-                                PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value <= -1);
-                                PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
-                                break;
-                            case InputCommand.MoveRight:
+                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value <= -1);
+                                    PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
+                                    break;
+                                case InputCommand.MoveRight:
 
-                                PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value >= 1);
-                                PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
-                                break;
-                            case InputCommand.RotateLeft:
+                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value >= 1);
+                                    PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
+                                    break;
+                                case InputCommand.RotateLeft:
 
-                                PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value >= 1);
-                                PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
-                                break;
-                            case InputCommand.RotateRight:
+                                    PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value >= 1);
+                                    PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
+                                    break;
+                                case InputCommand.RotateRight:
 
-                                PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value <= -1);
-                                PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
-                                break;
-                            default:
-                                break;
+                                    PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value <= -1);
+                                    PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            break;
                         }
-
-                        break;
                     }
-                }
 
                 PlayersFields[i].Fall();
                 //PlayersFields[i].HardDrop();
