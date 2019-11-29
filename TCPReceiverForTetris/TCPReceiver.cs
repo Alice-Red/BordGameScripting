@@ -40,7 +40,7 @@ namespace TCPReceiverForTetris
         }
 
         private void Server_ServerAwaked(Server sender, ServerAwakedArgs e) {
-            Console.WriteLine($"{e.IpAddress.Join(" || ")} :: {e.Port}");
+            ConsoleOut.Information($"{e.IpAddress.Join(" || ")} :: {e.Port}");
         }
 
         private void Server_ConnectionSuccessfull(Server sender, ConnetionSuccessfullArgs e) {
@@ -92,9 +92,9 @@ namespace TCPReceiverForTetris
             StringBuilder sb = new StringBuilder();
             sb.Append("INPUT|");
             var enableField = field.GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10));
-            sb.Append(enableField.SelectMany(s => s).Join(",") + "|");
-            sb.Append($"{field.Current.Position.Raw},{field.Current.Position.Column}|");
-            sb.Append($"{field.Current.Mino},{field}");
+            sb.Append("Field:" + enableField.SelectMany(s => s).Join(",") + "|");
+            sb.Append("Position" + $"{field.Current.Position.Raw},{field.Current.Position.Column}|");
+            sb.Append("Next" + $"{field.Current.Mino}, {field}");
 
             return sb.ToString();
         }

@@ -22,6 +22,7 @@ namespace Tetris
         public bool CanHold = false;
         public bool SuperFast = false;
         //public bool OnGround = false;
+        public int score = 0;
 
         public TetrisField() : base(12, 41) {
             CreateField();
@@ -56,7 +57,6 @@ namespace Tetris
         public int[][] GetShowableField() {
             return GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10)).ToArray();
         }
-
 
         public int[][] DrawableField() {
             var tmp = GetShowableField();

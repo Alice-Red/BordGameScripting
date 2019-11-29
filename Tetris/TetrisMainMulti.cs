@@ -30,7 +30,8 @@ namespace Tetris
 
         public TetrisMainMulti() : base() {
             this.MaxPlayer = 2;
-            this.ServerRate = 10;
+            this.ServerRate = 15;
+            ConsoleOut.SetRestriction(MessageType.Default);
         }
 
         public TetrisMainMulti(params TetrisInputter[] players) : base() {
@@ -111,7 +112,7 @@ namespace Tetris
                 for (int i = 0; i < Players.Length; i++) {
                     PlayersInputStruct[i] = null;
                     int a = i;
-                        PlayersInputStruct[a] = Players[a].Inputs(PlayersFields[a]);
+                    PlayersInputStruct[a] = Players[a].Inputs(PlayersFields[a]);
                     //Task.Factory.StartNew(() => {
                     //});
                     //Thread.Sleep(1000);
@@ -165,7 +166,6 @@ namespace Tetris
                     PlayersFields[target].Obstacle(obsrt);
                 }
             }
-
         }
 
         public override void End() {
