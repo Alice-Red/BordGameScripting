@@ -42,11 +42,11 @@ namespace Tetris
             }
         }
 
-        public int[] ScanFlat(int size) {
-            var hts = Heights().ToArray();
+        //public int[] ScanFlat(int size) {
+        //    var hts = Heights().ToArray();
 
 
-        }
+        //}
 
 
         //private IEnumerable<int> Void() {
