@@ -22,15 +22,15 @@ namespace TCPReceiverForTetris
         bool CommandReturned = false;
 
 
-        List<CommandStruct> CommandsStore= new List<CommandStruct>();
+        List<CommandStruct> CommandsStore = new List<CommandStruct>();
 
         public TCPReceiver() {
             if (!init)
-                Initialize();
+                Init();
         }
 
 
-        private void Initialize() {
+        private void Init() {
             server.Create(34481);
             server.ConnectionSuccessfull += Server_ConnectionSuccessfull;
             server.MessageReceived += Server_MessageReceived;
@@ -39,6 +39,13 @@ namespace TCPReceiverForTetris
             init = true;
         }
 
+        public override void Initialize() {
+            if (!init)
+                Init();
+            while (!Connecting)
+                ;
+
+        }
         private void Server_ServerAwaked(Server sender, ServerAwakedArgs e) {
             ConsoleOut.Information($"{e.IpAddress.Join(" || ")} :: {e.Port}");
         }
@@ -61,13 +68,13 @@ namespace TCPReceiverForTetris
 
         public override string Name() {
             if (!init)
-                Initialize();
+                Init();
             return GetName();
         }
 
         public override OperationSet Inputs(TetrisField field) {
             if (!init)
-                Initialize();
+                Init();
             //OpenFileDialog fileDialog = new OpenFileDialog();
             //fileDialog.
             while (!Connecting)

@@ -14,5 +14,7 @@ namespace Tetris
         public override IInputObjectContainer Input(GameField field) {
             return this.Inputs((TetrisField) field);
         }
+
+        public abstract void Initialize();
     }
 }

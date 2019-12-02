@@ -20,6 +20,8 @@ namespace Tetris
         public const string ID = "Tetris";
 
 
+        private double FallRate = 1;
+        private long RateCount;
 
         public TetrisField[] PlayersFields;
         public TetrisInputter[] Players;
@@ -156,8 +158,8 @@ namespace Tetris
                             break;
                         }
                     }
-
-                PlayersFields[i].Fall();
+                if (RateCount % FallRate == 0)
+                    PlayersFields[i].Fall();
                 //PlayersFields[i].HardDrop();
 
                 int obsrt = PlayersFields[i].ScanErase();
@@ -166,6 +168,7 @@ namespace Tetris
                     PlayersFields[target].Obstacle(obsrt);
                 }
             }
+            RateCount++;
         }
 
         public override void End() {
