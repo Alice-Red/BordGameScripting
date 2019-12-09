@@ -25,8 +25,8 @@ namespace TCPReceiverForTetris
         List<CommandStruct> CommandsStore = new List<CommandStruct>();
 
         public TCPReceiver() {
-            if (!init)
-                Init();
+            //if (!init)
+            //    Init();
         }
 
 
@@ -46,6 +46,7 @@ namespace TCPReceiverForTetris
                 ;
 
         }
+
         private void Server_ServerAwaked(Server sender, ServerAwakedArgs e) {
             ConsoleOut.Information($"{e.IpAddress.Join(" || ")} :: {e.Port}");
         }
@@ -54,6 +55,7 @@ namespace TCPReceiverForTetris
             if (ConnectingIP == "") {
                 ConnectingIP = e.IpAddress;
                 Connecting = true;
+                ConsoleOut.Information("connected" + e.IpAddress);
             }
         }
 

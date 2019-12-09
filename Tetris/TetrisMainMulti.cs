@@ -31,9 +31,9 @@ namespace Tetris
 
 
         public TetrisMainMulti() : base() {
-            this.MaxPlayer = 4;
+            this.MaxPlayer = 2;
             this.ServerRate = 15;
-            ConsoleOut.SetRestriction(MessageType.Default);
+            ConsoleOut.SetRestriction(MessageType.All);
         }
 
         public TetrisMainMulti(params TetrisInputter[] players) : base() {
