@@ -17,7 +17,7 @@ namespace GameLib.Core
         protected int Loser = 0;
         protected int turn = 1;
         protected bool Running = false;
-        private bool Inited = true;
+        protected bool Inited = true;
         public GameField Field;
         public double ServerRate = 1;
         private Stopwatch sw = new Stopwatch();

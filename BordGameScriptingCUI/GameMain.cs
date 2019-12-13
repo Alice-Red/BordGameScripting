@@ -17,8 +17,6 @@ namespace BordGameScriptingCUI
         GameLib.Core.Game game;
         List<GameInputter> pls = new List<GameInputter>();
 
-
-
         public GameMain() {
             LibraryLoader loader = new LibraryLoader(ProgramBGSCUI.LibraryPath);
             var tgame = loader.Games.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s.GetBaseTypes().Contains(typeof(Game))).ToArray();
@@ -32,7 +30,6 @@ namespace BordGameScriptingCUI
             Task.Factory.StartNew(() => {
                 game.Run();
             });
-
         }
 
         public void Menu(Type[] tgames, Type[] tinputters) {
@@ -56,7 +53,6 @@ namespace BordGameScriptingCUI
                 if (iinputters.Length <= n2)
                     break;
                 pls.Add((GameInputter) Activator.CreateInstance(iinputters[n2].GetType()));
-
             }
             game.StorePlayer(pls.ToArray());
 

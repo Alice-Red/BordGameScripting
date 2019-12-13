@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using GameLib.API;
 using GameLib.Core.Base;
@@ -15,76 +16,41 @@ namespace GameLib.Core
         protected int Loser = 0;
         protected int turn = 1;
         protected bool Running = false;
-        private bool Inited = true;
+        protected bool Inited = true;
         public GridField Field;
         protected IInputObjectContainer current;
         public GameInputter PL1;
         public GameInputter PL2;
         protected IDrawer Drawer;
 
+        public delegate void OnDrawHandler(Game sender, OnDrawArgs e);
+        public event OnDrawHandler OnDraw;
+
         public BordGame() {
             //Inited = false;
         }
 
-        public BordGame(Type pl1, Type pl2) {
-            if (!pl1.CreateInstance(typeof(GameInputter), out PL1) || pl2.CreateInstance(typeof(GameInputter), out PL2)) {
-                ConsoleOut.Error("初期化に失敗しました");
-                Inited = false;
-            }
-        }
-
-        public void SetPlayer(Type pl1, Type pl2) {
-            if (!pl1.CreateInstance(typeof(GameInputter), out PL1) || pl2.CreateInstance(typeof(GameInputter), out PL2)) {
-                ConsoleOut.Error("初期化に失敗しました");
-                Inited = false;
-            }
-        }
 
         public override void Run() {
             if (Running)
                 return;
-            Init();
+            
             if (Inited == false)
                 return;
-            Menu();
-            Draw();
+            Start();
             do {
                 Running = true;
-                Input();
-                Process();
-                Draw();
+                UpDate();
             } while (Loser == 0);
             Running = false;
-            Result();
+            End();
         }
 
-        protected abstract void Init();
+        public abstract void Start();
 
-        protected abstract void Menu();
+        public abstract void UpDate();
 
-        protected void Input() {
-            switch (turn) {
-                case 1:
-                    current = PL1.Input(Field);
-                    break;
-                case -1:
-                    current = PL2.Input(Field);
-                    break;
-            }
-
-        }
-
-        protected abstract void Process();
-
-        public void Draw() {
-            Console.WriteLine(turn);
-            Drawer.DrawConsole((Base.GridField) Field);
-
-        }
-
-        protected abstract void Result();
-
-        protected abstract void Next();
+        public abstract void End();
 
     }
 }

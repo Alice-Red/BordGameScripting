@@ -10,6 +10,7 @@ using System.Diagnostics;
 
 namespace GameLib.Core
 {
+    [Obsolete]
     public abstract class SingleGame : Game
     {
         public override int MaxPlayer { get; protected set; } = 1;
@@ -17,7 +18,7 @@ namespace GameLib.Core
         protected int Loser = 0;
         protected int turn = 1;
         protected bool Running = false;
-        private bool Inited = true;
+        protected bool Inited = true;
         public GameField Field;
         public int ServerRate = 10;
         private Stopwatch sw = new Stopwatch();
@@ -28,8 +29,8 @@ namespace GameLib.Core
         public delegate void OnDrawHandler(Game sender, OnDrawArgs e);
         public event OnDrawHandler OnDraw;
 
-        public delegate void OnInputHandler(SingleGame sender, OnInputArgs e);
-        public event OnInputHandler OnInput;
+        //public delegate void OnInputHandler(SingleGame sender, OnInputArgs e);
+        //public event OnInputHandler OnInput;
 
 
         public override void Run() {
@@ -38,7 +39,6 @@ namespace GameLib.Core
             Start();
             if (Inited == false)
                 return;
-
             OnDraw?.Invoke(this, new OnDrawArgs());
             do {
                 sw.Start();

@@ -21,14 +21,12 @@ namespace TCPReceiverForTetris
         string ConnectingIP = "";
         bool CommandReturned = false;
 
-
         List<CommandStruct> CommandsStore = new List<CommandStruct>();
 
         public TCPReceiver() {
             //if (!init)
             //    Init();
         }
-
 
         private void Init() {
             server.Create(34481);
@@ -102,8 +100,8 @@ namespace TCPReceiverForTetris
             sb.Append("INPUT|");
             var enableField = field.GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10));
             sb.Append("Field:" + enableField.SelectMany(s => s).Join(",") + "|");
-            sb.Append("Position" + $"{field.Current.Position.Raw},{field.Current.Position.Column}|");
-            sb.Append("Next" + $"{field.Current.Mino}, {field}");
+            sb.Append("Position:" + $"{field.Current.Position.Raw},{field.Current.Position.Column}|");
+            sb.Append("Next:" + $"{field.Current.Mino}, {field}");
 
             return sb.ToString();
         }
