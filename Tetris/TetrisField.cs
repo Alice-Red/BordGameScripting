@@ -23,6 +23,7 @@ namespace Tetris
         public bool SuperFast = false;
         //public bool OnGround = false;
         public int score = 0;
+        public Mino[] Nexts; 
 
         public TetrisField() : base(12, 41) {
             CreateField();

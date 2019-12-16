@@ -13,6 +13,7 @@ namespace GameLib.Core
 {
     public abstract class BordGame : Game
     {
+
         protected int Loser = 0;
         protected int turn = 1;
         protected bool Running = false;
@@ -27,6 +28,7 @@ namespace GameLib.Core
         public event OnDrawHandler OnDraw;
 
         public BordGame() {
+            MaxPlayer = 2;
             //Inited = false;
         }
 
