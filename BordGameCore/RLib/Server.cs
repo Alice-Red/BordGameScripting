@@ -127,7 +127,7 @@ namespace RUtil.Tcp
                         }
                         ms.Write(resBytes, 0, resSize);
                     } while (resBytes[resSize - 1] != '\n');
-                    string resMsg = Encoding.UTF8.GetString(ms.ToArray()).Trim('\n');
+                    string resMsg = Encoding.UTF8.GetString(ms.ToArray()).Trim('\r', '\n');
 
                     //Console.WriteLine(resMsg);
                     if (Client.DisconnectKeyWord.Contains(resMsg)) {

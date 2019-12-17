@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Tetris
 {
-    public struct Command
+    public class Command
     {
         public InputCommand command;
 
-        public int value;
+        public int value { get; set; }
 
-        public string message;
+        public string message { get; set; }
 
-        public Command(InputCommand command, int value) : this() {
+        public Command(InputCommand command, int value) {
             this.command = command;
             this.value = value;
             this.message = "";
         }
 
-        public Command(InputCommand command, string message) : this() {
+        public Command(InputCommand command, string message) {
             this.command = command;
             this.value = 0;
             this.message = message;

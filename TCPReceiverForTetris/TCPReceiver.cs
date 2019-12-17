@@ -21,26 +21,39 @@ namespace TCPReceiverForTetris
         string ConnectingIP = "";
         bool CommandReturned = false;
 
-
-        List<CommandStruct> CommandsStore= new List<CommandStruct>();
+        List<CommandStruct> CommandsStore = new List<CommandStruct>();
 
         public TCPReceiver() {
-            Initialize();
+            //if (!init)
+            //    Init();
         }
 
-
-        private void Initialize() {
+        private void Init() {
             server.Create(34481);
             server.ConnectionSuccessfull += Server_ConnectionSuccessfull;
             server.MessageReceived += Server_MessageReceived;
+            server.ServerAwaked += Server_ServerAwaked;
             server.Boot();
             init = true;
+        }
+
+        public override void Initialize() {
+            if (!init)
+                Init();
+            while (!Connecting)
+                ;
+
+        }
+
+        private void Server_ServerAwaked(Server sender, ServerAwakedArgs e) {
+            ConsoleOut.Information($"{e.IpAddress.Join(" || ")} :: {e.Port}");
         }
 
         private void Server_ConnectionSuccessfull(Server sender, ConnetionSuccessfullArgs e) {
             if (ConnectingIP == "") {
                 ConnectingIP = e.IpAddress;
                 Connecting = true;
+                ConsoleOut.Information("connected" + e.IpAddress);
             }
         }
 
@@ -55,13 +68,13 @@ namespace TCPReceiverForTetris
 
         public override string Name() {
             if (!init)
-                Initialize();
+                Init();
             return GetName();
         }
 
         public override OperationSet Inputs(TetrisField field) {
             if (!init)
-                Initialize();
+                Init();
             //OpenFileDialog fileDialog = new OpenFileDialog();
             //fileDialog.
             while (!Connecting)
@@ -86,9 +99,9 @@ namespace TCPReceiverForTetris
             StringBuilder sb = new StringBuilder();
             sb.Append("INPUT|");
             var enableField = field.GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10));
-            sb.Append(enableField.SelectMany(s => s).Join(",") + "|");
-            sb.Append($"{field.Current.Position.Raw},{field.Current.Position.Column}|");
-            sb.Append($"{field.Current.Mino},{field}");
+            sb.Append("Field:" + enableField.SelectMany(s => s).Join(",") + "|");
+            sb.Append("Position:" + $"{field.Current.Position.Raw},{field.Current.Position.Column}|");
+            sb.Append("Next:" + $"{field.Current.Mino}, {field}");
 
             return sb.ToString();
         }

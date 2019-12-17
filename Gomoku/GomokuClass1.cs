@@ -19,30 +19,20 @@ namespace Gomoku
 
         }
 
-        public Gomoku(Type pl1, Type pl2) : base(pl1, pl2) {
+        public override void End() {
+
+        }
+
+        public override void Start() {
+            this.Drawer = new GomokuDraw();
+            Field = new GomokuField();
         }
 
         public override void StorePlayer(params GameInputter[] players) {
 
         }
 
-        protected override void Init() {
-            this.Drawer = new GomokuDraw();
-            Field = new GomokuField();
-
-        }
-
-        protected override void Menu() {
-
-            //throw new NotImplementedException();
-        }
-
-        protected override void Next() {
-
-            //throw new NotImplementedException();
-        }
-
-        protected override void Process() {
+        public override void UpDate() {
             var tmpObject = (GomokuInputObject) current;
 
             if (((GomokuField) Field).Canput(new RawColumn(tmpObject.Raw, tmpObject.Column), turn)) {
@@ -55,11 +45,7 @@ namespace Gomoku
                 Loser = reslut.First().Player.Reverse().ToInt();
             }
 
-            //throw new NotImplementedException();
         }
 
-        protected override void Result() {
-            //throw new NotImplementedException();
-        }
     }
 }

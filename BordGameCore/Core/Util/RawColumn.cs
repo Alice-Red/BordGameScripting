@@ -9,7 +9,7 @@ using RUtil;
 
 namespace GameLib.Core.Util
 {
-    public struct RawColumn : IInputObjectContainer, IComparable<RawColumn>
+    public struct RawColumn : IInputObjectContainer, IComparable<RawColumn>,IGamePoint
     {
         public int Raw { get; set; }
 
@@ -90,6 +90,14 @@ namespace GameLib.Core.Util
                     return 0;
                 }
             }
+        }
+
+        int IGamePoint.X() {
+            return X;
+        }
+
+        int IGamePoint.Y() {
+            return Y;
         }
 
         public static RawColumn operator +(RawColumn left, RawColumn right) {

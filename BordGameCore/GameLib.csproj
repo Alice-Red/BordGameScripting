@@ -45,6 +45,8 @@
     <Compile Include="API\EventArgments.cs" />
     <Compile Include="API\GameAddonAttribute.cs" />
     <Compile Include="API\GameClient.cs" />
+    <Compile Include="API\IGameDrawInterface.cs" />
+    <Compile Include="API\IGamePoint.cs" />
     <Compile Include="API\LibraryLoader.cs" />
     <Compile Include="API\LibraryObject.cs" />
     <Compile Include="API\LibraryType.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Core\Util\RelativePosition.cs" />
     <Compile Include="Core\Util\SafeArray.cs" />
     <Compile Include="Core\Game.cs" />
+    <Compile Include="LibraryClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RLib\Client.cs" />
     <Compile Include="RLib\EventArgs.cs" />

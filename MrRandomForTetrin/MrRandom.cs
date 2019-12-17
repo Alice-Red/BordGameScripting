@@ -29,5 +29,7 @@ namespace MrRandomForTetris
             //.Store(InputCommand.HardDrop);
         }
 
+        public override void Initialize() {
+        }
     }
 }

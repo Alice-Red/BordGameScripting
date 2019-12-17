@@ -50,6 +50,7 @@ namespace RUtil.Tcp
 
         public ServerAwakedArgs(string[] ipAddress, int port) {
             IpAddress = ipAddress;
+            Port = port;
         }
     }
 

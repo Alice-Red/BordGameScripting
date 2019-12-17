@@ -19,11 +19,14 @@ namespace Tetris
 
         public int Rotate;
 
-        public FallingBlock(RawColumn position, Mino mino, int rotate) {
+        public Mino[] Nexts;
+
+        public FallingBlock(RawColumn position, Mino mino, int rotate, Mino[] nexts) {
             Position = position;
             Mino = mino;
             State = MainPartConfiguration.None;
             Rotate = rotate;
+            Nexts = nexts;
         }
 
         public void Rotation(int d) {

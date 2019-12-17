@@ -15,7 +15,7 @@ using System.Security.Policy;
 namespace Tetris
 {
     [GameAddon(ID)]
-    public class TetrisMain : SingleGame
+    public class TetrisMain : MultiGame
     {
 
         public const string ID = "Tetris";
@@ -28,6 +28,7 @@ namespace Tetris
 
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
+            this.MaxPlayer = 1;
             this.ServerRate = 1;
             //OnDraw += TetrisMain_OnDraw_GDI;
             //OnDraw -= TetrisMain_OnDraw_GDI;

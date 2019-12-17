@@ -58,7 +58,6 @@ namespace RUtil.Tcp
             } else if (Regex.IsMatch(address, @"^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$")) {
                 HostAddress = System.Net.Dns.GetHostEntry(address).AddressList[0].ToString();
                 Port = port;
-
             }
 
 
@@ -148,7 +147,7 @@ namespace RUtil.Tcp
                     //最後まで受信した時
                     //受信したデータを文字列に変換
                     string str = System.Text.Encoding.UTF8.GetString(
-                        so.ReceivedData.ToArray()).Trim('\n');
+                        so.ReceivedData.ToArray()).Trim('\r', '\n');
                     //受信した文字列を表示
                     //System.Console.WriteLine(str);
                     MessageReceived?.Invoke(this, new MessageReceivedArgs(server.RemoteEndPoint.ToString(), str));

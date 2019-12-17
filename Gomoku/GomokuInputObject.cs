@@ -14,7 +14,6 @@ namespace Gomoku
         public int Column { get; set; }
 
         public GomokuInputObject(int x, int y) {
-
             Raw = y;
             Column = x;
         }
