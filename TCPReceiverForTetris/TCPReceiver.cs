@@ -101,7 +101,7 @@ namespace TCPReceiverForTetris
             var enableField = field.GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10));
             sb.Append("Field:" + enableField.SelectMany(s => s).Join(",") + "|");
             sb.Append("Position:" + $"{field.Current.Position.Raw},{field.Current.Position.Column}|");
-            sb.Append("Next:" + $"{field.Current.Mino}, {field}");
+            sb.Append("Next:" + $"{field.Current.Mino},{field.Nexts.Select(s => s.ToString()).Join(",")}");
 
             return sb.ToString();
         }

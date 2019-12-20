@@ -15,6 +15,12 @@ namespace TwentyOne
         private int[][] PlayersHand;
 
 
+        public int[] GetHand(int pl) {
+            if (PlayersHand.Length <= pl)
+                return PlayersHand[pl - 1];
+            else
+                return new int[0];
+        }
 
 
 
