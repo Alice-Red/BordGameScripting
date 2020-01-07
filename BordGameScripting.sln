@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TetrisInputterForLua", "Tet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwentyOne", "TwentyOne\TwentyOne.csproj", "{F42F9720-7FE4-484F-8268-E78846B1F4C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsBruteForceForTetris", "MsBruteForceForTetris\MsBruteForceForTetris.csproj", "{D0CCCCE0-8434-4654-84F6-EF9D78AECADA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{F42F9720-7FE4-484F-8268-E78846B1F4C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F42F9720-7FE4-484F-8268-E78846B1F4C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F42F9720-7FE4-484F-8268-E78846B1F4C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0CCCCE0-8434-4654-84F6-EF9D78AECADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0CCCCE0-8434-4654-84F6-EF9D78AECADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0CCCCE0-8434-4654-84F6-EF9D78AECADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0CCCCE0-8434-4654-84F6-EF9D78AECADA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

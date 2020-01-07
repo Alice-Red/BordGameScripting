@@ -92,16 +92,16 @@ namespace TCPReceiverForTetris
 
         public string GetName() {
             var name = CommandsStore.Where(s => s.Head == "NAME").FirstOrDefault();
-            return name != null ? "" : name.Values["Name"][0];
+            return name == null ? "" : name.Values["Name"][0];
         }
 
         public string FieldToString(TetrisField field) {
             StringBuilder sb = new StringBuilder();
-            sb.Append("INPUT|");
+            sb.Append("INPUT_");
             var enableField = field.GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10));
-            sb.Append("Field:" + enableField.SelectMany(s => s).Join(",") + "|");
-            sb.Append("Position:" + $"{field.Current.Position.Raw},{field.Current.Position.Column}|");
-            sb.Append("Next:" + $"{field.Current.Mino}, {field}");
+            sb.Append("Field:" + enableField.SelectMany(s => s).Join(",") + "_");
+            sb.Append("Position:" + $"{field.Current.Position.Raw},{field.Current.Position.Column}_");
+            sb.Append("Next:" + $"{field.Current.Mino},{field.Nexts.Join(",")}");
 
             return sb.ToString();
         }

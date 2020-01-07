@@ -36,9 +36,10 @@
             this.controlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infomationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -50,7 +51,8 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newGameNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -73,6 +75,7 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.gameToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -95,7 +98,7 @@
             this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.exitToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // viewToolStripMenuItem
@@ -116,7 +119,7 @@
             this.logViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.logViewToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.logViewToolStripMenuItem.Name = "logViewToolStripMenuItem";
-            this.logViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logViewToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.logViewToolStripMenuItem.Text = "LogView";
             // 
             // consoleToolStripMenuItem
@@ -124,7 +127,7 @@
             this.consoleToolStripMenuItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.consoleToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.consoleToolStripMenuItem.Text = "Console";
             // 
             // controlToolStripMenuItem
@@ -132,7 +135,7 @@
             this.controlToolStripMenuItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.controlToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.controlToolStripMenuItem.Name = "controlToolStripMenuItem";
-            this.controlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.controlToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.controlToolStripMenuItem.Text = "Control";
             // 
             // infomationToolStripMenuItem
@@ -140,7 +143,7 @@
             this.infomationToolStripMenuItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.infomationToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.infomationToolStripMenuItem.Name = "infomationToolStripMenuItem";
-            this.infomationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.infomationToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.infomationToolStripMenuItem.Text = "Infomation";
             // 
             // helpToolStripMenuItem
@@ -152,14 +155,6 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.helpToolStripMenuItem.Text = "Help(&H)";
             // 
-            // versionToolStripMenuItem
-            // 
-            this.versionToolStripMenuItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.versionToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.versionToolStripMenuItem.Text = "Version(&A)";
-            // 
             // showHelpToolStripMenuItem
             // 
             this.showHelpToolStripMenuItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -168,6 +163,14 @@
             this.showHelpToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
             this.showHelpToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.showHelpToolStripMenuItem.Text = "Show Help(V)";
+            // 
+            // versionToolStripMenuItem
+            // 
+            this.versionToolStripMenuItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.versionToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.versionToolStripMenuItem.Text = "Version(&A)";
             // 
             // statusStrip1
             // 
@@ -179,6 +182,12 @@
             this.statusStrip1.Size = new System.Drawing.Size(1264, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // splitContainer1
             // 
@@ -273,6 +282,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -317,7 +327,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(244, 24);
@@ -325,11 +335,19 @@
             this.panel1.Size = new System.Drawing.Size(764, 635);
             this.panel1.TabIndex = 6;
             // 
-            // toolStripStatusLabel1
+            // gameToolStripMenuItem
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameNToolStripMenuItem});
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.gameToolStripMenuItem.Text = "Game(&G)";
+            // 
+            // newGameNToolStripMenuItem
+            // 
+            this.newGameNToolStripMenuItem.Name = "newGameNToolStripMenuItem";
+            this.newGameNToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameNToolStripMenuItem.Text = "New Game (&N)";
             // 
             // Form1
             // 
@@ -391,6 +409,8 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newGameNToolStripMenuItem;
     }
 }
 

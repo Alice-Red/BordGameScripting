@@ -19,11 +19,25 @@ namespace Tetris
         public FallingBlock Current;
         //public MinoGenerator Generator;
         public Mino Holding = Mino.None;
+
+        /// <summary>
+        /// ホールドができるかどうか
+        /// </summary>
         public bool CanHold = false;
+
+        /// <summary>
+        /// 高速化
+        /// [触らないでください]
+        /// </summary>
         public bool SuperFast = false;
         //public bool OnGround = false;
-        public int score = 0;
-        public Mino[] Nexts; 
+
+        /// <summary>
+        /// 現在のスコア
+        /// </summary>
+        public int Score = 0;
+
+        public Mino[] Nexts;
 
         public TetrisField() : base(12, 41) {
             CreateField();
@@ -72,14 +86,14 @@ namespace Tetris
             return tmp;
         }
 
-        public bool Fall() {
+        internal bool Fall() {
             if (Current.State.Any(MainPartConfiguration.Placed))
                 return false;
 
             bool flg = true;
             Current.State = MainPartConfiguration.Floating;
             var t = Current.Shape().For((i, j, s) => {
-                if (s != 0 && Field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
+                if (Field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
                     flg = false;
             });
             if (flg) {
@@ -92,7 +106,7 @@ namespace Tetris
             }
         }
 
-        public void Place() {
+        internal void Place() {
 
             Overlapped().ForEach(s => {
                 field[s.Raw, s.Column] = (int) Current.Mino;
@@ -104,7 +118,7 @@ namespace Tetris
             //GenerateMino();
         }
 
-        public void HardDrop() {
+        internal void HardDrop() {
             while (Fall())
                 ;
             //Current.State = MainPartConfiguration.Placed;
@@ -114,7 +128,7 @@ namespace Tetris
 
         //}
 
-        public bool Rotate(bool right) {
+        internal bool Rotate(bool right) {
             if (Current.State.Any(MainPartConfiguration.Placed))
                 return false;
 
@@ -138,7 +152,7 @@ namespace Tetris
             return false;
         }
 
-        public bool Move(bool right) {
+        internal bool Move(bool right) {
             var diff = right ? RawColumn.New(0, 1) : RawColumn.New(0, -1);
             var t = Overlapped().Select(s => s + diff).ToArray();
             if (Current.State != MainPartConfiguration.Waiting)
@@ -156,7 +170,7 @@ namespace Tetris
             return true;
         }
 
-        public void Hold() {
+        internal void Hold() {
             //Mino t;
             //if(Holding !=Mino.None)
             //    t = 
@@ -166,7 +180,7 @@ namespace Tetris
         }
 
         // 消せるところ
-        public int ScanErase() {
+        internal int ScanErase() {
             var eraseList = GetShowableField().Select((s, i) => {
                 if (!s.Contains(0))
                     return (i, 1);
@@ -191,10 +205,14 @@ namespace Tetris
             for (int i = 0; i < lines.Length; i++) {
                 result = result.Insert(empty);
             }
+            Score += (lines.Length * 100 + ((int) Math.Pow(lines.Length - 1, 2) * 10));
+            if (lines.Length > 0 && lines[0] + lines.Length <= lines.Last()) {
+                Score += 5;
+            }
             field = result.Reverse().To2D();
         }
 
-        public void Obstacle(int line) {
+        internal void Obstacle(int line) {
             int index = Util.DICE(10);
             int[] empty = new int[] { -1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, -1 };
             empty[index + 1] = 0;

@@ -34,7 +34,7 @@ namespace GameLib.Core.Base
             get {
                 if (field == null || field.Length == 0)
                     field = new int[height, width];
-                return field;
+                return field.DeepClone();
             }
         }
 

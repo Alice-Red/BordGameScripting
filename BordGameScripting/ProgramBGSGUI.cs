@@ -8,6 +8,7 @@ namespace BordGameScripting
 {
     static class ProgramBGSGUI
     {
+        public static string LibraryPath = @"Lib\";
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>

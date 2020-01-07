@@ -87,6 +87,7 @@ namespace Tetris
                     Position = TetrisUtils.GeneratePosition,
                     Rotate = 0
                 };
+                PlayersFields[i].Nexts = Generator.Nexts;
             }
         }
 
@@ -133,12 +134,12 @@ namespace Tetris
                             switch (PlayersInputStruct[i].Commands[j].command) {
                                 case InputCommand.MoveLeft:
 
-                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value <= -1);
+                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value >= 1);
                                     PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
                                     break;
                                 case InputCommand.MoveRight:
 
-                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value >= 1);
+                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value <= -1);
                                     PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
                                     break;
                                 case InputCommand.RotateLeft:
@@ -163,7 +164,9 @@ namespace Tetris
                 //PlayersFields[i].HardDrop();
 
                 int obsrt = PlayersFields[i].ScanErase();
-                if (obsrt != 0) {
+                if (obsrt <= 3)
+                    obsrt -= 1;
+                if (obsrt > 0) {
                     var target = Enumerable.Range(0, PlayersFields.Length).Random();
                     PlayersFields[target].Obstacle(obsrt);
                 }
