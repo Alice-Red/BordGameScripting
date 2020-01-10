@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
+using GameLib.Core.Util;
+using RUtil;
 using Tetris;
 
 namespace MsBruteForceForTetris
@@ -24,45 +28,57 @@ namespace MsBruteForceForTetris
         }
 
         public override OperationSet Inputs(TetrisField field) {
-            // 砂場
-            TetrisFieldSandBox box = new TetrisFieldSandBox(field);
 
-            int maxScore = 0;
-            OperationSet max = new OperationSet();
+
+            int maxScore = -5000;
+            List<OperationSet> max = new List<OperationSet>();
 
             // 総当たり
-            for (int r = -2; r < 2; r++) {
-                for (int m = -5; m < 5; m++) {
+            // 時間もかかりとても雑
+            for (int r = -1; r < 2; r++) {
+                for (int m = -5; m < 6; m++) {
+                    // 砂場
+                    TetrisFieldSandBox box = new TetrisFieldSandBox(field);
+
                     OperationSet cur = new OperationSet();
+
                     cur.Store(InputCommand.RotateRight, r);
                     cur.Store(InputCommand.MoveRight, m);
 
                     int currentScore = Evaluation(box, cur);
 
-                    if (maxScore < currentScore) {
+                    if (maxScore == currentScore) {
+                        max.Add(cur);
+                    } else if (maxScore < currentScore) {
                         maxScore = currentScore;
-                        max = cur;
+                        max.Clear();
+                        max.Add(cur);
                     }
-
                 }
             }
 
             // 一番まともそうな手を返す
-            return max;
+            var res = max.Random();
+            OperationSet Result = new OperationSet();
+
+            Result.Store(res.Commands[0].value < 0 ? InputCommand.RotateLeft : InputCommand.RotateRight, Math.Abs(res.Commands[0].value));
+            Result.Store(res.Commands[1].value < 0 ? InputCommand.MoveLeft : InputCommand.MoveRight, Math.Abs(res.Commands[1].value));
+
+            return Result;
         }
 
         public int Evaluation(TetrisFieldSandBox box, OperationSet set) {
 
-            int evalScore = 500;
+            int evalScore = 5000;
             box.TestTry(set);
 
 
-            // 穴の数 * 20 点　減点
+            // 穴の数が多いほど減点
             int[] holes = box.Holes().ToArray();
-            evalScore -= (holes.Sum() * 20);
+            evalScore -= (holes.Sum() * 150);
 
 
-            // 標準偏差　平坦に近いほうがよさげ
+            // 標準偏差　平坦に近いほうが正義（嘘）
 
             // 高さ一覧
             int[] heights = box.Heights().ToArray();
@@ -89,7 +105,14 @@ namespace MsBruteForceForTetris
             double StandardDeviation = Math.Sqrt(dispersion);
 
             // ばらつきが多いほど減点
-            evalScore -= (int)(StandardDeviation * 100);
+            evalScore -= (int) (Math.Abs(dispersion) * 100 * StandardDeviation);
+
+            //ConsoleOut.Information($"{box.DistanceToHole().Join(", ")}");
+
+            // ラインを消せるなら加点
+            int ls = box.Clearable().Count();
+            evalScore += ((int) Math.Pow(ls, 2) * 120);
+
 
             return evalScore;
 

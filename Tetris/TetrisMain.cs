@@ -29,7 +29,7 @@ namespace Tetris
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
             this.MaxPlayer = 1;
-            this.ServerRate = 1;
+            this.ServerRate = 20;
             //OnDraw += TetrisMain_OnDraw_GDI;
             //OnDraw -= TetrisMain_OnDraw_GDI;
 
@@ -50,11 +50,18 @@ namespace Tetris
 
         private void TetrisMain_OnDraw_Console(Game sender, OnDrawArgs e) {
             StringBuilder sb = new StringBuilder();
-
+            sb.AppendLine();
             Enumerable.Range(0, 4).ForEach(i => {
-                sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join(""));
+                sb.AppendLine("　" + Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("  "));
             });
 
+            for (int i = 0; i < TField.Current.Shape().GetLength(1); i++) {
+                sb.AppendLine("　" + TField.Current.Shape().ToJagged()[i].Select(s => s == 0 ? "　" : "■").Join(""));
+            }
+
+            sb.AppendLine();
+            sb.AppendLine($"Lines:{TField.Lines} Score:{TField.Score}");
+            sb.AppendLine();
             sb.AppendLine("-－－－－－－－－－－-");
             var f = TField.DrawableField();
             foreach (var item in f) {
@@ -92,39 +99,27 @@ namespace Tetris
             }
             opSet = pl.Inputs(TField);
 
-            foreach (var item in opSet.Commands) {
-                switch (item.command) {
-                    case InputCommand.None:
-                        break;
-                    case InputCommand.HardDrop:
-                        TField.HardDrop();
-                        break;
-                    case InputCommand.WaitDrop:
-                        TField.Fall();
-                        break;
+            for (int j = 0; j < opSet.Commands.Length; j++) {
+                switch (opSet.Commands[j].command) {
                     case InputCommand.MoveLeft:
-                        for (int i = 0; i < item.value; i++) {
-                            TField.Move(true);
+                        for (int i = 0; i < Math.Abs(opSet.Commands[j].value); i++) {
+                            TField.Move(opSet.Commands[j].value < 0);
                         }
                         break;
                     case InputCommand.MoveRight:
-                        for (int i = 0; i < item.value; i++) {
-                            TField.Move(false);
+                        for (int i = 0; i < Math.Abs(opSet.Commands[j].value); i++) {
+                            TField.Move(opSet.Commands[j].value > 0);
                         }
                         break;
                     case InputCommand.RotateLeft:
-                        for (int i = 0; i < item.value; i++) {
-                            TField.Rotate(true);
+                        for (int i = 0; i < Math.Abs(opSet.Commands[j].value); i++) {
+                            TField.Rotate(opSet.Commands[j].value < 0);
                         }
                         break;
                     case InputCommand.RotateRight:
-                        for (int i = 0; i < item.value; i++) {
-                            TField.Rotate(false);
+                        for (int i = 0; i < Math.Abs(opSet.Commands[j].value); i++) {
+                            TField.Rotate(opSet.Commands[j].value > 0);
                         }
-                        break;
-                    case InputCommand.Hold:
-                        break;
-                    case InputCommand.Command:
                         break;
                     default:
                         break;

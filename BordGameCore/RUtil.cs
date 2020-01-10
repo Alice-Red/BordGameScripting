@@ -585,7 +585,7 @@ namespace RUtil
             int length = source.Select(s => s.Length).Max();
             if (length > index)
                 foreach (var item in source)
-                    yield return item.Length <= index ? item[index] : default(T);
+                    yield return item.Length > index ? item[index] : default(T);
         }
 
         /// <summary>
@@ -600,7 +600,7 @@ namespace RUtil
             if (length > index)
                 foreach (var item in source) {
                     var tmp = item.ToArray();
-                    yield return tmp.Length <= index ? tmp[index] : default(T);
+                    yield return tmp.Length > index ? tmp[index] : default(T);
                 }
         }
 

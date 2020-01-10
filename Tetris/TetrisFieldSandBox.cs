@@ -54,7 +54,7 @@ namespace Tetris
         }
 
         /// <summary>
-        /// ミノの高さを左からスキャンします
+        /// 列ごとにミノの高さを数えます
         /// </summary>
         /// <returns></returns>
         public IEnumerable<int> Heights() {
@@ -63,7 +63,7 @@ namespace Tetris
                 int counter = 20;
                 foreach (var t2 in item) {
                     if (t2 == 0) {
-                        counter--;
+                        counter -= 1;
                     } else {
                         break;
                     }
@@ -73,7 +73,7 @@ namespace Tetris
         }
 
         /// <summary>
-        /// 穴の数を左からスキャンします
+        /// 列ごとに穴の数を数えます
         /// </summary>
         /// <returns></returns>
         public IEnumerable<int> Holes() {
@@ -81,13 +81,57 @@ namespace Tetris
             var hts = Heights().ToArray();
             for (int i = 0; i < hts.Length; i++) {
                 int counter = 0;
-                for (int j = 0; j < hts[i]; j++)
-                    if (tfield[i][j] == 0) {
+                for (int j = 0; j < hts[i] - 1; j++)
+                    if (tfield[j][i] == 0) {
                         counter++;
                     }
                 yield return counter;
             }
         }
+
+        /// <summary>
+        /// 列ごとに穴を無視して個数を数えます
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<int> ElementCount() {
+            var tfield = GetShowableField();
+            foreach (var item in tfield.Columns())
+                yield return item.Count(s => s > 0);
+        }
+
+        /// <summary>
+        /// 列ごとに穴までの距離を測ります
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<int> DistanceToHole() {
+            var holes = Holes().ToArray();
+            var heights = Heights().ToArray();
+            var tfield = GetShowableField();
+
+            for (int i = 0; i < holes.Length; i++) {
+                if (holes[i] == 0) {
+                    yield return 0;
+                    continue;
+                }
+                for (int j = 0; j < heights[i]; j++) {
+                    int index = 20 - heights[i] + j;
+                    if (tfield[index][i] == 0) {
+                        yield return j;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public IEnumerable<int> Clearable() {
+            var tfield = GetShowableField();
+            for (int i = 0; i < tfield.Length; i++) {
+                if (tfield[i].All(s => s != 0))
+                    yield return i;
+            }
+
+        }
+
 
         /// <summary>
         /// sizeマスの平面を探します。

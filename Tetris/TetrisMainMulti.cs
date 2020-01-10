@@ -134,22 +134,22 @@ namespace Tetris
                             switch (PlayersInputStruct[i].Commands[j].command) {
                                 case InputCommand.MoveLeft:
 
-                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value >= 1);
+                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value <= -1);
                                     PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
                                     break;
                                 case InputCommand.MoveRight:
 
-                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value <= -1);
+                                    PlayersFields[i].Move(PlayersInputStruct[i].Commands[j].value >= 1);
                                     PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
                                     break;
                                 case InputCommand.RotateLeft:
 
-                                    PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value >= 1);
+                                    PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value <= -1);
                                     PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
                                     break;
                                 case InputCommand.RotateRight:
 
-                                    PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value <= -1);
+                                    PlayersFields[i].Rotate(PlayersInputStruct[i].Commands[j].value >= 1);
                                     PlayersInputStruct[i].Commands[j].value = PlayersInputStruct[i].Commands[j].value.ToZero(1);
                                     break;
                                 default:

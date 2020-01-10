@@ -37,9 +37,12 @@ namespace Tetris
         /// </summary>
         public int Score = 0;
 
+        public int Lines = 0;
+
         public Mino[] Nexts;
 
         public TetrisField() : base(12, 41) {
+            field = new int[Height, Width];
             CreateField();
             //Generator = new MinoGenerator();
             //this.GenerateMino();
@@ -47,8 +50,8 @@ namespace Tetris
 
         private void CreateField() {
             Enumerable.Range(0, 41).ForEach(s => {
-                Field[s, 0] = -1;
-                Field[s, 11] = -1;
+                field[s, 0] = -1;
+                field[s, 11] = -1;
             });
             Enumerable.Range(0, 12).ForEach(s => {
                 field[40, s] = -1;
@@ -93,7 +96,7 @@ namespace Tetris
             bool flg = true;
             Current.State = MainPartConfiguration.Floating;
             var t = Current.Shape().For((i, j, s) => {
-                if (Field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
+                if (s != 0 && Field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
                     flg = false;
             });
             if (flg) {
@@ -209,6 +212,7 @@ namespace Tetris
             if (lines.Length > 0 && lines[0] + lines.Length <= lines.Last()) {
                 Score += 5;
             }
+            Lines += lines.Length;
             field = result.Reverse().To2D();
         }
 
