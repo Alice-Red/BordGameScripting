@@ -32,8 +32,8 @@ namespace Tetris
 
         public TetrisMainMulti() : base() {
             this.MaxPlayer = 2;
-            this.ServerRate = 15;
-            ConsoleOut.SetRestriction(MessageType.All);
+            this.ServerRate = 10;
+            ConsoleOut.SetRestriction(MessageType.Default);
         }
 
         public TetrisMainMulti(params TetrisInputter[] players) : base() {
@@ -55,8 +55,16 @@ namespace Tetris
             }
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", Players.Length).Join(" "));
 
+            var lines = sb.ToString()/*.Trim('\r').Split('\n').ToArray();*/;
+
+
             Console.Clear();
-            Console.WriteLine(sb.ToString());
+            Console.WriteLine(lines);
+
+            //for (int i = 0; i < lines.Length; i++) {
+            //    Console.WriteLine(lines[i]);
+            //}
+
 
         }
 

@@ -65,7 +65,7 @@ namespace Tetris
 
             for (int i = point.Item1.Raw; i <= point.Item2.Raw; i++) {
                 for (int j = point.Item1.Column; j <= point.Item2.Column; j++) {
-                    tmp.Add(Field[i, j]);
+                    tmp.Add(field[i, j]);
                 }
                 yield return tmp.ToArray();
                 tmp = new List<int>();
@@ -96,7 +96,7 @@ namespace Tetris
             bool flg = true;
             Current.State = MainPartConfiguration.Floating;
             var t = Current.Shape().For((i, j, s) => {
-                if (s != 0 && Field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
+                if (s != 0 && field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
                     flg = false;
             });
             if (flg) {
@@ -162,7 +162,7 @@ namespace Tetris
                 Current.State = MainPartConfiguration.Falling;
 
             foreach (var item in t) {
-                if (Field.FromRC(item) != 0)
+                if (field.FromRC(item) != 0)
                     return false;
             }
 
@@ -280,7 +280,7 @@ namespace Tetris
         }
 
         public bool Canput(RawColumn rc, int[,] shape) {
-            return Overlapped(rc, shape).All(s => Field.FromRC(s, -1) == 0);
+            return Overlapped(rc, shape).All(s => field.FromRC(s, -1) == 0);
         }
 
         public override bool Canput(int r, int c, int t) {

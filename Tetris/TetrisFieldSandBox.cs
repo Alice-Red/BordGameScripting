@@ -17,6 +17,7 @@ namespace Tetris
         }
 
 
+
         /// <summary>
         /// 試しに置きます
         /// </summary>

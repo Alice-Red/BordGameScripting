@@ -45,7 +45,9 @@ namespace MsBruteForceForTetris
                     cur.Store(InputCommand.RotateRight, r);
                     cur.Store(InputCommand.MoveRight, m);
 
+
                     int currentScore = Evaluation(box, cur);
+
 
                     if (maxScore == currentScore) {
                         max.Add(cur);
@@ -107,7 +109,7 @@ namespace MsBruteForceForTetris
             // ばらつきが多いほど減点
             evalScore -= (int) (Math.Abs(dispersion) * 100 * StandardDeviation);
 
-            //ConsoleOut.Information($"{box.DistanceToHole().Join(", ")}");
+            ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
 
             // ラインを消せるなら加点
             int ls = box.Clearable().Count();

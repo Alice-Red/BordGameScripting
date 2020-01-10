@@ -159,8 +159,6 @@ namespace GameLib.Core.Base
                         yield return RawColumn.New(r, c);
         }
 
-
-
         /// <summary>
         /// 指定座標から全8方向に見える座標を返します
         /// </summary>
@@ -186,7 +184,6 @@ namespace GameLib.Core.Base
             }
             return result;
         }
-
 
         /// <summary>
         /// 指定座標から全8方向に見える物を返します
