@@ -48,6 +48,10 @@ namespace Tetris
                 sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("　"));
             });
 
+            //sb.AppendLine();
+            //sb.AppendLine();
+            //sb.AppendLine();
+
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", Players.Length).Join(" "));
             var fs = PlayersFields.Select(s => s.DrawableField()).ToArray();
             for (int i = 0; i < 20; i++) {

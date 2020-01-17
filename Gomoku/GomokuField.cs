@@ -19,7 +19,7 @@ namespace Gomoku
 
 
         public override bool Canput(int r, int c, int t) {
-            return (Field[r, c] == 0);
+            return (field[r, c] == 0);
         }
 
         public override int CheckWinner() {

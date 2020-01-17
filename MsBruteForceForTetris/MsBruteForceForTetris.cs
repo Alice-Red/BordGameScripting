@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GameLib.API;
 using GameLib.Core.Util;
-using RUtil;
 using Tetris;
 
 namespace MsBruteForceForTetris
@@ -34,7 +33,7 @@ namespace MsBruteForceForTetris
             List<OperationSet> max = new List<OperationSet>();
 
             // 総当たり
-            // 時間もかかりとても雑
+            // とても雑
             for (int r = -1; r < 2; r++) {
                 for (int m = -5; m < 6; m++) {
                     // 砂場
@@ -77,7 +76,7 @@ namespace MsBruteForceForTetris
 
             // 穴の数が多いほど減点
             int[] holes = box.Holes().ToArray();
-            evalScore -= (holes.Sum() * 150);
+            evalScore -= (holes.Sum() * 200);
 
 
             // 標準偏差　平坦に近いほうが正義（嘘）
@@ -107,13 +106,13 @@ namespace MsBruteForceForTetris
             double StandardDeviation = Math.Sqrt(dispersion);
 
             // ばらつきが多いほど減点
-            evalScore -= (int) (Math.Abs(dispersion) * 100 * StandardDeviation);
+            evalScore -= (int) (Math.Abs(dispersion) * 50 * StandardDeviation);
 
-            ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
+            //ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
 
             // ラインを消せるなら加点
             int ls = box.Clearable().Count();
-            evalScore += ((int) Math.Pow(ls, 2) * 120);
+            evalScore += ((int) Math.Pow(ls, 2) * 100);
 
 
             return evalScore;

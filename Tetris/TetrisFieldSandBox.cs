@@ -124,6 +124,10 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// 消すことができる行を列挙します
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<int> Clearable() {
             var tfield = GetShowableField();
             for (int i = 0; i < tfield.Length; i++) {
