@@ -38,7 +38,6 @@ namespace MsBruteForceForTetris
                 for (int m = -5; m < 6; m++) {
                     // 砂場
                     TetrisFieldSandBox box = new TetrisFieldSandBox(field);
-
                     OperationSet cur = new OperationSet();
 
                     cur.Store(InputCommand.RotateRight, r);
@@ -106,13 +105,13 @@ namespace MsBruteForceForTetris
             double StandardDeviation = Math.Sqrt(dispersion);
 
             // ばらつきが多いほど減点
-            evalScore -= (int) (Math.Abs(dispersion) * 50 * StandardDeviation);
+            evalScore -= (int) (Math.Abs(dispersion) * 40 * StandardDeviation);
 
             //ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
 
             // ラインを消せるなら加点
             int ls = box.Clearable().Count();
-            evalScore += ((int) Math.Pow(ls, 2) * 100);
+            evalScore += ((int) Math.Pow(ls, 2) * 120);
 
 
             return evalScore;

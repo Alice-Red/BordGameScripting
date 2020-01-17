@@ -91,7 +91,7 @@ namespace Tetris
         }
 
         /// <summary>
-        /// 列ごとに穴を無視して個数を数えます
+        /// 列ごとに穴を無視してブロックの個数を数えます
         /// </summary>
         /// <returns></returns>
         public IEnumerable<int> ElementCount() {
@@ -134,7 +134,6 @@ namespace Tetris
                 if (tfield[i].All(s => s != 0))
                     yield return i;
             }
-
         }
 
 
@@ -160,7 +159,6 @@ namespace Tetris
                     result.Add(i);
             }
             return result.ToArray();
-
         }
 
         /// <summary>
@@ -189,11 +187,12 @@ namespace Tetris
         }
 
 
+        public void Reset() {
+            Current.Position = TetrisUtils.GeneratePosition;
+            Current.Rotate = 0;
+            Current.State = MainPartConfiguration.Floating;
+        }
 
-        //private IEnumerable<int> Void() {
-        //    var source = this.GetShowableField();
-        //    source
-        //}
 
 
     }

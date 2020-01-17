@@ -970,7 +970,7 @@ namespace RUtil
         }
 
         /// <summary>
-        /// 素数を生成します
+        /// 素数を無限生成します
         /// </summary>
         /// <param name="conditions"></param>
         /// <returns></returns>
@@ -1232,7 +1232,7 @@ namespace RUtil
         /// <param name="src"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        static IEnumerable<IEnumerable<T>> Combinations<T>(this IList<T> src, int n) => Enumerable.Range(0, n - 1).Aggregate(Enumerable.Range(0, src.Count() - n + 1).Select(num => new List<int>() { num }), (list, _) => list.SelectMany(c => Enumerable.Range(c.Max() + 1, src.Count() - c.Max() - 1).Select(num => new List<int>(c) { num }))).Select(c => c.Select(num => src[num]));
+        static IEnumerable<IEnumerable<T>> Combination<T>(this IList<T> src, int n) => Enumerable.Range(0, n - 1).Aggregate(Enumerable.Range(0, src.Count() - n + 1).Select(num => new List<int>() { num }), (list, _) => list.SelectMany(c => Enumerable.Range(c.Max() + 1, src.Count() - c.Max() - 1).Select(num => new List<int>(c) { num }))).Select(c => c.Select(num => src[num]));
 
         /// <summary>
         /// Enum値を "名前(指定文字数) + 番号" という文字列に変換します (特殊用途) 

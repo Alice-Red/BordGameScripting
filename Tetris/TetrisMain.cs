@@ -34,6 +34,7 @@ namespace Tetris
             //OnDraw -= TetrisMain_OnDraw_GDI;
 
         }
+
         public override void StorePlayer(params GameInputter[] players) {
             System.Diagnostics.Debug.WriteLine($"{players[0] is TetrisInputter}");
 

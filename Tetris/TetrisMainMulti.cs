@@ -48,9 +48,9 @@ namespace Tetris
                 sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("　"));
             });
 
-            //sb.AppendLine();
-            //sb.AppendLine();
-            //sb.AppendLine();
+            sb.AppendLine();
+            sb.AppendLine(PlayersFields.Select(s => " Line : " + s.Lines).Join("\t\t"));
+            sb.AppendLine(PlayersFields.Select(s => "Score : " + s.Score).Join("\t\t"));
 
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", Players.Length).Join(" "));
             var fs = PlayersFields.Select(s => s.DrawableField()).ToArray();
@@ -179,8 +179,8 @@ namespace Tetris
                 if (obsrt <= 3)
                     obsrt -= 1;
                 if (obsrt > 0) {
-                    var target = Enumerable.Range(0, PlayersFields.Length).Random();
-                    PlayersFields[target].Obstacle(obsrt);
+                    PlayersFields.Remove(i).Random().Obstacle(obsrt);
+                    //PlayersFields[target];
                 }
             }
             RateCount++;

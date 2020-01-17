@@ -109,6 +109,24 @@ namespace Tetris
             }
         }
 
+        internal bool Fall(bool flag) {
+            if (Current.State.Any(MainPartConfiguration.Placed))
+                return false;
+
+            bool flg = true;
+            Current.State = MainPartConfiguration.Floating;
+            var t = Current.Shape().For((i, j, s) => {
+                if (s != 0 && field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
+                    flg = false;
+            });
+            if (flg) {
+                Current.Position.Y += 1;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         internal void Place() {
 
             Overlapped().ForEach(s => {
@@ -126,6 +144,12 @@ namespace Tetris
                 ;
             //Current.State = MainPartConfiguration.Placed;
         }
+
+        internal void HardDrop(bool flag) {
+            while (Fall(flag))
+                ;
+        }
+
 
         //public void WaitDrop() {
 
