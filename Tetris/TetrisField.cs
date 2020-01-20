@@ -48,6 +48,11 @@ namespace Tetris
             //this.GenerateMino();
         }
 
+        public TetrisField(int[,] f, FallingBlock cur) : base(){
+            this.field = f;
+            Current = cur;
+        }
+
         private void CreateField() {
             Enumerable.Range(0, 41).ForEach(s => {
                 field[s, 0] = -1;

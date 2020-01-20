@@ -45,6 +45,7 @@ namespace GameLib.Core.Util
             var t = AllMessages.AddGet(new Message(text, memberName, filePath, lineNumber, MessageType.Debug));
             if (Restriction.HasFlag(t.Type))
                 Console.WriteLine(t.ToString());
+            System.Diagnostics.Debug.WriteLine(t.ToString());
         }
 
         /// <summary>
@@ -59,6 +60,7 @@ namespace GameLib.Core.Util
             var t = AllMessages.AddGet(new Message(text, memberName, filePath, lineNumber, type));
             if (Restriction.HasFlag(t.Type))
                 Console.WriteLine(t.ToString());
+            System.Diagnostics.Debug.WriteLine(t.ToString());
         }
 
         /// <summary>
@@ -72,6 +74,7 @@ namespace GameLib.Core.Util
             var t = AllMessages.AddGet(new Message(text, memberName, filePath, lineNumber, MessageType.Info));
             if (Restriction.HasFlag(t.Type))
                 Console.WriteLine(t.ToString());
+            System.Diagnostics.Debug.WriteLine(t.ToString());
         }
 
         /// <summary>
@@ -85,6 +88,7 @@ namespace GameLib.Core.Util
             var t = AllMessages.AddGet(new Message(text, memberName, filePath, lineNumber, MessageType.Debug));
             if (Restriction.HasFlag(t.Type))
                 Console.WriteLine(t.ToString());
+            System.Diagnostics.Debug.WriteLine(t.ToString());
         }
 
         /// <summary>
@@ -98,6 +102,7 @@ namespace GameLib.Core.Util
             var t = AllMessages.AddGet(new Message(text, memberName, filePath, lineNumber, MessageType.Warning));
             if (Restriction.HasFlag(t.Type))
                 Console.WriteLine(t.ToString());
+            System.Diagnostics.Debug.WriteLine(t.ToString());
         }
 
         /// <summary>
@@ -111,6 +116,7 @@ namespace GameLib.Core.Util
             var t = AllMessages.AddGet(new Message(text, memberName, filePath, lineNumber, MessageType.Error));
             if (Restriction.HasFlag(t.Type))
                 Console.WriteLine(t.ToString());
+            System.Diagnostics.Debug.WriteLine(t.ToString());
         }
 
     }

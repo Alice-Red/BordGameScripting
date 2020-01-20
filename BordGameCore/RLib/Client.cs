@@ -35,6 +35,7 @@ namespace RUtil.Tcp
 
         private Socket server;
 
+        public bool Connecting { get; private set; }
 
         public Client() {
 
@@ -46,6 +47,7 @@ namespace RUtil.Tcp
 
         public void Create(string address, int port) {
 
+            Connecting = false;
             if (Regex.IsMatch(address, @"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+")) {
                 HostAddress = address.Split(':')[0];
                 Port = int.Parse(address.Split(':')[1]);
@@ -114,6 +116,7 @@ namespace RUtil.Tcp
         //データ受信スタート
         private void StartReceive(System.Net.Sockets.Socket soc) {
             AsyncStateObject so = new AsyncStateObject(soc);
+            Connecting = true;
             //非同期受信を開始
             soc.BeginReceive(so.ReceiveBuffer,
                 0,
@@ -138,6 +141,7 @@ namespace RUtil.Tcp
                     //System.Console.WriteLine("切断されました。");
                     DisConnected(this, new DisConnectedArgs(server.RemoteEndPoint.ToString()));
                     so.Socket.Close();
+                    Connecting = false;
                     return;
                 }
 
@@ -166,6 +170,7 @@ namespace RUtil.Tcp
                 //閉じた時
                 //System.Console.WriteLine("閉じました。");
                 DisConnected(this, new DisConnectedArgs(server.RemoteEndPoint.ToString()));
+                Connecting = false;
                 return;
             }
         }

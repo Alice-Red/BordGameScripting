@@ -80,7 +80,7 @@ namespace TCPReceiverForTetris
             while (!Connecting)
                 ;
             CommandReturned = false;
-            server.Send((s, i) => i == 0, FieldToString(field));
+            server.Send((s, i) => i == 0, CommandConverter.CreateInputCommand(field));
             while (!CommandReturned)
                 ;
             var ttt = CommandsStore.Where(s => s.Head == "INPUT").LastOrDefault();
@@ -95,16 +95,6 @@ namespace TCPReceiverForTetris
             return name == null ? "" : name.Values["Name"][0];
         }
 
-        public string FieldToString(TetrisField field) {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("INPUT_");
-            var enableField = field.GetRect(RawColumn.New(20, 1), RawColumn.New(39, 10));
-            sb.Append("Field:" + enableField.SelectMany(s => s).Join(",") + "_");
-            sb.Append("Position:" + $"{field.Current.Position.Raw},{field.Current.Position.Column}_");
-            sb.Append("Next:" + $"{field.Current.Mino},{field.Nexts.Join(",")}");
-
-            return sb.ToString();
-        }
 
     }
 }

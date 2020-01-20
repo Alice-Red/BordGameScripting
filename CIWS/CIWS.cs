@@ -1,43 +1,41 @@
-﻿using System;
+﻿using GameLib.API;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameLib.API;
-using GameLib.Core.Util;
 using Tetris;
+using RUtil;
 
-namespace MsBruteForceForTetris
+namespace CIWS
 {
+
     [GameAddon(TetrisMain.ID)]
-    public class MsBruteForceForTetris : TetrisInputter
+    public class CIWS : TetrisInputter
     {
-
-        const string NAME = "Ms.Brute Force";
-
+        private const string NAME = "Redkun";
         public override string Name() {
-            // 自己紹介
             return NAME;
         }
 
         public override void Initialize() {
-            // 今回はここは何もなし
+
         }
 
         public override OperationSet Inputs(TetrisField field) {
-
-
             int maxScore = int.MinValue;
             List<OperationSet> max = new List<OperationSet>();
 
             // 総当たり
-            // とても雑
+
+            //for (int n = -1; n < field.Nexts.Length; n++) {
+            TetrisFieldSandBox box = new TetrisFieldSandBox(field);
+            //if (n >= 0)
+            //    box.TryPut();
             for (int r = -1; r <= 2; r++) {
                 for (int m = -5; m < 6; m++) {
                     // 砂場
-                    TetrisFieldSandBox box = new TetrisFieldSandBox(field);
+                    box.Reset();
                     OperationSet cur = new OperationSet();
 
                     cur.Store(InputCommand.RotateRight, r);
@@ -56,7 +54,7 @@ namespace MsBruteForceForTetris
                     }
                 }
             }
-
+            //}
             // 一番まともそうな手を返す
 
             return max.Random();
@@ -67,16 +65,16 @@ namespace MsBruteForceForTetris
             int evalScore = 10000;
             box.TryDrop(set);
 
+            // 高さ一覧
+            int[] heights = box.Heights().ToArray();
 
             // 穴の数が多いほど減点
             int[] holes = box.Holes().ToArray();
-            evalScore -= (holes.Sum());
+            evalScore -= ((Math.Pow(holes.Sum(), 2) / 2) * 20 * heights.Max() / 2).RoundUp();
 
 
             // 標準偏差　平坦に近いほうが正義（嘘）
 
-            // 高さ一覧
-            int[] heights = box.Heights().ToArray();
 
 
             // 標準偏差の求め方
@@ -100,20 +98,20 @@ namespace MsBruteForceForTetris
             double StandardDeviation = Math.Sqrt(dispersion);
 
             // ばらつきが多いほど減点
-            evalScore -= (int) (Math.Abs(dispersion));
+            evalScore -= (Math.Abs(dispersion) * 50 * Math.Abs(StandardDeviation)).RoundUp();
 
             //ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
 
             // ラインを消せるなら加点
             int ls = box.Clearable().Count();
-            evalScore += ((int) Math.Pow(ls, 2));
+            evalScore += (Math.Pow(ls, 2) * 20 + TetrisUtils.BasicScore[ls] * 40 * heights.Max()).RoundDown();
+
+            // 高さが高いと減点
+            //evalScore -= Math.Pow((heights.Max() + 5), 2).RoundUp();
 
 
             return evalScore;
 
         }
-
-
-
     }
 }

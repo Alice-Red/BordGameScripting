@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RUtil;
 
 namespace Tetris
 {
@@ -18,13 +19,19 @@ namespace Tetris
             for (int i = 1; i < ar.Length; i++) {
                 if (ar[i].Contains(',')) {
                     var tmp = ar[i].Split(':');
-                    Values.Add(tmp.FirstOrDefault(), tmp.LastOrDefault().Split(','));
+                    if (!Values.ContainsKey(tmp.FirstOrDefault()))
+                        Values.Add(tmp.FirstOrDefault(), tmp.LastOrDefault().Split(','));
                 } else {
                     var tmp = ar[i].Split(':');
-                    Values.Add(tmp.FirstOrDefault(), tmp.LastOrDefault().Split(','));
+                    if (!Values.ContainsKey(tmp.FirstOrDefault()))
+                        Values.Add(tmp.FirstOrDefault(), tmp.LastOrDefault().Split(','));
                 }
             }
-
         }
+
+        public new string ToString() {
+            return new string[] { Head }.Concat(Values.Select(s => s.Key + ":" + s.Value.Join(","))).Join("|");
+        }
+
     }
 }

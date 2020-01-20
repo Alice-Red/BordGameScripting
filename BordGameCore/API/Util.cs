@@ -29,6 +29,8 @@ namespace GameLib.API
 
         public static T Random<T>(this IEnumerable<T> source) {
             int n = source.Count();
+            if (n == 0)
+                return default(T);
             return source.ElementAt(DICE(n) - 1);
         }
 

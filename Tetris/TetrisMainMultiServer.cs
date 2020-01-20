@@ -1,43 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using GameLib.API;
+﻿using GameLib.API;
 using GameLib.Core;
 using GameLib.Core.Util;
 using RUtil;
+using RUtil.Tcp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Tetris
 {
     [GameAddon(ID)]
-    public class TetrisMainMulti : MultiGame
+    public class TetrisMainMultiServer : MultiGame
     {
 
-
         public const string ID = "Tetris";
-
 
         private double FallRate = 1;
         private long RateCount;
 
-        public TetrisField[] PlayersFields;
-        public TetrisInputter[] Players;
+        public List<TetrisField> PlayersFields;
+        //public List<TetrisInputter> Players;
+        public TetrisInputter Player;
         public OperationSet[] PlayersInputStruct;
+        private List<string> iPs;
         public MinoGenerator Generator;
         public int[] Losers;
+        private bool closing = false;
 
+        private Server server;
 
-        public TetrisMainMulti() : base() {
-            this.MaxPlayer = 2;
-            this.ServerRate = 60;
-            ConsoleOut.SetRestriction(MessageType.Default);
+        public TetrisMainMultiServer() : base() {
+            this.MaxPlayer = 1;
+            this.ServerRate = 20;
+            iPs = new List<string>();
+            //iPs.Add("Host");
         }
 
-        public TetrisMainMulti(params TetrisInputter[] players) : base() {
-            StorePlayer(players);
+        public override void StorePlayer(params GameInputter[] players) {
+            PlayersFields = new List<TetrisField>();
+            if (players.Length >= 1) {
+                Player = (TetrisInputter) players[0];
+                PlayersFields.Add(new TetrisField());
+            }
+        }
+
+        public override void Start() {
+
+            Console.Write("Player Count >>");
+            MaxPlayer = int.Parse(Console.ReadLine());
+
+            server = new Server();
+            server.Create(34481);
+            server.ConnectionSuccessfull += Server_ConnectionSuccessfull;
+            server.ServerAwaked += Server_ServerAwaked;
+            server.MessageReceived += Server_MessageReceived;
+            server.Boot();
+
+
+            while (!closing)
+                ;
+            PlayersInputStruct = Enumerable.Range(0, PlayersFields.Count()).Select(s => new OperationSet()).ToArray();
+
+            Generator = new MinoGenerator();
+            GenerateMino();
+            for (int i = 0; i < PlayersFields.Count(); i++) {
+                PlayersFields[i].SuperFast = false;
+            }
+            OnDraw += TetrisMain_OnDraw_Console;
+        }
+
+        private void Server_ServerAwaked(Server sender, ServerAwakedArgs e) {
+            Console.WriteLine($"Waiting ({e.IpAddress.Join(Environment.NewLine)} : {e.Port})");
+        }
+
+        private void Server_ConnectionSuccessfull(Server sender, ConnetionSuccessfullArgs e) {
+            ConsoleOut.Debug($"{e.IpAddress}");
+            if (!closing) {
+                iPs.Add(e.IpAddress);
+                PlayersFields.Add(new TetrisField());
+                if (MaxPlayer == iPs.Count() + 1) {
+                    closing = true;
+                }
+                Console.WriteLine(e.IpAddress);
+            }
+        }
+
+        private void Server_MessageReceived(Server sender, MessageReceivedArgs e) {
+            ConsoleOut.Debug($"({e.IpAddress}){e.Message}");
+            int id_in_ips = iPs.IndexOf(e.IpAddress);
+            var cmmand = new CommandStruct(e.Message);
+
+            PlayersInputStruct[id_in_ips + 1] = CommandConverter.InputSrtingToOpSet(cmmand);
+
         }
 
         private void TetrisMain_OnDraw_Console(Game sender, OnDrawArgs e) {
@@ -52,47 +108,23 @@ namespace Tetris
             sb.AppendLine(PlayersFields.Select(s => " Line : " + s.Lines).Join("\t\t"));
             sb.AppendLine(PlayersFields.Select(s => "Score : " + s.Score).Join("\t\t"));
 
-            sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", PlayersFields.Length).Join(" "));
+            sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", PlayersFields.Count()).Join(" "));
             var fs = PlayersFields.Select(s => s.DrawableField()).ToArray();
             for (int i = 0; i < 20; i++) {
                 sb.AppendLine(fs.Select(h => ("|" + h[i].Select(s => s == 0 ? "　" : "■").Join("") + "|")).Join(" "));
             }
-            sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", PlayersFields.Length).Join(" "));
+            sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", PlayersFields.Count()).Join(" "));
 
-            var lines = sb.ToString()/*.Trim('\r').Split('\n').ToArray();*/;
+            var lines = sb.ToString();
 
 
             Console.Clear();
             Console.WriteLine(lines);
 
-            //for (int i = 0; i < lines.Length; i++) {
-            //    Console.WriteLine(lines[i]);
-            //}
-
-
         }
-
-
-        public override void StorePlayer(params GameInputter[] players) {
-            int count = players.Length;
-            Players = players.Select(s => (TetrisInputter) s).ToArray();
-            PlayersFields = Enumerable.Range(0, count).Select(s => new TetrisField()).ToArray();
-            PlayersInputStruct = Enumerable.Range(0, count).Select(s => new OperationSet()).ToArray();
-        }
-
-
-        public override void Start() {
-            Generator = new MinoGenerator();
-            GenerateMino();
-            for (int i = 0; i < PlayersFields.Length; i++) {
-                PlayersFields[i].SuperFast = false;
-            }
-            OnDraw += TetrisMain_OnDraw_Console;
-        }
-
         public void GenerateMino() {
             Generator.Generate();
-            for (int i = 0; i < Players.Length; i++) {
+            for (int i = 0; i < PlayersInputStruct.Length; i++) {
                 PlayersFields[i].Current = new FallingBlock() {
                     Mino = Generator.Current,
                     State = MainPartConfiguration.Generated,
@@ -104,9 +136,6 @@ namespace Tetris
         }
 
         public override void UpDate() {
-            //var inputStructs = new OperationSet[Players.Length];
-            //System.Diagnostics.Debug.WriteLine($"{turn}");
-
 
             if (PlayersFields.Select(s => s.Current.State).All(s => s == MainPartConfiguration.Placed || s == MainPartConfiguration.Generated)) {
                 GenerateMino();
@@ -124,20 +153,19 @@ namespace Tetris
                         break;
                 }
 
-                for (int i = 0; i < Players.Length; i++) {
-                    PlayersInputStruct[i] = null;
-                    int a = i;
-                    PlayersInputStruct[a] = Players[a].Inputs(PlayersFields[a]);
-                    //Task.Factory.StartNew(() => {
-                    //});
-                    //Thread.Sleep(1000);
-                }
+                Task.Factory.StartNew(() => {
+                    PlayersInputStruct[0] = Player.Inputs(PlayersFields[0]);
+                });
 
+                for (int i = 0; i < iPs.Count(); i++) {
+                    server.Send((s, k) => s.RemoteEndPoint.ToString() == iPs[i], CommandConverter.CreateInputCommand(PlayersFields[i]));
+                }
+                //System.Threading.Thread.Sleep(10);
                 turn++;
 
             }
 
-            for (int i = 0; i < Players.Length; i++) {
+            for (int i = 0; i < PlayersInputStruct.Length; i++) {
 
                 if (PlayersInputStruct[i] != null)
                     for (int j = 0; j < PlayersInputStruct[i].Commands.Length; j++) {
@@ -187,14 +215,19 @@ namespace Tetris
                     //PlayersFields[target];
                 }
             }
+
+            //StringBuilder sb = new StringBuilder();
+            //sb.Append("SYNC|");
+            //sb.Append(PlayersFields.Select((s, i) => $"{iPs[i]}:" + s.GetShowableField().SelectMany(f => f).Join(",")).Join("|"));
+
+            //server.SendAll(sb.ToString());
+
             RateCount++;
         }
 
         public override void End() {
-            Console.WriteLine($"Winner is {(Loser == -1 ? "none" : Players[Loser - 1].Name() + " (Player" + (Loser) + ")")}");
+            //Console.WriteLine($"Winner is {(Loser == -1 ? "none" : Players[Loser - 1].Name() + " (Player" + (Loser) + ")")}");
             Console.WriteLine("game over");
-
         }
-
     }
 }

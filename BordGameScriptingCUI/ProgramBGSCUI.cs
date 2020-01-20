@@ -20,7 +20,8 @@ namespace BordGameScriptingCUI
             Console.ReadKey(true);
 #else
             GameMain main = new GameMain();
-            Console.ReadKey(true);
+            while (true)
+                ;
 #endif
 
         }

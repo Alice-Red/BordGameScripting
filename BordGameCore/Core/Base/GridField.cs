@@ -37,6 +37,9 @@ namespace GameLib.Core.Base
                 return field.DeepClone();
             }
         }
+        protected GridField() {
+
+        }
 
         public GridField(int width) {
             this.width = (ushort) width;
@@ -47,6 +50,7 @@ namespace GameLib.Core.Base
             this.width = (ushort) width;
             this.height = (ushort) height;
         }
+
 
         public int this[int raw, int column] {
             get { return field[raw, column]; }

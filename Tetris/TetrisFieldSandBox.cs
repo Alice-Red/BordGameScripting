@@ -17,12 +17,16 @@ namespace Tetris
         }
 
 
+        public void TryPut() {
+            Place();
+        }
+
 
         /// <summary>
-        /// 試しに置きます
+        /// 試しに落とします
         /// </summary>
         /// <param name="set"></param>
-        public void TestTry(OperationSet set) {
+        public void TryDrop(OperationSet set) {
 
             for (int j = 0; j < set.Commands.Length; j++) {
                 switch (set.Commands[j].command) {
