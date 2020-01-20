@@ -33,11 +33,26 @@ namespace GameLib.API
 
         public Assembly[] Inpuuters(string id) => Libs.Where(s => s.LibType == LibraryType.Inputter).Where(s => s.ID == id).Select(s => s.Asm).ToArray();
 
-        public static LibraryObject LoadFile(string file) {
-            if (!File.Exists(file))
+        public static IEnumerable<LibraryObject> LoadFileFromTxt(string txtfile) {
+            if (!File.Exists(txtfile))
                 throw new System.IO.FileNotFoundException();
+            else {
+                var pathes = RUtil.IO.ReadFile(txtfile).Replace("\r\n", "\n").Replace("\r", "\n").Split('\n');
+                foreach(var s in pathes) {
+                    yield return LoadFile(s);
+                }
+            }
+        }
 
-            return new LibraryObject(file);
+
+        public static LibraryObject LoadFile(string dllfile) {
+            if (!File.Exists(dllfile))
+                throw new System.IO.FileNotFoundException();
+            else if (Path.GetExtension(dllfile) == ".dll") {
+                return new LibraryObject(dllfile);
+            } else {
+                throw new System.IO.FileNotFoundException();
+            }
         }
 
         public static LibraryObject[] LoadFolder(string folder) {

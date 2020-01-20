@@ -29,7 +29,7 @@ namespace MsBruteForceForTetris
         public override OperationSet Inputs(TetrisField field) {
 
 
-            int maxScore = -5000;
+            int maxScore = int.MinValue;
             List<OperationSet> max = new List<OperationSet>();
 
             // 総当たり
@@ -59,23 +59,23 @@ namespace MsBruteForceForTetris
 
             // 一番まともそうな手を返す
             var res = max.Random();
-            OperationSet Result = new OperationSet();
+            //OperationSet Result = new OperationSet();
 
-            Result.Store(res.Commands[0].value < 0 ? InputCommand.RotateLeft : InputCommand.RotateRight, Math.Abs(res.Commands[0].value));
-            Result.Store(res.Commands[1].value < 0 ? InputCommand.MoveLeft : InputCommand.MoveRight, Math.Abs(res.Commands[1].value));
+            //Result.Store(res.Commands[0].value < 0 ? InputCommand.RotateLeft : InputCommand.RotateRight, Math.Abs(res.Commands[0].value));
+            //Result.Store(res.Commands[1].value < 0 ? InputCommand.MoveLeft : InputCommand.MoveRight, Math.Abs(res.Commands[1].value));
 
-            return Result;
+            return res;
         }
 
         public int Evaluation(TetrisFieldSandBox box, OperationSet set) {
 
-            int evalScore = 5000;
+            int evalScore = 10000;
             box.TestTry(set);
 
 
             // 穴の数が多いほど減点
             int[] holes = box.Holes().ToArray();
-            evalScore -= (holes.Sum() * 200);
+            evalScore -= (holes.Sum());
 
 
             // 標準偏差　平坦に近いほうが正義（嘘）
@@ -105,13 +105,13 @@ namespace MsBruteForceForTetris
             double StandardDeviation = Math.Sqrt(dispersion);
 
             // ばらつきが多いほど減点
-            evalScore -= (int) (Math.Abs(dispersion) * 40 * StandardDeviation);
+            evalScore -= (int) (Math.Abs(dispersion));
 
             //ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
 
             // ラインを消せるなら加点
             int ls = box.Clearable().Count();
-            evalScore += ((int) Math.Pow(ls, 2) * 120);
+            evalScore += ((int) Math.Pow(ls, 2));
 
 
             return evalScore;

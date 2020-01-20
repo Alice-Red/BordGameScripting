@@ -32,7 +32,7 @@ namespace Tetris
 
         public TetrisMainMulti() : base() {
             this.MaxPlayer = 2;
-            this.ServerRate = 10;
+            this.ServerRate = 30;
             ConsoleOut.SetRestriction(MessageType.Default);
         }
 
@@ -176,8 +176,8 @@ namespace Tetris
                 //PlayersFields[i].HardDrop();
 
                 int obsrt = PlayersFields[i].ScanErase();
-                if (obsrt <= 3)
-                    obsrt -= 1;
+                obsrt = (((double) obsrt - 1) * (3 / 2)).RoundDown();
+
                 if (obsrt > 0) {
                     PlayersFields.Remove(i).Random().Obstacle(obsrt);
                     //PlayersFields[target];

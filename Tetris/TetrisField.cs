@@ -232,10 +232,11 @@ namespace Tetris
             for (int i = 0; i < lines.Length; i++) {
                 result = result.Insert(empty);
             }
-            Score += (lines.Length * 100 + ((int) Math.Pow(lines.Length - 1, 2) * 10));
+            Score += TetrisUtils.BasicScore[lines.Length];
             if (lines.Length > 0 && lines[0] + lines.Length <= lines.Last()) {
-                Score += 5;
+                Score += 20 * (int) Math.Pow(lines.Length, 2);
             }
+            Current.Position.Y += lines.Length;
             Lines += lines.Length;
             field = result.Reverse().To2D();
         }
@@ -243,7 +244,7 @@ namespace Tetris
         internal void Obstacle(int line) {
             int index = Util.DICE(10);
             int[] empty = new int[] { -1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, -1 };
-            empty[index + 1] = 0;
+            empty[index] = 0;
 
             var result = field.ToJagged();
             for (int i = 0; i < line; i++) {

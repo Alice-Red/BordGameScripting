@@ -10,6 +10,7 @@ namespace Tetris
     public class TetrisUtils
     {
         public static readonly RawColumn GeneratePosition = new RawColumn(16, 4);
+        public static readonly int[] BasicScore = new int[] { 0, 40, 100, 300, 1200 };
 
         public static (RawColumn, RawColumn) NomalizeRect(RawColumn point1, RawColumn point2) {
             var topLeft = RawColumn.New(

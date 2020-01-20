@@ -59,7 +59,7 @@ namespace Tetris
         /// </summary>
         /// <returns></returns>
         public IEnumerable<int> Heights() {
-            var tfield = GetShowableField();
+            var tfield = DrawableField();
             foreach (var item in tfield.Columns()) {
                 int counter = 20;
                 foreach (var t2 in item) {
@@ -78,7 +78,7 @@ namespace Tetris
         /// </summary>
         /// <returns></returns>
         public IEnumerable<int> Holes() {
-            var tfield = GetShowableField().Reverse().ToArray();
+            var tfield = DrawableField().Reverse().ToArray();
             var hts = Heights().ToArray();
             for (int i = 0; i < hts.Length; i++) {
                 int counter = 0;
@@ -95,7 +95,7 @@ namespace Tetris
         /// </summary>
         /// <returns></returns>
         public IEnumerable<int> ElementCount() {
-            var tfield = GetShowableField();
+            var tfield = DrawableField();
             foreach (var item in tfield.Columns())
                 yield return item.Count(s => s > 0);
         }
@@ -107,7 +107,7 @@ namespace Tetris
         public IEnumerable<int> DistanceToHole() {
             var holes = Holes().ToArray();
             var heights = Heights().ToArray();
-            var tfield = GetShowableField();
+            var tfield = DrawableField();
 
             for (int i = 0; i < holes.Length; i++) {
                 if (holes[i] == 0) {
@@ -129,7 +129,7 @@ namespace Tetris
         /// </summary>
         /// <returns></returns>
         public IEnumerable<int> Clearable() {
-            var tfield = GetShowableField();
+            var tfield = DrawableField();
             for (int i = 0; i < tfield.Length; i++) {
                 if (tfield[i].All(s => s != 0))
                     yield return i;
