@@ -23,19 +23,19 @@ namespace CIWS
         }
 
         public override OperationSet Inputs(TetrisField field) {
+
             int maxScore = int.MinValue;
             List<OperationSet> max = new List<OperationSet>();
 
             // 総当たり
 
             //for (int n = -1; n < field.Nexts.Length; n++) {
-            TetrisFieldSandBox box = new TetrisFieldSandBox(field);
             //if (n >= 0)
             //    box.TryPut();
             for (int r = -1; r <= 2; r++) {
                 for (int m = -5; m < 6; m++) {
                     // 砂場
-                    box.Reset();
+                    TetrisFieldSandBox box = new TetrisFieldSandBox(field);
                     OperationSet cur = new OperationSet();
 
                     cur.Store(InputCommand.RotateRight, r);

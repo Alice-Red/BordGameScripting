@@ -17,9 +17,9 @@ namespace Tetris
         }
 
 
-        public void TryPut() {
-            Place();
-        }
+        //public void TryPut() {
+        //    Place();
+        //}
 
 
         /// <summary>
@@ -140,7 +140,6 @@ namespace Tetris
             }
         }
 
-
         /// <summary>
         /// sizeマスの平面を探します。
         /// 無い場合はからの配列が返ります。
@@ -190,7 +189,9 @@ namespace Tetris
             return result.ToArray();
         }
 
-
+        /// <summary>
+        /// リセットします
+        /// </summary>
         public void Reset() {
             Current.Position = TetrisUtils.GeneratePosition;
             Current.Rotate = 0;

@@ -158,6 +158,7 @@ namespace Tetris
                 });
 
                 for (int i = 0; i < iPs.Count(); i++) {
+                    ConsoleOut.Debug($"++++{iPs[i]}");
                     server.Send((s, k) => s.RemoteEndPoint.ToString() == iPs[i], CommandConverter.CreateInputCommand(PlayersFields[i]));
                 }
                 //System.Threading.Thread.Sleep(10);
