@@ -48,7 +48,7 @@ namespace Tetris
             //this.GenerateMino();
         }
 
-        public TetrisField(int[,] f, FallingBlock cur) : base(){
+        public TetrisField(int[,] f, FallingBlock cur) : base() {
             this.field = f;
             Current = cur;
         }
@@ -63,6 +63,9 @@ namespace Tetris
             });
         }
 
+        public TetrisField Clone() {
+            return new TetrisField(this.Field, this.Current);
+        }
 
         public IEnumerable<int[]> GetRect(RawColumn point1, RawColumn point2) {
             var point = TetrisUtils.NomalizeRect(point1, point2);

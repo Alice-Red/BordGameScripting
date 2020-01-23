@@ -29,7 +29,7 @@ namespace Tetris
         public TetrisMain() {
             OnDraw += TetrisMain_OnDraw_Console;
             this.MaxPlayer = 1;
-            this.ServerRate = 30;
+            this.ServerRate = 15;
             //OnDraw += TetrisMain_OnDraw_GDI;
             //OnDraw -= TetrisMain_OnDraw_GDI;
 

@@ -991,6 +991,16 @@ namespace RUtil
         }
 
         /// <summary>
+        /// 標準偏差を算出します
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static double StandardDeviation(this double[] values) {
+            double avg = values.Average();
+            return Math.Sqrt(values.Select(s => Math.Pow(s - avg, 2)).Average());
+        }
+
+        /// <summary>
         /// 2点間の距離
         /// </summary>
         /// <param name="x1"></param>

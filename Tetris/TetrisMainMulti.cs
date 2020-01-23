@@ -127,7 +127,7 @@ namespace Tetris
                 for (int i = 0; i < Players.Length; i++) {
                     PlayersInputStruct[i] = null;
                     int a = i;
-                    PlayersInputStruct[a] = Players[a].Inputs(PlayersFields[a]);
+                    PlayersInputStruct[a] = Players[a].Inputs(PlayersFields[a].Clone());
                     //Task.Factory.StartNew(() => {
                     //});
                     //Thread.Sleep(1000);

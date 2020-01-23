@@ -28,8 +28,10 @@ namespace MsBruteForceForTetris
 
         public override OperationSet Inputs(TetrisField field) {
 
-
+            // 現在の最大スコア
             int maxScore = int.MinValue;
+
+            // 同じスコア
             List<OperationSet> max = new List<OperationSet>();
 
             // 総当たり
@@ -40,10 +42,11 @@ namespace MsBruteForceForTetris
                     TetrisFieldSandBox box = new TetrisFieldSandBox(field);
                     OperationSet cur = new OperationSet();
 
+                    // 操作を登録
                     cur.Store(InputCommand.RotateRight, r);
                     cur.Store(InputCommand.MoveRight, m);
 
-
+                    // 評価関数を呼ぶ
                     int currentScore = Evaluation(box, cur);
 
 
@@ -62,9 +65,15 @@ namespace MsBruteForceForTetris
             return max.Random();
         }
 
+        /// <summary>
+        /// 評価関数
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="set"></param>
+        /// <returns></returns>
         public int Evaluation(TetrisFieldSandBox box, OperationSet set) {
 
-            int evalScore = 10000;
+            int evalScore = 100;
             box.TryDrop(set);
 
 
@@ -73,36 +82,20 @@ namespace MsBruteForceForTetris
             evalScore -= (holes.Sum());
 
 
-            // 標準偏差　平坦に近いほうが正義（嘘）
+            // 標準偏差でばらつきを見る
 
             // 高さ一覧
             int[] heights = box.Heights().ToArray();
 
-
-            // 標準偏差の求め方
-            // 1.平均値を求める
+            // 平均
             double avg = heights.Average();
 
-            // 2.偏差（数値 － 平均値）を求める
-            double[] deviation = new double[heights.Length];
-            for (int i = 0; i < deviation.Length; i++) {
-                deviation[i] = heights[i] - avg;
-            }
-
-            // 3.分散（偏差の二乗平均）を求める
-            double[] devipow2 = new double[deviation.Length];
-            for (int i = 0; i < devipow2.Length; i++) {
-                devipow2[i] = Math.Pow(deviation[i], 2);
-            }
-            double dispersion = devipow2.Average();
-
-            // 4.分散の正の平方根を計算する
-            double StandardDeviation = Math.Sqrt(dispersion);
+            // 標準偏差
+            double StandardDeviation = Math.Sqrt(heights.Select(s => Math.Pow(s - avg, 2)).Average());
 
             // ばらつきが多いほど減点
-            evalScore -= (int) (Math.Abs(dispersion));
+            evalScore -= (int) (StandardDeviation);
 
-            //ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
 
             // ラインを消せるなら加点
             int ls = box.Clearable().Count();
@@ -112,8 +105,6 @@ namespace MsBruteForceForTetris
             return evalScore;
 
         }
-
-
 
     }
 }

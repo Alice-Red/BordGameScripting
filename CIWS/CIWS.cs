@@ -70,7 +70,7 @@ namespace CIWS
 
             // 穴の数が多いほど減点
             int[] holes = box.Holes().ToArray();
-            evalScore -= ((Math.Pow(holes.Sum(), 2) / 2) * 20 * heights.Max() / 2).RoundUp();
+            evalScore -= ((Math.Pow(holes.Sum(), 2) / 2) * 120 * heights.Max() / 2).RoundUp();
 
 
             // 標準偏差　平坦に近いほうが正義（嘘）
@@ -78,33 +78,21 @@ namespace CIWS
 
 
             // 標準偏差の求め方
-            // 1.平均値を求める
+
+            // 平均
             double avg = heights.Average();
 
-            // 2.偏差（数値 － 平均値）を求める
-            double[] deviation = new double[heights.Length];
-            for (int i = 0; i < deviation.Length; i++) {
-                deviation[i] = heights[i] - avg;
-            }
-
-            // 3.分散（偏差の二乗平均）を求める
-            double[] devipow2 = new double[deviation.Length];
-            for (int i = 0; i < devipow2.Length; i++) {
-                devipow2[i] = Math.Pow(deviation[i], 2);
-            }
-            double dispersion = devipow2.Average();
-
-            // 4.分散の正の平方根を計算する
-            double StandardDeviation = Math.Sqrt(dispersion);
+            // 標準偏差
+            double StandardDeviation = Math.Sqrt(heights.Select(s => Math.Pow(s - avg, 2)).Average());
 
             // ばらつきが多いほど減点
-            evalScore -= (Math.Abs(dispersion) * 50 * Math.Abs(StandardDeviation)).RoundUp();
+            evalScore -= (Math.Pow(StandardDeviation, 3) * 210).RoundUp();
 
             //ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
 
             // ラインを消せるなら加点
             int ls = box.Clearable().Count();
-            evalScore += (Math.Pow(ls, 2) * 20 + TetrisUtils.BasicScore[ls] * 40 * heights.Max()).RoundDown();
+            evalScore += (Math.Pow(ls, 2) * 50 + ls * 10 * heights.Max()).RoundDown();
 
             // 高さが高いと減点
             //evalScore -= Math.Pow((heights.Max() + 5), 2).RoundUp();
