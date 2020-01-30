@@ -17,9 +17,17 @@ namespace Tetris
         }
 
 
-        //public void TryPut() {
-        //    Place();
-        //}
+        public TetrisFieldSandBox TryPut(OperationSet set) {
+            var t = new TetrisFieldSandBox(this.Clone());
+            t.TryDrop(set);
+            t.Place();
+            if (Nexts.Length > 0) {
+                t.Current.Mino = Nexts[0];
+                t.Nexts = Nexts.Skip(1).ToArray();
+                t.Reset();
+            }
+            return t;
+        }
 
 
         /// <summary>

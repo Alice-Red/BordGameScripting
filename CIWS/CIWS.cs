@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tetris;
 using RUtil;
+using System.Runtime;
 
 namespace CIWS
 {
@@ -29,36 +30,41 @@ namespace CIWS
 
             // 総当たり
 
-            //for (int n = -1; n < field.Nexts.Length; n++) {
-            //if (n >= 0)
-            //    box.TryPut();
-            for (int r = -1; r <= 2; r++) {
-                for (int m = -5; m < 6; m++) {
-                    // 砂場
-                    TetrisFieldSandBox box = new TetrisFieldSandBox(field);
-                    OperationSet cur = new OperationSet();
+            for (int n = -1; n < field.Nexts.Length; n++) {
+                for (int r = -1; r <= 2; r++) {
+                    for (int m = -5; m < 6; m++) {
+                        // 砂場
+                        TetrisFieldSandBox box = new TetrisFieldSandBox(field);
+                        OperationSet cur = new OperationSet();
 
-                    cur.Store(InputCommand.RotateRight, r);
-                    cur.Store(InputCommand.MoveRight, m);
+                        cur.Store(InputCommand.RotateRight, r);
+                        cur.Store(InputCommand.MoveRight, m);
 
 
-                    int currentScore = Evaluation(box, cur);
+                        int currentScore = Evaluation(box, cur);
 
 
-                    if (maxScore == currentScore) {
-                        max.Add(cur);
-                    } else if (maxScore < currentScore) {
-                        maxScore = currentScore;
-                        max.Clear();
-                        max.Add(cur);
+                        if (maxScore == currentScore) {
+                            max.Add(cur);
+                        } else if (maxScore < currentScore) {
+                            maxScore = currentScore;
+                            max.Clear();
+                            max.Add(cur);
+                        }
                     }
                 }
             }
-            //}
             // 一番まともそうな手を返す
 
             return max.Random();
         }
+
+        //public TetrisFieldSandBox fowerd() {
+
+        //}
+
+
+
 
         public int Evaluation(TetrisFieldSandBox box, OperationSet set) {
 
@@ -74,7 +80,6 @@ namespace CIWS
 
 
             // 標準偏差　平坦に近いほうが正義（嘘）
-
 
 
             // 標準偏差の求め方
@@ -97,6 +102,12 @@ namespace CIWS
             // 高さが高いと減点
             //evalScore -= Math.Pow((heights.Max() + 5), 2).RoundUp();
 
+            // 個数一覧を取得
+            int[] depth = box.DistanceToHole().ToArray();
+
+            // 一番深い所に穴がある位置を取得
+            int maxIndex = depth.ElementAt(depth.Max());
+            evalScore -= maxIndex;
 
             return evalScore;
 

@@ -141,7 +141,6 @@ namespace Tetris
                 field[s.Raw, s.Column] = (int) Current.Mino;
             });
 
-
             Current.State = MainPartConfiguration.Placed;
             //CheckWinner();
             //GenerateMino();

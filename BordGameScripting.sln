@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsBruteForceForTetris", "Ms
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIWS", "CIWS\CIWS.csproj", "{CF944BB2-97E5-4BE6-B2E4-41B08DD3A552}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment", "Experiment\Experiment.csproj", "{38BC4942-A6C0-4948-B7CE-ACD1CC2A85E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{CF944BB2-97E5-4BE6-B2E4-41B08DD3A552}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF944BB2-97E5-4BE6-B2E4-41B08DD3A552}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF944BB2-97E5-4BE6-B2E4-41B08DD3A552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38BC4942-A6C0-4948-B7CE-ACD1CC2A85E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38BC4942-A6C0-4948-B7CE-ACD1CC2A85E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38BC4942-A6C0-4948-B7CE-ACD1CC2A85E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38BC4942-A6C0-4948-B7CE-ACD1CC2A85E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
