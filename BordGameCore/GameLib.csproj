@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\EventArgments.cs" />
     <Compile Include="API\GameAddonAttribute.cs" />
     <Compile Include="API\GameClient.cs" />
     <Compile Include="API\IGameDrawInterface.cs" />
@@ -56,7 +55,6 @@
     <Compile Include="API\GameInputter.cs" />
     <Compile Include="API\IInputObjectContainer.cs" />
     <Compile Include="API\IO.cs" />
-    <Compile Include="Core\Base\BordGameArgmentObjectContainer.cs" />
     <Compile Include="Core\Base\GridField.cs" />
     <Compile Include="Core\Base\PlayerColor1P.cs" />
     <Compile Include="Core\Base\PlayerColor2P.cs" />
@@ -76,7 +74,7 @@
     <Compile Include="Core\Util\RelativePosition.cs" />
     <Compile Include="Core\Util\SafeArray.cs" />
     <Compile Include="Core\Game.cs" />
-    <Compile Include="GameAutoLoop.cs" />
+    <Compile Include="Core\GameAutoLoop.cs" />
     <Compile Include="LibraryClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RLib\Client.cs" />
