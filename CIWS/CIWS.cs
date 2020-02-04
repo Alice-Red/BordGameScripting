@@ -30,7 +30,7 @@ namespace CIWS
 
             // 総当たり
 
-            for (int n = -1; n < field.Nexts.Length; n++) {
+            //for (int n = -1; n < field.Nexts.Length; n++) {
                 for (int r = -1; r <= 2; r++) {
                     for (int m = -5; m < 6; m++) {
                         // 砂場
@@ -53,7 +53,7 @@ namespace CIWS
                         }
                     }
                 }
-            }
+            //}
             // 一番まともそうな手を返す
 
             return max.Random();
@@ -102,12 +102,12 @@ namespace CIWS
             // 高さが高いと減点
             //evalScore -= Math.Pow((heights.Max() + 5), 2).RoundUp();
 
-            // 個数一覧を取得
-            int[] depth = box.DistanceToHole().ToArray();
+            //// 個数一覧を取得
+            //int[] depth = box.DistanceToHole().ToArray();
 
-            // 一番深い所に穴がある位置を取得
-            int maxIndex = depth.ElementAt(depth.Max());
-            evalScore -= maxIndex;
+            //// 一番深い所に穴がある位置を取得
+            //int maxIndex = depth.ElementAt(depth.Max());
+            //evalScore -= maxIndex;
 
             return evalScore;
 

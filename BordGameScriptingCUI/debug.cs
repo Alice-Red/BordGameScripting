@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLib;
 using RUtil;
 
 namespace BordGameScriptingCUI
@@ -10,6 +11,11 @@ namespace BordGameScriptingCUI
     class debug
     {
         public debug() {
+
+
+            GameAutoLoop autoLoop = new GameAutoLoop();
+            
+
             //string text = "";
             //MinoGenerator gen = new MinoGenerator(24);
             //Dictionary<Mino, int> count = new Dictionary<Mino, int>();

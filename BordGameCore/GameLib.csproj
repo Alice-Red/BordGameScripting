@@ -76,6 +76,7 @@
     <Compile Include="Core\Util\RelativePosition.cs" />
     <Compile Include="Core\Util\SafeArray.cs" />
     <Compile Include="Core\Game.cs" />
+    <Compile Include="GameAutoLoop.cs" />
     <Compile Include="LibraryClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RLib\Client.cs" />

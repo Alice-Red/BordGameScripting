@@ -83,15 +83,9 @@ namespace MsBruteForceForTetris
 
 
             // 標準偏差でばらつきを見る
-
-            // 高さ一覧
-            int[] heights = box.Heights().ToArray();
-
-            // 平均
-            double avg = heights.Average();
-
-            // 標準偏差
-            double StandardDeviation = Math.Sqrt(heights.Select(s => Math.Pow(s - avg, 2)).Average());
+            int[] heights = box.Heights().ToArray();        // 高さ一覧
+            double avg = heights.Average();                 // 平均
+            double StandardDeviation = Math.Sqrt(heights.Select(s => Math.Pow(s - avg, 2)).Average());      // 標準偏差
 
             // ばらつきが多いほど減点
             evalScore -= (int) (StandardDeviation);

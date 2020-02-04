@@ -62,9 +62,13 @@ namespace Tetris
                 field[40, s] = -1;
             });
         }
-
+        
         public TetrisField Clone() {
-            return new TetrisField(this.Field, this.Current);
+            var t = new TetrisField(this.field, this.Current);
+            t.Nexts = this.Nexts;
+            t.Score = this.Score;
+            t.Lines = this.Lines;
+            return t;
         }
 
         public IEnumerable<int[]> GetRect(RawColumn point1, RawColumn point2) {
