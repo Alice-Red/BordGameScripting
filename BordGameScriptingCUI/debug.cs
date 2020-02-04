@@ -13,7 +13,7 @@ namespace BordGameScriptingCUI
         public debug() {
 
 
-            GameAutoLoop autoLoop = new GameAutoLoop();
+            //GameAutoLoop autoLoop = new GameAutoLoop();
             
 
             //string text = "";
