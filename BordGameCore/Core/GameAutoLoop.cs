@@ -29,6 +29,7 @@ namespace GameLib.Core
                 GAME.Run();
 
                 c += 1;
+                System.Threading.Thread.Sleep(1400);
             }
         }
 

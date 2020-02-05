@@ -113,7 +113,7 @@ namespace Experiment
             // 一番浅いところにある穴の位置を取得
             // 個数一覧を取得
             int[] count = box.ElementCount().ToArray();
-            int minIndex = count.ElementAt(count.Min());
+            int minIndex = count.IndexOf(count.Min());
             if (minIndex <= 8) {
                 evalScore -= (minIndex) * 20;
             }

@@ -25,10 +25,13 @@ namespace BordGameScriptingCUI
             //    //s => s.IsSubclassOf(typeof(GameInputter))
             //    ).ToArray();
             var tinput = loader.Inputters.Select(s => s.GetExportedTypes()).To2D().ToEnumerable().Where(s => s.GetBaseTypes().Contains(typeof(GameInputter))).ToArray();
+            Console.Write("Loop count >");
+            int loopcount = int.Parse(Console.ReadLine());
             Menu(tgame, tinput);
-
+            GameAutoLoop auto = new GameAutoLoop(game, pls.ToArray(), loopcount);
             Task.Factory.StartNew(() => {
-                game.Run();
+                // game.Run();
+                auto.Boot();
             });
         }
 

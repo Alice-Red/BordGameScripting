@@ -98,7 +98,7 @@ namespace Experiment
             // ばらつきが多いほど減点
             evalScore -= (int) (StandardDeviation) * 3;
 
-            var pos = box.Current.Position;
+            var pos = box.CurrentPosition();
             evalScore += 2 * (pos.Column - heights[pos.Column]);
 
             // ラインを消せるなら加点

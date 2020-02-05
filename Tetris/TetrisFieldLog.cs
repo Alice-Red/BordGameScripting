@@ -8,7 +8,9 @@ namespace Tetris
 {
     public class TetrisFieldLog
     {
-        //public 
+        public OperationSet opset;
+        public Mino mino;
+
 
 
     }

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLib.Core.Util;
 using RUtil;
 
 namespace Tetris
@@ -66,6 +67,18 @@ namespace Tetris
             HardDrop();
             Current.State = MainPartConfiguration.Idle;
         }
+
+        public RawColumn CurrentPosition() {
+            var t = Current.Shape().Columns().ToArray();
+            int i;
+            for (i = 0; i < t.Length; i++) {
+                if (!t[i].All(s => s == 0)) 
+                    break;
+            }
+
+            return Current.Position + new RawColumn(0, i - 1);
+        }
+
 
         /// <summary>
         /// 列ごとにミノの高さを数えます

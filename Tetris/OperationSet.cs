@@ -18,6 +18,15 @@ namespace Tetris
 
         public string player;
 
+        public OperationSet Clone() {
+            OperationSet os = new OperationSet();
+            foreach(var item in this.cmds) {
+                os.Store(item.command, item.value);
+            }
+            return os;
+        }
+
+
         public OperationSet Store(InputCommand command) {
             if (((int) command).Any(1, 2))
                 cmds.Add(new Command(command, 0));
