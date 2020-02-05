@@ -62,9 +62,10 @@ namespace Tetris
             var lines = sb.ToString()/*.Trim('\r').Split('\n').ToArray();*/;
 
 
-            Console.Clear();
+            //Console.Clear();
+            Console.CursorTop = 0;
+            Console.CursorLeft = 0;
             Console.WriteLine(lines);
-
             //for (int i = 0; i < lines.Length; i++) {
             //    Console.WriteLine(lines[i]);
             //}

@@ -58,6 +58,7 @@ namespace BordGameScriptingCUI
                 pls.Add((GameInputter) Activator.CreateInstance(iinputters[n2].GetType()));
             }
             game.StorePlayer(pls.ToArray());
+            Console.Clear();
 
             //for (int i = 0; i < tinputters.Length; i++) {
             //    Console.WriteLine($"{i}: {(iinputters[i] as GameInputter).ToString()}");

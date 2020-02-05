@@ -70,7 +70,9 @@ namespace Tetris
             }
             sb.AppendLine("-－－－－－－－－－－-");
 
-            Console.Clear();
+            //Console.Clear();
+            Console.CursorTop = 0;
+            Console.CursorLeft = 0;
             Console.WriteLine(sb.ToString());
 
         }
