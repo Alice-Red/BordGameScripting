@@ -56,9 +56,13 @@ namespace Tetris
                 sb.AppendLine("　" + Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("  "));
             });
 
-            for (int i = 0; i < TField.Current.Shape().GetLength(1); i++) {
-                sb.AppendLine("　" + TField.Current.Shape().ToJagged()[i].Select(s => s == 0 ? "　" : "■").Join(""));
-            }
+            //for (int i = 0; i < TField.Current.Shape().GetLength(1); i++) {
+            //    sb.AppendLine("　" + TField.Current.Shape().ToJagged()[i].Select(s => s == 0 ? "　" : "■").Join(""));
+            //}
+
+            Enumerable.Range(0, 4).ForEach(i => {
+                sb.AppendLine(TField.Current.Shape().Raw(i).Select(s => s == 0 ? "　" : "■").Join("") + "     ");
+            });
 
             sb.AppendLine();
             sb.AppendLine($"Lines:{TField.Lines} Score:{TField.Score}");

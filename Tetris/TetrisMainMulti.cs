@@ -31,8 +31,8 @@ namespace Tetris
 
 
         public TetrisMainMulti() : base() {
-            this.MaxPlayer = 2;
-            this.ServerRate = 10;
+            this.MaxPlayer = 5;
+            this.ServerRate = 20;
             ConsoleOut.SetRestriction(MessageType.Default);
         }
 
@@ -45,12 +45,14 @@ namespace Tetris
 
             sb.AppendLine();
             Enumerable.Range(0, 4).ForEach(i => {
-                sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("　"));
+                sb.AppendLine(Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("　") + "　　　　");
             });
 
             sb.AppendLine();
-            sb.AppendLine(PlayersFields.Select(s => " Line : " + s.Lines).Join("\t\t"));
-            sb.AppendLine(PlayersFields.Select(s => "Score : " + s.Score).Join("\t\t"));
+            sb.AppendLine(PlayersFields.Select(s => (" Line : " + s.Lines).PadLeftInBytes(Utility.PadType.Char, 23)).Join(""));
+            sb.AppendLine(Players.Select(s => (" Name : " + s.Name()).PadLeftInBytes(Utility.PadType.Char, 23)).Join(""));
+            sb.AppendLine(PlayersFields.Select(s => ("Score : " + s.Score).PadLeftInBytes(Utility.PadType.Char, 23)).Join(""));
+            sb.AppendLine(PlayersFields.Select(s => (s.CheckWinner() == -1 ? "Dead" : "Alive").PadLeftInBytes(Utility.PadType.Char, 23)).Join(""));
 
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", PlayersFields.Length).Join(" "));
             var fs = PlayersFields.Select(s => s.DrawableField()).ToArray();
@@ -126,12 +128,11 @@ namespace Tetris
                 }
 
                 for (int i = 0; i < Players.Length; i++) {
-                    PlayersInputStruct[i] = null;
-                    int a = i;
-                    PlayersInputStruct[a] = Players[a].Inputs(PlayersFields[a].Clone());
-                    //Task.Factory.StartNew(() => {
-                    //});
-                    //Thread.Sleep(1000);
+                    if (PlayersFields[i].CheckWinner() != -1) {
+                        PlayersInputStruct[i] = null;
+                        int a = i;
+                        PlayersInputStruct[a] = Players[a].Inputs(PlayersFields[a].Clone());
+                    }
                 }
 
                 turn++;
@@ -181,10 +182,10 @@ namespace Tetris
                 //PlayersFields[i].HardDrop();
 
                 int obsrt = PlayersFields[i].ScanErase();
-                obsrt = (((double) obsrt - 1) * (3 / 2)).RoundDown();
+                obsrt = (((double) obsrt - 1) * (3 / 2)).Round();
 
                 if (obsrt > 0) {
-                    PlayersFields.Remove(i).Random().Obstacle(obsrt);
+                    PlayersFields.Remove(i).Where(s => s.CheckWinner() != -1).Random().Obstacle(obsrt);
                     //PlayersFields[target];
                 }
             }
