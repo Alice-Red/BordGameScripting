@@ -41,7 +41,11 @@ namespace Tetris
 
         public Mino[] Nexts;
 
+        public int ObstacleCountDown = 1;
+        public List<int> ObstacleQueue;
+
         public TetrisField() : base(12, 41) {
+            ObstacleQueue = new List<int>();
             field = new int[Height, Width];
             CreateField();
             //Generator = new MinoGenerator();
@@ -62,7 +66,7 @@ namespace Tetris
                 field[40, s] = -1;
             });
         }
-        
+
         public TetrisField Clone() {
             var t = new TetrisField(this.field, this.Current);
             t.Nexts = this.Nexts;
@@ -131,8 +135,17 @@ namespace Tetris
                 if (s != 0 && field.FromRC(Current.Position + new RawColumn(i + 1, j)) != 0)
                     flg = false;
             });
+
             if (flg) {
                 Current.Position.Y += 1;
+                ObstacleCountDown -= 1;
+                if (ObstacleCountDown == 0) {
+                    ObstacleCountDown = 1;
+                    if (ObstacleQueue.Count() > 0) {
+                        obstacle(ObstacleQueue.First());
+                        ObstacleQueue.RemoveAt(0);
+                    }
+                }
                 return true;
             } else {
                 return false;
@@ -142,7 +155,7 @@ namespace Tetris
         internal void Place() {
 
             Overlapped().ForEach(s => {
-                field[s.Raw, s.Column] = (int) Current.Mino;
+                field[s.Raw, s.Column] = (int)Current.Mino;
             });
 
             Current.State = MainPartConfiguration.Placed;
@@ -245,14 +258,21 @@ namespace Tetris
             }
             Score += TetrisUtils.BasicScore[lines.Length];
             if (lines.Length > 0 && lines[0] + lines.Length <= lines.Last()) {
-                Score += 20 * (int) Math.Pow(lines.Length, 2);
+                Score += 20 * (int)Math.Pow(lines.Length, 2);
             }
             Current.Position.Y += lines.Length;
             Lines += lines.Length;
             field = result.Reverse().To2D();
+
+            int a = lines.Length;
+            while (a > 0 && ObstacleQueue.Count() >= 1) {
+                ObstacleQueue[0]--;
+                if (ObstacleQueue[0] == 0)
+                    ObstacleQueue.RemoveAt(0);
+            }
         }
 
-        internal void Obstacle(int line) {
+        private void obstacle(int line) {
             int index = Util.DICE(10);
             int[] empty = new int[] { -1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, -1 };
             empty[index] = 0;
@@ -262,6 +282,10 @@ namespace Tetris
                 result = result.Insert(empty, 40).Skip(1).ToArray();
             }
             field = result.To2D();
+        }
+
+        internal void Obstacle(int line) {
+            ObstacleQueue.Add(line);
         }
 
         private List<RawColumn> Surroundings() {

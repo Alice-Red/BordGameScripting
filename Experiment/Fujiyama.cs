@@ -14,6 +14,9 @@ namespace Experiment
     [GameAddon(TetrisMain.ID)]
     public class Fujiyama : TetrisInputter
     {
+        public Fujiyama() {
+            this.Enable = false;
+        }
 
         // 名前
         const string NAME = "Fujiyama";

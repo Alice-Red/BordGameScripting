@@ -15,6 +15,7 @@ namespace TwentyOne
         public const string ID = "TwentyOne";
 
         public TwentyOneMain() {
+            this.Enable = false;
             OnDraw += TwentyOneMain_OnDraw;
         }
 

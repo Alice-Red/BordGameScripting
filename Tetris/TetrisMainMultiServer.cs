@@ -32,6 +32,7 @@ namespace Tetris
         private Server server;
 
         public TetrisMainMultiServer() : base() {
+            this.Enable = false;
             this.MaxPlayer = 1;
             this.ServerRate = 20;
             iPs = new List<string>();
@@ -41,7 +42,7 @@ namespace Tetris
         public override void StorePlayer(params GameInputter[] players) {
             PlayersFields = new List<TetrisField>();
             if (players.Length >= 1) {
-                Player = (TetrisInputter) players[0];
+                Player = (TetrisInputter)players[0];
                 PlayersFields.Add(new TetrisField());
             }
         }
@@ -209,7 +210,7 @@ namespace Tetris
                 //PlayersFields[i].HardDrop();
 
                 int obsrt = PlayersFields[i].ScanErase();
-                obsrt = (((double) obsrt - 1) * (3 / 2)).RoundDown();
+                obsrt = (((double)obsrt - 1) * (3 / 2)).RoundDown();
 
                 if (obsrt > 0) {
                     PlayersFields.Remove(i).Random().Obstacle(obsrt);

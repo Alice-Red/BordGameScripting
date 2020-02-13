@@ -16,7 +16,7 @@ namespace Tetris
     {
         public const string ID = "Tetris";
 
-
+        
         private double FallRate = 1;
         private long RateCount;
 
@@ -29,6 +29,7 @@ namespace Tetris
         private Client client = new Client();
 
         public TetrisMainMultiClient() : base() {
+            this.Enable = false;
             this.MaxPlayer = 1;
             this.ServerRate = 10;
             ConsoleOut.SetRestriction(MessageType.All);

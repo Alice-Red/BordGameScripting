@@ -36,15 +36,21 @@ namespace BordGameScriptingCUI
         }
 
         public void Menu(Type[] tgames, Type[] tinputters) {
-            var igames = tgames.Select(s => Activator.CreateInstance(s)).ToArray();
-            for (int i = 0; i < igames.Length; i++) {
-                Console.WriteLine($"{i}: {(igames[i] as Game).ToString()}");
+            // select game
+            var igames = tgames.Select(s => (Game)Activator.CreateInstance(s)).Where(s => s.Enable).ToArray();
+            int n = 0;
+            if (igames.Length != 1) {
+                for (int i = 0; i < igames.Length; i++) {
+                    Console.WriteLine($"{i}: {(igames[i] as Game).ToString()}");
+                }
+                Console.Write("Select Game >>");
+                n = Console.ReadLine().ParseInt();
             }
-            Console.Write("Select Game >>");
-            var n = Console.ReadLine().ParseInt();
             game = igames[n] as Game;
+
+            // select inoputter
             var id = game.GetType().GetAttributeValue<GameAddonAttribute>().GameID;
-            var iinputters = tinputters.Select(s => (GameInputter) Activator.CreateInstance(s)).Where(s => s.GetType().GetAttributeValue<GameAddonAttribute>().GameID == id).ToArray();
+            var iinputters = tinputters.Select(s => (GameInputter)Activator.CreateInstance(s)).Where(s => s.GetType().GetAttributeValue<GameAddonAttribute>().GameID == id && s.Enable).ToArray();
 
             for (int i = 0; i < iinputters.Length; i++) {
                 Console.WriteLine($"{i}: {(iinputters[i] as GameInputter).ToString()}");
@@ -55,10 +61,11 @@ namespace BordGameScriptingCUI
                 var n2 = Console.ReadLine().ParseInt();
                 if (iinputters.Length <= n2)
                     break;
-                pls.Add((GameInputter) Activator.CreateInstance(iinputters[n2].GetType()));
+                pls.Add((GameInputter)Activator.CreateInstance(iinputters[n2].GetType()));
             }
             game.StorePlayer(pls.ToArray());
 
+            Console.Clear();
             //for (int i = 0; i < tinputters.Length; i++) {
             //    Console.WriteLine($"{i}: {(iinputters[i] as GameInputter).ToString()}");
             //}

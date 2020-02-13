@@ -16,7 +16,7 @@ namespace Gomoku
         public const string ID = "Gomoku";
 
         public Gomoku() {
-
+            this.Enable = false;
         }
 
         public override void End() {

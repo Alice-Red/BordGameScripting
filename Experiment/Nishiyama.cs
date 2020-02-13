@@ -18,6 +18,9 @@ namespace Experiment
 
     public class Nishiyama : TetrisInputter
     {
+        public Nishiyama() {
+            this.Enable = false;
+        }
 
         // 名前
         const string NAME = "Nishiyama";

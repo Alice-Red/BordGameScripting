@@ -31,28 +31,28 @@ namespace CIWS
             // 総当たり
 
             //for (int n = -1; n < field.Nexts.Length; n++) {
-                for (int r = -1; r <= 2; r++) {
-                    for (int m = -5; m < 6; m++) {
-                        // 砂場
-                        TetrisFieldSandBox box = new TetrisFieldSandBox(field);
-                        OperationSet cur = new OperationSet();
+            for (int r = -1; r <= 2; r++) {
+                for (int m = -5; m < 6; m++) {
+                    // 砂場
+                    TetrisFieldSandBox box = new TetrisFieldSandBox(field);
+                    OperationSet cur = new OperationSet();
 
-                        cur.Store(InputCommand.RotateRight, r);
-                        cur.Store(InputCommand.MoveRight, m);
-
-
-                        int currentScore = Evaluation(box, cur);
+                    cur.Store(InputCommand.RotateRight, r);
+                    cur.Store(InputCommand.MoveRight, m);
 
 
-                        if (maxScore == currentScore) {
-                            max.Add(cur);
-                        } else if (maxScore < currentScore) {
-                            maxScore = currentScore;
-                            max.Clear();
-                            max.Add(cur);
-                        }
+                    int currentScore = Evaluation(box, cur);
+
+
+                    if (maxScore == currentScore) {
+                        max.Add(cur);
+                    } else if (maxScore < currentScore) {
+                        maxScore = currentScore;
+                        max.Clear();
+                        max.Add(cur);
                     }
                 }
+            }
             //}
             // 一番まともそうな手を返す
 
@@ -108,6 +108,12 @@ namespace CIWS
             //// 一番深い所に穴がある位置を取得
             //int maxIndex = depth.ElementAt(depth.Max());
             //evalScore -= maxIndex;
+
+            // 個数一覧を取得
+            int[] count = box.ElementCount().ToArray();
+
+            // 一番個数が多い位置を取得
+            int y = count.IndexOf(count.Max());
 
             return evalScore;
 

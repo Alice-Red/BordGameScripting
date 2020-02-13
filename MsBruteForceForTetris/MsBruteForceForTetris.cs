@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameLib.API;
 using GameLib.Core.Util;
 using Tetris;
@@ -83,8 +79,8 @@ namespace MsBruteForceForTetris
 
 
             // 標準偏差でばらつきを見る
-            int[] heights = box.Heights().ToArray();        // 高さ一覧
-            double avg = heights.Average();                 // 平均
+            int[] heights = box.Heights().ToArray();                    // 高さ一覧
+            double avg = heights.Average();                             // 平均
             double StandardDeviation = Math.Sqrt(heights.Select(s => Math.Pow(s - avg, 2)).Average());      // 標準偏差
 
             // ばらつきが多いほど減点

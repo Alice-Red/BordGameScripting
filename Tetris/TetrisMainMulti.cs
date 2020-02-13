@@ -31,8 +31,9 @@ namespace Tetris
 
 
         public TetrisMainMulti() : base() {
+            //this.Enable = false;
             this.MaxPlayer = 2;
-            this.ServerRate = 10;
+            this.ServerRate = 40;
             ConsoleOut.SetRestriction(MessageType.Default);
         }
 
@@ -49,8 +50,10 @@ namespace Tetris
             });
 
             sb.AppendLine();
-            sb.AppendLine(PlayersFields.Select(s => " Line : " + s.Lines).Join("\t\t"));
-            sb.AppendLine(PlayersFields.Select(s => "Score : " + s.Score).Join("\t\t"));
+            sb.AppendLine(" " + Players.Select(s => ("" + s.Name()).PadLeftInBytes(Utility.PadType.Char, 22)).Join(""));
+            sb.AppendLine(" " + PlayersFields.Select(s => (" Line : " + s.Lines).PadLeftInBytes(Utility.PadType.Char, 22)).Join(""));
+            sb.AppendLine(" " + PlayersFields.Select(s => ("Score : " + s.Score).PadLeftInBytes(Utility.PadType.Char, 22)).Join(""));
+            sb.AppendLine(" " + PlayersFields.Select(s => (s.CheckWinner() == -1 ? "Defeat" : "Alive").PadLeftInBytes(Utility.PadType.Char, 22)).Join(""));
 
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", PlayersFields.Length).Join(" "));
             var fs = PlayersFields.Select(s => s.DrawableField()).ToArray();
@@ -62,7 +65,9 @@ namespace Tetris
             var lines = sb.ToString()/*.Trim('\r').Split('\n').ToArray();*/;
 
 
-            Console.Clear();
+            //Console.Clear();
+            Console.CursorLeft = 0;
+            Console.CursorTop = 0;
             Console.WriteLine(lines);
 
             //for (int i = 0; i < lines.Length; i++) {
@@ -75,7 +80,7 @@ namespace Tetris
 
         public override void StorePlayer(params GameInputter[] players) {
             int count = players.Length;
-            Players = players.Select(s => (TetrisInputter) s).ToArray();
+            Players = players.Select(s => (TetrisInputter)s).ToArray();
             PlayersFields = Enumerable.Range(0, count).Select(s => new TetrisField()).ToArray();
             PlayersInputStruct = Enumerable.Range(0, count).Select(s => new OperationSet()).ToArray();
         }
@@ -180,7 +185,7 @@ namespace Tetris
                 //PlayersFields[i].HardDrop();
 
                 int obsrt = PlayersFields[i].ScanErase();
-                obsrt = (((double) obsrt - 1) * (3 / 2)).RoundDown();
+                obsrt = (((double)obsrt - 1) * (3 / 2)).RoundDown();
 
                 if (obsrt > 0) {
                     PlayersFields.Remove(i).Random().Obstacle(obsrt);
