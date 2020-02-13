@@ -27,10 +27,9 @@ namespace Tetris
         protected MinoGenerator Generator;
 
         public TetrisMain() {
-            //this.Enable = false;
             OnDraw += TetrisMain_OnDraw_Console;
             this.MaxPlayer = 1;
-            this.ServerRate = 5;
+            this.ServerRate = 10;
             //OnDraw += TetrisMain_OnDraw_GDI;
             //OnDraw -= TetrisMain_OnDraw_GDI;
 
@@ -54,13 +53,16 @@ namespace Tetris
             StringBuilder sb = new StringBuilder();
             sb.AppendLine();
             Enumerable.Range(0, 4).ForEach(i => {
-                sb.AppendLine("　" + Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("　") + ("　　　　"));
+                sb.AppendLine("　" + Generator.Nexts.Select(h => Minos.MinoP[h].Raw(i).Select(s => s == 0 ? "　" : "■").Join("")).Join("  "));
             });
-
 
             //for (int i = 0; i < TField.Current.Shape().GetLength(1); i++) {
             //    sb.AppendLine("　" + TField.Current.Shape().ToJagged()[i].Select(s => s == 0 ? "　" : "■").Join(""));
             //}
+
+            Enumerable.Range(0, 4).ForEach(i => {
+                sb.AppendLine(TField.Current.Shape().Raw(i).Select(s => s == 0 ? "　" : "■").Join("") + "     ");
+            });
 
             sb.AppendLine();
             sb.AppendLine($"Lines:{TField.Lines} Score:{TField.Score}");
@@ -73,8 +75,8 @@ namespace Tetris
             sb.AppendLine("-－－－－－－－－－－-");
 
             //Console.Clear();
-            Console.CursorLeft = 0;
             Console.CursorTop = 0;
+            Console.CursorLeft = 0;
             Console.WriteLine(sb.ToString());
 
         }
@@ -145,7 +147,7 @@ namespace Tetris
 
         public override void End() {
             Console.WriteLine("game over");
-            //Console.WriteLine("any key...");
+            Console.WriteLine("any key...");
         }
 
     }

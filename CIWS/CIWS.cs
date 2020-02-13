@@ -76,22 +76,16 @@ namespace CIWS
 
             // 穴の数が多いほど減点
             int[] holes = box.Holes().ToArray();
-            evalScore -= ((Math.Pow(holes.Sum(), 2) / 2) * 120 * heights.Max() / 2).RoundUp();
+            evalScore -= ((Math.Pow(holes.Sum(), 2) / 2) * 120 * heights.Max() / 3).RoundUp();
 
 
             // 標準偏差　平坦に近いほうが正義（嘘）
 
-
-            // 標準偏差の求め方
-
-            // 平均
-            double avg = heights.Average();
-
-            // 標準偏差
-            double StandardDeviation = Math.Sqrt(heights.Select(s => Math.Pow(s - avg, 2)).Average());
+            double avg = heights.Average();             // 平均
+            double StandardDeviation = Math.Sqrt(heights.Select(s => Math.Pow(s - avg, 2)).Average());    // 標準偏差
 
             // ばらつきが多いほど減点
-            evalScore -= (Math.Pow(StandardDeviation, 3) * 210).RoundUp();
+            evalScore -= (Math.Pow(StandardDeviation, 3) * 250).RoundUp();
 
             //ConsoleOut.Log($"{box.DistanceToHole().Join(", ")}");
 
@@ -100,14 +94,14 @@ namespace CIWS
             evalScore += (Math.Pow(ls, 2) * 50 + ls * 10 * heights.Max()).RoundDown();
 
             // 高さが高いと減点
-            //evalScore -= Math.Pow((heights.Max() + 5), 2).RoundUp();
+            evalScore -= (Math.Pow((heights.Max() + 5), 2) / 2).RoundUp();
 
-            //// 個数一覧を取得
-            //int[] depth = box.DistanceToHole().ToArray();
+            // 個数一覧を取得
+            int[] depth = box.DistanceToHole().ToArray();
 
-            //// 一番深い所に穴がある位置を取得
-            //int maxIndex = depth.ElementAt(depth.Max());
-            //evalScore -= maxIndex;
+            // 一番深い所に穴がある位置を取得
+            int maxIndex = depth.IndexOf(depth.Min());
+            evalScore -= maxIndex * 2;
 
             // 個数一覧を取得
             int[] count = box.ElementCount().ToArray();

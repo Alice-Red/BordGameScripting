@@ -23,8 +23,9 @@ namespace GameLib.Core
         public void Boot() {
             int c = 0;
             while (c < count || count == -1) {
-                var GAME = (Game)Activator.CreateInstance(Target.GetType());
-                var INPUTS = Players.Select(s => (GameInputter)Activator.CreateInstance(s.GetType())).ToArray();
+                var GAME = (Game) Activator.CreateInstance(Target.GetType());
+                //var INPUTS = Enumerable.Range(0, 2).Select(s => (GameInputter) Activator.CreateInstance(Players.Random().GetType())).ToArray();
+                var INPUTS = Players.Select(s => (GameInputter) Activator.CreateInstance(s.GetType())).ToArray();
                 GAME.StorePlayer(INPUTS);
                 GAME.Run();
 
