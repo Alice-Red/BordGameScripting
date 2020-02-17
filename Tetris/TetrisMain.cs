@@ -27,6 +27,7 @@ namespace Tetris
         protected MinoGenerator Generator;
 
         public TetrisMain() {
+            this.Enable = false;
             OnDraw += TetrisMain_OnDraw_Console;
             this.MaxPlayer = 1;
             this.ServerRate = 10;
@@ -39,7 +40,7 @@ namespace Tetris
             System.Diagnostics.Debug.WriteLine($"{players[0] is TetrisInputter}");
 
             if (players.Length >= 1) {
-                pl = (TetrisInputter) Activator.CreateInstance(players[0].GetType());
+                pl = (TetrisInputter)Activator.CreateInstance(players[0].GetType());
 
             } else
                 Err = "Player Cast faile.";

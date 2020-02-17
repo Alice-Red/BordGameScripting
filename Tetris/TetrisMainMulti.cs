@@ -31,7 +31,8 @@ namespace Tetris
 
 
         public TetrisMainMulti() : base() {
-            this.MaxPlayer = 5;
+            //this.Enable = false;
+            this.MaxPlayer = 2;
             this.ServerRate = 20;
             ConsoleOut.SetRestriction(MessageType.Default);
         }
@@ -41,6 +42,13 @@ namespace Tetris
         }
 
         private void TetrisMain_OnDraw_Console(Game sender, OnDrawArgs e) {
+            TetrisFieldSandBox[] boxes = PlayersFields.Select(s => new TetrisFieldSandBox(s)).ToArray();
+            boxes.ForEach(s => {
+                s.HardDrop();
+            });
+            var boxcur = boxes.Select(s => s.Current).ToArray();
+            //var ts = boxes.Select(s => s.DrawableField()).ToArray();
+
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine();
@@ -55,9 +63,25 @@ namespace Tetris
             sb.AppendLine(PlayersFields.Select(s => (s.CheckWinner() == -1 ? "Dead" : "Alive").PadLeftInBytes(Utility.PadType.Char, 23)).Join(""));
 
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", PlayersFields.Length).Join(" "));
+
             var fs = PlayersFields.Select(s => s.DrawableField()).ToArray();
+            for (int i = 0; i < boxcur.Length; i++) {
+                boxcur[i].Position -= new RawColumn(20, 1);
+                var t = boxcur[i].Shape();
+                for (int k = 0; k < t.GetLength(0); k++) {
+                    for (int j = 0; j < t.GetLength(1); j++) {
+                        var rc = boxcur[i].Position + new RawColumn(k, j);
+                        try {
+                            if (fs[i][rc.Raw][rc.Column] == 0 && t[k, j] != 0) {
+                                fs[i][rc.Raw][rc.Column] = -100;
+                            }
+                        } catch { }
+                    }
+                }
+            }
+
             for (int i = 0; i < 20; i++) {
-                sb.AppendLine(fs.Select(h => ("|" + h[i].Select(s => s == 0 ? "　" : "■").Join("") + "|")).Join(" "));
+                sb.AppendLine(fs.Select(h => ("|" + h[i].Select(s => s == 0 ? "　" : (s == -100 ? "□" : "■")).Join("") + "|")).Join(" "));
             }
             sb.AppendLine(Enumerable.Repeat("-－－－－－－－－－－-", PlayersFields.Length).Join(" "));
 
@@ -78,7 +102,7 @@ namespace Tetris
 
         public override void StorePlayer(params GameInputter[] players) {
             int count = players.Length;
-            Players = players.Select(s => (TetrisInputter) s).ToArray();
+            Players = players.Select(s => (TetrisInputter)s).ToArray();
             PlayersFields = Enumerable.Range(0, count).Select(s => new TetrisField()).ToArray();
             PlayersInputStruct = Enumerable.Range(0, count).Select(s => new OperationSet()).ToArray();
         }
@@ -182,7 +206,7 @@ namespace Tetris
                 //PlayersFields[i].HardDrop();
 
                 int obsrt = PlayersFields[i].ScanErase();
-                obsrt = (((double) obsrt - 1) * (3 / 2)).Round();
+                obsrt = (((double)obsrt - 1) * (3 / 2)).Round();
 
                 if (obsrt > 0) {
                     PlayersFields.Remove(i).Where(s => s.CheckWinner() != -1).Random().Obstacle(obsrt);
