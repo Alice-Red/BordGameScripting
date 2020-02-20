@@ -209,7 +209,8 @@ namespace Tetris
                 obsrt = (((double)obsrt - 1) * (3 / 2)).Round();
 
                 if (obsrt > 0) {
-                    PlayersFields.Remove(i).Where(s => s.CheckWinner() != -1).Random().Obstacle(obsrt);
+                    if (Loser == 0)
+                        PlayersFields.Remove(i).Where(s => s.CheckWinner() != -1).Random().Obstacle(obsrt);
                     //PlayersFields[target];
                 }
             }

@@ -19,7 +19,7 @@ namespace Experiment
     public class Nishiyama : TetrisInputter
     {
         public Nishiyama() {
-            this.Enable = false;
+           // this.Enable = false;
         }
 
         // 名前

@@ -15,7 +15,7 @@ namespace Experiment
     public class Fujiyama : TetrisInputter
     {
         public Fujiyama() {
-            this.Enable = false;
+            //this.Enable = false;
         }
 
         // 名前

@@ -138,14 +138,6 @@ namespace Tetris
 
             if (flg) {
                 Current.Position.Y += 1;
-                ObstacleCountDown -= 1;
-                if (ObstacleCountDown == 0) {
-                    ObstacleCountDown = 1;
-                    if (ObstacleQueue.Count() > 0) {
-                        obstacle(ObstacleQueue.First());
-                        ObstacleQueue.RemoveAt(0);
-                    }
-                }
                 return true;
             } else {
                 return false;
@@ -157,6 +149,16 @@ namespace Tetris
             Overlapped().ForEach(s => {
                 field[s.Raw, s.Column] = (int)Current.Mino;
             });
+
+            ObstacleCountDown -= 1;
+            if (ObstacleCountDown == 0) {
+                ObstacleCountDown = 1;
+                if (ObstacleQueue.Count() > 0) {
+                    obstacle(ObstacleQueue.First());
+                    ObstacleQueue.RemoveAt(0);
+                }
+            }
+
 
             Current.State = MainPartConfiguration.Placed;
             //CheckWinner();
@@ -285,7 +287,8 @@ namespace Tetris
         }
 
         internal void Obstacle(int line) {
-            ObstacleQueue.Add(line);
+            //ObstacleQueue.Add(line);
+            obstacle(line);
         }
 
         private List<RawColumn> Surroundings() {
