@@ -66,7 +66,7 @@ namespace BordGameScriptingCUI
             game.StorePlayer(pls.ToArray());
             Console.Clear();
 
-            Console.Clear();
+            //Console.Clear();
             //for (int i = 0; i < tinputters.Length; i++) {
             //    Console.WriteLine($"{i}: {(iinputters[i] as GameInputter).ToString()}");
             //}

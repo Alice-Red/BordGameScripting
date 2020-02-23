@@ -6,15 +6,3 @@ Readme : https://hackmd.io/PGpyZ9lDRN2i-3cfmnvFmg
 jikken : https://hackmd.io/v7DvAHf0S1WZQtUW8AYOug
 
 
-
-
-
-
-Javaである理由：授業で使うため
-    ->　果たせなかったため、javaにこだわる必要がない
-
-    |
-    V
-
-本来の想定である、C#を用いて記述をしてもらう
-
