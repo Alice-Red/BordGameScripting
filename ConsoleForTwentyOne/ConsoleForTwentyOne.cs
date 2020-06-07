@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TwentyOne;
 
-namespace TwentyOne
+namespace ConsoleForTwentyOne
 {
     [GameAddon("TwentyOne")]
     public class ConsoleForTwentyOne : TwentyOneInputter
@@ -21,7 +22,11 @@ namespace TwentyOne
         }
 
         public override DoYouDrawCard Input(TwentyOneField fielda) {
-            Console.WriteLine("");
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"");
 
 
 

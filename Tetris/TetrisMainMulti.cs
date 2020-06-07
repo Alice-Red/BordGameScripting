@@ -32,7 +32,7 @@ namespace Tetris
 
         public TetrisMainMulti() : base() {
             this.MaxPlayer = 2;
-            this.ServerRate = 15;
+            this.ServerRate = 5;
             ConsoleOut.SetRestriction(MessageType.All);
         }
 

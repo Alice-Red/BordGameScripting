@@ -44,5 +44,15 @@
     <Compile Include="ElevatorMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BordGameCore\GameLib.csproj">
+      <Project>{90073e79-d901-44be-9c5c-6f1d6dc6fe61}</Project>
+      <Name>GameLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwentyOne\TwentyOne.csproj">
+      <Project>{f42f9720-7fe4-484f-8268-e78846b1f4c9}</Project>
+      <Name>TwentyOne</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
